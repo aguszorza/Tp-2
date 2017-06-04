@@ -5,7 +5,8 @@ public class Modo {
 	protected int poderDePelea;
 	protected int distanciaDeAtaque;
 	protected int velocidad;
-	
+	//Habria que ver si para los distintos modos creamos subclases o
+	//lo hacemos a mano como esta hecho ahora en cada personaje 
 	public Modo(int poder, int distancia, int velocidad){
 		this.poderDePelea = poder;
 		this.distanciaDeAtaque = distancia;

@@ -62,6 +62,16 @@ public class Tablero {
 			throw new CeldaOcupada();
 		}
 	}
+	
+	public void verificarAtaque(Celda atacante, Celda atacado){
+		int rango = atacante.obtenerPersonaje().obtenerDistanciaDeAtaque();
+		if (Math.abs(atacante.obtenerFila() - atacado.obtenerFila()) > rango){
+			//levantar excepcion
+		}
+		if (Math.abs(atacante.obtenerColumna() - atacado.obtenerColumna()) > rango){
+			//levantar excepcion
+		}
+	}
 
 	public Celda obtenerCelda(int fila, int columna){
 		return this.filas.get(fila).obtenerCelda(columna);
