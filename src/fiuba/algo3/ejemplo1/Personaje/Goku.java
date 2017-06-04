@@ -1,5 +1,7 @@
 package fiuba.algo3.ejemplo1.Personaje;
 
+import fiuba.algo3.ejemplo1.Kamehameha;
+
 public class Goku extends Personaje {
 
 	static int PODER = 20;
@@ -12,13 +14,14 @@ public class Goku extends Personaje {
 	public Goku(){
 		super(500, "Goku", new Modo(PODER, DISTANCIA, VELOCIDAD));
 		this.danioAdicional = (float)1.2;
+		this.habilidad = new Kamehameha(this);
 	}
 	
 	public float obtenerPoderDePelea(){
 		if (this.vida < 150){
-			return this.obtenerPoderDePelea() * this.danioAdicional;
+			return super.obtenerPoderDePelea() * this.danioAdicional;
 		}
-		return this.obtenerPoderDePelea();
+		return super.obtenerPoderDePelea();
 	}
 	
 	public void kaioKen(){

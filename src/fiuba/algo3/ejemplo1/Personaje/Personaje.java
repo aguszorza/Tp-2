@@ -5,6 +5,7 @@ import fiuba.algo3.ejemplo1.HabilidadEspecial;
 public class Personaje {
 
 	protected int vida;
+	protected int vidaMaxima;
 	protected String nombre;
 	protected int ki;
 	protected Modo modoDePelea;
@@ -12,6 +13,7 @@ public class Personaje {
 
 	public Personaje(int vida, String nombre, Modo modo){
 		this.vida = vida;
+		this.vidaMaxima = vida;
 		this.nombre = nombre;
 		this.ki = 0;
 		this.modoDePelea = modo;
@@ -26,11 +28,16 @@ public class Personaje {
 	}
 	
 	public void aumentarVida(int cantidad){
-		this.ki = this.vida + cantidad;
+		if(this.vida + cantidad > this.vidaMaxima){
+			this.vida = this.vidaMaxima;
+		}
+		else{
+			this.vida = this.vida + cantidad;
+		}
 	}
-	
+	//ver que hacer cuando llega a cero
 	public void reducirVida(int cantidad){
-		this.ki = this.ki - cantidad;
+		this.vida = this.vida - cantidad;
 	}
 	
 	public int ki(){
@@ -59,7 +66,7 @@ public class Personaje {
 	
 	public void transformar(Modo modo, int costoKi){
 		if (this.ki() < costoKi){
-			//levantar excepcion
+			throw new KiInsuficiente();
 		}
 		this.modoDePelea = modo;
 		this.ki = this.ki - costoKi;
