@@ -2,6 +2,8 @@ package fiuba.algo3.ejemplo1;
 
 import org.junit.Test;
 
+import fiuba.algo3.ejemplo1.Personaje.Freezer;
+import fiuba.algo3.ejemplo1.Personaje.Goku;
 import fiuba.algo3.ejemplo1.tablero.Celda;
 import fiuba.algo3.ejemplo1.tablero.CeldaVacia;
 import fiuba.algo3.ejemplo1.tablero.MovimientoInvalido;
@@ -76,8 +78,8 @@ public class TableroTest {
 		Tablero tablero = new Tablero(10);
 		Goku personaje = new Goku(); 
 		tablero.agregarPersonaje(10,7,personaje);
-		personaje = new Goku(); // CAMBIAR A OTRO PERSONAJE DESPUES
-		tablero.agregarPersonaje(10,8,personaje);
+		Freezer personaje2 = new Freezer();
+		tablero.agregarPersonaje(10,8,personaje2);
 		tablero.moverPersonaje(10, 7, 10, 8);
 		Assert.fail("No levanto excepcion");
 	}

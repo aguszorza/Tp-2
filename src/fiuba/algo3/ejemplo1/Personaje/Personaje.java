@@ -1,12 +1,14 @@
-package fiuba.algo3.ejemplo1;
+package fiuba.algo3.ejemplo1.Personaje;
+
+import fiuba.algo3.ejemplo1.HabilidadEspecial;
 
 public class Personaje {
 
-	int vida;
-	String nombre;
-	int ki;
-	Modo modoDePelea;
-	HabilidadEspecial habilidad;
+	protected int vida;
+	protected String nombre;
+	protected int ki;
+	protected Modo modoDePelea;
+	protected HabilidadEspecial habilidad;
 
 	public Personaje(int vida, String nombre, Modo modo){
 		this.vida = vida;
@@ -43,7 +45,7 @@ public class Personaje {
 		return this.vida;
 	}
 	
-	public int obtenerPoderDePelea(){
+	public float obtenerPoderDePelea(){
 		return this.modoDePelea.obtenerPoderDePelea();
 	}
 	

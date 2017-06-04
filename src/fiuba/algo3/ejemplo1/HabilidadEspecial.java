@@ -1,5 +1,7 @@
 package fiuba.algo3.ejemplo1;
 
+import fiuba.algo3.ejemplo1.Personaje.Personaje;
+
 public class HabilidadEspecial {
 
 	private int costoKi;

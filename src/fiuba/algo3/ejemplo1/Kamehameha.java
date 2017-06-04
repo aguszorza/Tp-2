@@ -1,5 +1,8 @@
 package fiuba.algo3.ejemplo1;
 
+import fiuba.algo3.ejemplo1.Personaje.Goku;
+import fiuba.algo3.ejemplo1.Personaje.Personaje;
+
 public class Kamehameha extends HabilidadEspecial{
 
 	private float danioAdicional;
