@@ -2,8 +2,10 @@ package fiuba.algo3.ejemplo1;
 
 import org.junit.Test;
 
+import fiuba.algo3.ejemplo1.Personaje.Freezer;
 import fiuba.algo3.ejemplo1.Personaje.Goku;
 import fiuba.algo3.ejemplo1.Personaje.KiInsuficiente;
+import fiuba.algo3.ejemplo1.Personaje.MajinBoo;
 import junit.framework.Assert;
 
 public class PersonajeTest {
@@ -195,5 +197,59 @@ public class PersonajeTest {
 		goku.SuperSaiyajin();
 		goku.reducirVida(351);
 		Assert.assertEquals("No paso: no devolvio 72", (float)72, goku.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testAtacarReduceLaVidaDelEnemigo(){
+		Goku goku = new Goku();
+		Freezer freezer = new Freezer();
+		float danio = goku.obtenerPoderDePelea();
+		int vida = freezer.obtenerVida();
+		goku.atacar(freezer);
+		vida = vida - freezer.obtenerVida();
+		Assert.assertEquals("No paso: no se redujo la vida", (int)danio, vida);
+	}
+	
+	@Test
+	public void testAtacarHaceMenosDanioSiElPoderDeAtaqueDelEnemigoEsMayor(){
+		Goku goku = new Goku();
+		MajinBoo majin = new MajinBoo();
+		float danio = goku.obtenerPoderDePelea();
+		int vida = majin.obtenerVida();
+		goku.atacar(majin);
+		vida = vida - majin.obtenerVida();
+		Assert.assertEquals("No paso: no se redujo la vida", (int)(danio * 0.8), vida);
+	}
+	
+	@Test(expected = KiInsuficiente.class)
+	public void testLanzarHabilidadEspecialLanzaExcepcionSiNoSeTieneElKiSuficiente(){
+		Goku goku = new Goku();
+		Freezer freezer = new Freezer();
+		goku.lanzarHabilidadEspecial(freezer);
+		Assert.fail("No levanto excepcion");
+	}
+	
+	@Test
+	public void testLanzarHabilidadEspecialReduceLaVidaDelEnemigo(){
+		Goku goku = new Goku();
+		Freezer freezer = new Freezer();
+		int vida = freezer.obtenerVida();
+		for(int i = 0; i < 10; i++)
+			goku.aumentarKi();
+		goku.lanzarHabilidadEspecial(freezer);
+		vida = vida - freezer.obtenerVida();
+		Assert.assertEquals("No paso: no se redujo la vida", 30, vida);
+	}
+	
+	@Test
+	public void testLanzarHabilidadEspecialHaceMenosDanioSiElPoderDeAtaqueDelEnemigoEsMayor(){
+		Goku goku = new Goku();
+		MajinBoo majin = new MajinBoo();
+		int vida = majin.obtenerVida();
+		for(int i = 0; i < 10; i++)
+			goku.aumentarKi();
+		goku.lanzarHabilidadEspecial(majin);
+		vida = vida - majin.obtenerVida();
+		Assert.assertEquals("No paso: no se redujo la vida", 24, vida);
 	}
 }

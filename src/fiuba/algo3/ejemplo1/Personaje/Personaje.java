@@ -71,4 +71,18 @@ public class Personaje {
 		this.modoDePelea = modo;
 		this.ki = this.ki - costoKi;
 	}
+	
+	public void atacar(Personaje enemigo){
+		float danio = this.obtenerPoderDePelea();
+		if(enemigo.obtenerPoderDePelea() > danio)
+			danio = danio * (float)0.8;
+		enemigo.reducirVida((int)danio);
+	}
+	
+	public void lanzarHabilidadEspecial(Personaje enemigo){
+		float danio = this.habilidad.lanzarHabilidad();
+		if(enemigo.obtenerPoderDePelea() > this.obtenerPoderDePelea())
+			danio = danio * (float)0.8;
+		enemigo.reducirVida((int)danio);
+	}
 }
