@@ -7,6 +7,12 @@ import fiuba.algo3.ejemplo1.Personaje.KiInsuficiente;
 import junit.framework.Assert;
 
 public class PersonajeTest {
+	
+	@Test
+	public void testObtenerNombreDevuelveElNombreCorrecto() {
+		Goku goku = new Goku();
+		Assert.assertEquals("No paso: no devolvio Goku como nombre", "Goku", goku.getNombre());
+	}
 
 	@Test
 	public void testAumentarKiAumentaEnCincoElKi() {
@@ -129,5 +135,65 @@ public class PersonajeTest {
 		goku.aumentarKi();		
 		goku.kaioKen();
 		Assert.assertEquals("No paso: no devolvio 0", 0, goku.ki());
+	}
+	
+	@Test(expected = KiInsuficiente.class)
+	public void testSuperSaiyajinLevantaExcepcionSiNoSeTieneElKiSuficiente(){
+		Goku goku = new Goku();
+		goku.SuperSaiyajin();
+		Assert.fail("No levanto excepcion");
+	}
+	
+	@Test
+	public void testSuperSaiyajinAumentaLosStats(){
+		Goku goku = new Goku();
+		Boolean estado = true;
+		for(int i = 0; i < 10; i++){
+			goku.aumentarKi();
+		}
+		goku.SuperSaiyajin();
+		estado = estado && goku.obtenerVelocidad() == 5;
+		estado = estado && goku.obtenerDistanciaDeAtaque() == 4;
+		estado = estado && goku.obtenerPoderDePelea() == 60;
+		Assert.assertTrue("No paso: no se modificaron correctamente los stats", estado);
+	}
+	
+	@Test
+	public void testSuperSaiyajinDisminuyeElKiEn50(){
+		Goku goku = new Goku();
+		for(int i = 0; i < 11; i++){
+			goku.aumentarKi();
+		}
+		int ki = goku.ki();
+		goku.SuperSaiyajin();
+		ki = ki - goku.ki();
+		Assert.assertEquals("No paso: no disminuyo en 50 el ki", 50, ki);
+	}
+	
+	@Test
+	public void testPoderDePeleaAumentaUn20PorcientoSiTieneMenosDe150DeVida() {
+		Goku goku = new Goku();
+		goku.reducirVida(351);
+		Assert.assertEquals("No paso: no devolvio 24", (float)24, goku.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testPoderDePeleaAumentaUn20PorcientoSiTieneMenosDe150DeVidaEnModoKaioKen() {
+		Goku goku = new Goku();
+		for(int i = 0; i < 10; i++)
+			goku.aumentarKi();
+		goku.kaioKen();
+		goku.reducirVida(351);
+		Assert.assertEquals("No paso: no devolvio 48", (float)48, goku.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testPoderDePeleaAumentaUn20PorcientoSiTieneMenosDe150DeVidaEnModoSuperSaiyajin() {
+		Goku goku = new Goku();
+		for(int i = 0; i < 10; i++)
+			goku.aumentarKi();
+		goku.SuperSaiyajin();
+		goku.reducirVida(351);
+		Assert.assertEquals("No paso: no devolvio 72", (float)72, goku.obtenerPoderDePelea());
 	}
 }
