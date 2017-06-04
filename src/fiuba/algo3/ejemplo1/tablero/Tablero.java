@@ -37,29 +37,29 @@ public class Tablero {
 		}
 	}
 	
-	private void comprobaPosicion(int filaAct, int colAct){
-		if( filaAct > this.tamanio || filaAct < 1){
-			//levantar excepcion
+	private void comprobarPosicion(int fila, int columna){
+		if(!this.filas.containsKey(fila) || !this.filas.containsKey(columna)){
+			throw new PosicionFueraDelTablero();
 		}
-		if( colAct > this.tamanio || colAct < 1){
-			//levantar excepcion
-		}
-		if(this.filas.get(filaAct).obtenerCelda(colAct).estaVacia()){
-			//levantar excepcion
+		if(this.filas.get(fila).obtenerCelda(columna).estaVacia()){
+			throw new CeldaVacia();
 		}
 	}
 	
-	public void comprobarAdyacencia(){
-		
+	private void comprobarAdyacencia(Celda celdaInicial, Celda celdaFinal){
+		if (!celdaInicial.esAdyacente(celdaFinal)){
+			throw new MovimientoInvalido();
+		}
 	}
+	
 	//unir las dos funciones
 	private void comprobarNuevaPosicion(int fila, int columna){
-		// como es un tablero cuadrado
-		if(!this.filas.containsKey(fila) || this.filas.containsKey(columna)){
+		// como es un tablero cuadrado, verifico que ambos numeros sean clave del tablero 
+		if(!this.filas.containsKey(fila) || !this.filas.containsKey(columna)){
 			throw new PosicionFueraDelTablero();
 		}
 		if(!this.filas.get(fila).obtenerCelda(columna).estaVacia()){
-			//levantar excepcion
+			throw new CeldaOcupada();
 		}
 	}
 
@@ -72,8 +72,11 @@ public class Tablero {
 	}
 	
 	public void moverPersonaje(int filaAct, int colAct, int nuevaFila, int nuevaCol){
-		comprobaPosicion(filaAct, colAct); // verifica que haya un personaje y que sea parte del tablero
+		comprobarPosicion(filaAct, colAct); // verifica que haya un personaje y que sea parte del tablero
 		comprobarNuevaPosicion (nuevaFila, nuevaCol); // verifica que sea parte del tablero y que no haya un personaje
+		Celda celdaInicial = this.obtenerCelda(filaAct, colAct);
+		Celda celdaFinal = this.obtenerCelda(nuevaFila, nuevaCol);
+		this.comprobarAdyacencia(celdaInicial, celdaFinal);
 		Personaje personaje = this.filas.get(filaAct).removerPersonaje(colAct);
 		this.filas.get(nuevaFila).agregarPersonaje(nuevaCol, personaje);
 	}

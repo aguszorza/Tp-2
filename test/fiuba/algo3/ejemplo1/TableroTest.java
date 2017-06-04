@@ -3,13 +3,16 @@ package fiuba.algo3.ejemplo1;
 import org.junit.Test;
 
 import fiuba.algo3.ejemplo1.tablero.Celda;
+import fiuba.algo3.ejemplo1.tablero.CeldaVacia;
+import fiuba.algo3.ejemplo1.tablero.MovimientoInvalido;
+import fiuba.algo3.ejemplo1.tablero.CeldaOcupada;
 import fiuba.algo3.ejemplo1.tablero.PosicionFueraDelTablero;
 import fiuba.algo3.ejemplo1.tablero.Tablero;
 import junit.framework.Assert;
 
 public class TableroTest {
 
-	@Test
+	/*@Test
 	public void testCrearTableroYObtenerCeldas() {
 		Tablero tablero = new Tablero(10);
 		int contador = 1;
@@ -31,22 +34,60 @@ public class TableroTest {
 			}
 		}
 		Assert.assertTrue(estado);
-	}
+	}*/
 	
 	@Test
 	public void testAgregarPersonajeAgregaAlPersonajeEnLaCeldaCorrecta() {
 		Tablero tablero = new Tablero(10);
-		Personaje personaje = new Personaje(100, "Goku");
+		Goku personaje = new Goku();
 		tablero.agregarPersonaje(3,6,personaje);
 		Assert.assertEquals("No paso", personaje, tablero.obtenerCelda(3, 6).obtenerPersonaje());
+	}
+	
+	@Test
+	public void testMoverPersonajeAOtraCeldaLoMueve() {
+		Tablero tablero = new Tablero(10);
+		Goku personaje = new Goku();
+		tablero.agregarPersonaje(3,6,personaje);
+		tablero.moverPersonaje(3, 6, 4, 6);
+		Assert.assertEquals("No paso", personaje, tablero.obtenerCelda(4, 6).obtenerPersonaje());
 	}
 
 	@Test (expected = PosicionFueraDelTablero.class)
 	public void testIntentarMoverAUnaPosicionFueraDelTableroLanzaExcepcion() {
 		Tablero tablero = new Tablero(10);
-		Personaje personaje = new Personaje(100, "Goku");
+		Goku personaje = new Goku();
 		tablero.agregarPersonaje(10,7,personaje);
 		tablero.moverPersonaje(10, 7, 11, 7);
+		Assert.fail("No levanto excepcion");
+	}
+	
+	@Test (expected = CeldaVacia.class)
+	public void testIntentarMoverDesdeUnaCeldaVaciaLanzaExcepcion() {
+		Tablero tablero = new Tablero(10);
+		Goku personaje = new Goku();
+		tablero.agregarPersonaje(10,7,personaje);
+		tablero.moverPersonaje(9, 7, 9, 8);
+		Assert.fail("No levanto excepcion");
+	}
+	
+	@Test (expected = CeldaOcupada.class)
+	public void testIntentarMoverAUnaCeldaOcupadaLanzaExcepcion() {
+		Tablero tablero = new Tablero(10);
+		Goku personaje = new Goku(); 
+		tablero.agregarPersonaje(10,7,personaje);
+		personaje = new Goku(); // CAMBIAR A OTRO PERSONAJE DESPUES
+		tablero.agregarPersonaje(10,8,personaje);
+		tablero.moverPersonaje(10, 7, 10, 8);
+		Assert.fail("No levanto excepcion");
+	}
+	
+	@Test (expected = MovimientoInvalido.class)
+	public void testIntentarMoverAUnaCeldaNoAdyacenteLanzaExcepcion() {
+		Tablero tablero = new Tablero(10);
+		Goku personaje = new Goku(); 
+		tablero.agregarPersonaje(10,7,personaje);
+		tablero.moverPersonaje(10, 7, 2, 1);
 		Assert.fail("No levanto excepcion");
 	}
 }
