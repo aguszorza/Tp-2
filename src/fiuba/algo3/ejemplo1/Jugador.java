@@ -1,5 +1,6 @@
 package fiuba.algo3.ejemplo1;
 
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
@@ -16,10 +17,15 @@ public class Jugador {
 		this.personajes = personajes;
 	}
 	
+	public Enumeration<Personaje> obtenerPersonajes(){
+		return this.personajes.keys();
+	}
+	
 	public Boolean existePersonaje(Personaje personaje){
 		return this.personajes.containsKey(personaje);
 	}
 	
+	//ver de unir las dos. Ya sea usando una funcion o bien uniendo ataque con habilidad
 	public void atacar(Celda atacante, Celda atacado){
 		if(!existePersonaje(atacante.obtenerPersonaje())){ // no es un personaje del jugador
 			//levantar excepcion
