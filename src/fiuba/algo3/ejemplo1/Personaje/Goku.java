@@ -1,7 +1,6 @@
 package fiuba.algo3.ejemplo1.Personaje;
 
 import fiuba.algo3.ejemplo1.Kamehameha;
-import fiuba.algo3.ejemplo1.Consumibles.FabricaDeModos;
 
 public class Goku extends Personaje {
 
@@ -21,12 +20,10 @@ public class Goku extends Personaje {
 	}
 	
 	public void kaioKen(){
-		Modo kaioKen =  new FabricaDeModos().gokuKaioKen();
-		this.transformar(kaioKen, 20);
+		this.transformar(new FabricaDeModos().gokuKaioKen(this.modoDePelea));
 	}
 	
 	public void SuperSaiyajin(){
-		Modo SuperSaiyajin = new FabricaDeModos().gokuSuperSaiyajin();
-		this.transformar(SuperSaiyajin, 50);
+		this.transformar(new FabricaDeModos().gokuSuperSaiyajin(this.modoDePelea));
 	}	
 }

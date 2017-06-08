@@ -69,12 +69,12 @@ public class Personaje {
 		return this.modoDePelea.obtenerVelocidad();
 	}
 	
-	public void transformar(Modo modo, int costoKi){
-		if (this.ki() < costoKi){
+	public void transformar(Modo modo){
+		if (this.ki() < modo.obtenerCostoDeKi()){
 			throw new KiInsuficiente();
 		}
 		this.modoDePelea = modo;
-		this.ki = this.ki - costoKi;
+		this.ki = this.ki - modo.obtenerCostoDeKi();
 	}
 	
 	public void atacar(Personaje enemigo){

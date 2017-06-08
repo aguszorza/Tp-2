@@ -1,7 +1,5 @@
 package fiuba.algo3.ejemplo1.Personaje;
 
-import fiuba.algo3.ejemplo1.Consumibles.FabricaDeModos;
-
 public class Freezer extends Personaje{
 
 	public Freezer(){
@@ -9,12 +7,10 @@ public class Freezer extends Personaje{
 	}
 	
 	public void segundaForma(){
-		Modo segundaForma = new FabricaDeModos().freezerSegundaForma();
-		this.transformar(segundaForma, 20);
+		this.transformar(new FabricaDeModos().freezerSegundaForma(this.modoDePelea));
 	}
 	
 	public void definitivo(){
-		Modo definitivo = new FabricaDeModos().freezerDefinitivo();
-		this.transformar(definitivo, 50);
+		this.transformar(new FabricaDeModos().freezerDefinitivo(this.modoDePelea));
 	}
 }

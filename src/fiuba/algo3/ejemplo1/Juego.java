@@ -18,29 +18,29 @@ public class Juego {
 	
 	public Juego(){
 		this.tablero = new Tablero(10);
-		this.guerreroZ = new Jugador(inicializarGuerrerosZ(tablero));
-		this.enemigoTierra = new Jugador(inicializarEnemigosDeLaTierra(tablero));
+		this.guerreroZ = new Jugador(inicializarGuerrerosZ());
+		this.enemigoTierra = new Jugador(inicializarEnemigosDeLaTierra());
 	}
 	
-	private Hashtable <Personaje, Celda> inicializarGuerrerosZ(Tablero tablero){
+	private Hashtable <Personaje, Celda> inicializarGuerrerosZ(){
 		Hashtable <Personaje, Celda> personajes = new Hashtable <Personaje, Celda>();
 		Goku goku = new Goku();
 		Gohan gohan = new Gohan();
-		tablero.agregarPersonaje(1, 5, goku);
-		tablero.agregarPersonaje(1, 1, gohan);
-		personajes.put(goku, tablero.obtenerCelda(1, 5));
-		personajes.put(gohan, tablero.obtenerCelda(1, 1));
+		this.tablero.agregarPersonaje(1, 5, goku);
+		this.tablero.agregarPersonaje(1, 1, gohan);
+		personajes.put(goku, this.tablero.obtenerCelda(1, 5));
+		personajes.put(gohan, this.tablero.obtenerCelda(1, 1));
 		return personajes;
 	}
 	
-	private Hashtable <Personaje, Celda> inicializarEnemigosDeLaTierra(Tablero tablero){
+	private Hashtable <Personaje, Celda> inicializarEnemigosDeLaTierra(){
 		Hashtable <Personaje, Celda> personajes = new Hashtable <Personaje, Celda>();
 		Freezer freezer = new Freezer();
 		MajinBoo boo = new MajinBoo();
-		tablero.agregarPersonaje(10, 5, freezer);
-		tablero.agregarPersonaje(10, 10, boo);
-		personajes.put(freezer, tablero.obtenerCelda(10, 5));
-		personajes.put(boo, tablero.obtenerCelda(10, 10));
+		this.tablero.agregarPersonaje(10, 5, freezer);
+		this.tablero.agregarPersonaje(10, 10, boo);
+		personajes.put(freezer, this.tablero.obtenerCelda(10, 5));
+		personajes.put(boo, this.tablero.obtenerCelda(10, 10));
 		return personajes;
 	}
 	
