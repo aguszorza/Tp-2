@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Personaje {
 
-	protected int vida;
+	protected int vidaActual;
 	protected int vidaMaxima;
 	protected String nombre;
 	protected int ki;
@@ -16,7 +16,7 @@ public class Personaje {
 	private ArrayList<Consumible> consumiblesActivos;
 
 	public Personaje(int vida, String nombre, Modo modo){
-		this.vida = vida;
+		this.vidaActual = vida;
 		this.vidaMaxima = vida;
 		this.nombre = nombre;
 		this.ki = 0;
@@ -33,16 +33,16 @@ public class Personaje {
 	}
 	
 	public void aumentarVida(int cantidad){
-		if(this.vida + cantidad > this.vidaMaxima){
-			this.vida = this.vidaMaxima;
+		if(this.vidaActual + cantidad > this.vidaMaxima){
+			this.vidaActual = this.vidaMaxima;
 		}
 		else{
-			this.vida = this.vida + cantidad;
+			this.vidaActual = this.vidaActual + cantidad;
 		}
 	}
 	//ver que hacer cuando llega a cero
 	public void reducirVida(int cantidad){
-		this.vida = this.vida - cantidad;
+		this.vidaActual = this.vidaActual - cantidad;
 	}
 	
 	public int ki(){
@@ -54,7 +54,7 @@ public class Personaje {
 	}
 	
 	public int obtenerVida(){
-		return this.vida;
+		return this.vidaActual;
 	}
 	
 	public float obtenerPoderDePelea(){

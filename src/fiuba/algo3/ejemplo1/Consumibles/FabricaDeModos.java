@@ -94,4 +94,10 @@ public class FabricaDeModos {
 		Modo majin = new Modo (60, 3, 4);
 		return majin;
 	}
+	
+	//agregar la imposibilidad de ganar ki
+	public Modo chocolate(){
+		Modo chocolate = new Modo(0, 0, 0);
+		return chocolate;
+	}
 }

@@ -37,18 +37,18 @@ public class Tablero {
 		}
 	}
 	
+	private void comprobarAdyacencia(Celda celdaInicial, Celda celdaFinal){
+		if (!celdaInicial.esAdyacente(celdaFinal)){
+			throw new MovimientoInvalido();
+		}
+	}
+	
 	private void comprobarPosicion(int fila, int columna){
 		if(!this.filas.containsKey(fila) || !this.filas.containsKey(columna)){
 			throw new PosicionFueraDelTablero();
 		}
 		if(this.filas.get(fila).obtenerCelda(columna).estaVacia()){
 			throw new CeldaVacia();
-		}
-	}
-	
-	private void comprobarAdyacencia(Celda celdaInicial, Celda celdaFinal){
-		if (!celdaInicial.esAdyacente(celdaFinal)){
-			throw new MovimientoInvalido();
 		}
 	}
 	
