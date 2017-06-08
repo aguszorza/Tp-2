@@ -1,25 +1,22 @@
 package fiuba.algo3.ejemplo1.Personaje;
 
-public class Gohan extends Personaje {
+import fiuba.algo3.ejemplo1.Consumibles.FabricaDeModos;
 
-	static int PODER = 15;
-	static int DISTANCIA = 2;
-	static int VELOCIDAD = 2;
-	
-	
+public class Gohan extends Personaje {
+		
 	public Gohan(){
-		super(300, "Gohan", new Modo(PODER, DISTANCIA, VELOCIDAD));
+		super(300, "Gohan", new FabricaDeModos().gohanNormal());
 	}
 	
-	public void SuperSaiyajin1(){
-		Modo SuperSaiyajin1 = new Modo(30, 2, 2);
+	public void SuperSaiyajin(){
+		Modo SuperSaiyajin1 = new FabricaDeModos().gohanSuperSaiyajin();
 		this.transformar(SuperSaiyajin1, 10);
 	}
 	
 	//Agregar lo de la vida
 	/*
 	public void SuperSaiyajin2(){
-		Modo SuperSaiyajin = new Modo(100, 4, 3);
+		Modo SuperSaiyajin = new FabricaDeModos().gohanSuperSaiyajin2();
 		// falta la otra verificacion
 		this.transformar(SuperSaiyajin, 50);
 	}*/	

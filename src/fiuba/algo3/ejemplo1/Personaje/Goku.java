@@ -1,18 +1,14 @@
 package fiuba.algo3.ejemplo1.Personaje;
 
 import fiuba.algo3.ejemplo1.Kamehameha;
+import fiuba.algo3.ejemplo1.Consumibles.FabricaDeModos;
 
 public class Goku extends Personaje {
 
-	static int PODER = 20;
-	static int DISTANCIA = 2;
-	static int VELOCIDAD = 2;
-	
-	private float danioAdicional;
-	
+	float danioAdicional;
 	
 	public Goku(){
-		super(500, "Goku", new Modo(PODER, DISTANCIA, VELOCIDAD));
+		super(500, "Goku", new FabricaDeModos().gokuNormal());
 		this.danioAdicional = (float)1.2;
 		this.habilidad = new Kamehameha(this);
 	}
@@ -25,12 +21,12 @@ public class Goku extends Personaje {
 	}
 	
 	public void kaioKen(){
-		Modo kaioKen = new Modo(40, 4, 3);
+		Modo kaioKen =  new FabricaDeModos().gokuKaioKen();
 		this.transformar(kaioKen, 20);
 	}
 	
 	public void SuperSaiyajin(){
-		Modo SuperSaiyajin = new Modo(60, 4, 5);
+		Modo SuperSaiyajin = new FabricaDeModos().gokuSuperSaiyajin();
 		this.transformar(SuperSaiyajin, 50);
 	}	
 }

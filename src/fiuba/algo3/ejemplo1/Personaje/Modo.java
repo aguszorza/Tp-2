@@ -39,7 +39,7 @@ public class Modo {
 	}
 
 	public void actualizarPoderPeleaOriginal() {
-		this.poderDePelea = poderDePeleaOriginal;
+		this.poderDePelea = this.poderDePeleaOriginal;
 	}
 
 	public void incrementarVelocidad(int porcentaje) {
