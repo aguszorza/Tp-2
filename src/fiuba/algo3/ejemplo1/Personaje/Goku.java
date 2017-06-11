@@ -1,6 +1,6 @@
 package fiuba.algo3.ejemplo1.Personaje;
 
-import fiuba.algo3.ejemplo1.Kamehameha;
+import fiuba.algo3.ejemplo1.HabilidadesEspeciales.Kamehameha;
 
 public class Goku extends Personaje {
 

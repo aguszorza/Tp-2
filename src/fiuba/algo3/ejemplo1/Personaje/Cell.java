@@ -1,5 +1,7 @@
 package fiuba.algo3.ejemplo1.Personaje;
 
+import fiuba.algo3.ejemplo1.HabilidadesEspeciales.Absorber;
+
 public class Cell extends Personaje{
 	
 	private int cantidadAbsorciones;
@@ -7,6 +9,7 @@ public class Cell extends Personaje{
 	public Cell(){
 		super(500, "Cell", new FabricaDeModos().cellNormal());
 		this.cantidadAbsorciones = 0;
+		this.habilidad = new Absorber(this);
 	}
 	
 	public void semiPerfecto(){
@@ -25,5 +28,9 @@ public class Cell extends Personaje{
 	
 	public void aumentarAbsorciones(){
 		this.cantidadAbsorciones ++;
+	}
+	
+	public int obtenerAbsorciones(){
+		return this.cantidadAbsorciones;
 	}
 }

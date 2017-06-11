@@ -1,7 +1,7 @@
 package fiuba.algo3.ejemplo1.Personaje;
 
 import fiuba.algo3.ejemplo1.Consumibles.Consumible;
-import fiuba.algo3.ejemplo1.HabilidadEspecial;
+import fiuba.algo3.ejemplo1.HabilidadesEspeciales.HabilidadEspecial;
 
 import java.util.ArrayList;
 
@@ -80,6 +80,15 @@ public class Personaje {
 		this.modoDePelea = modo;
 		this.ki = this.ki - modo.obtenerCostoDeKi();
 	}
+	
+	//Ver lo de modo chocolate
+	//public void transformarEnChocolate(){
+		//this.modoDePelea = new ModoChocolate (this.modoDePelea, );
+	//}
+	
+	//public void recuperarModoDePelea(){
+	//	
+//	}
 	
 	public void atacar(Personaje enemigo){
 		float danio = this.obtenerPoderDePelea();
