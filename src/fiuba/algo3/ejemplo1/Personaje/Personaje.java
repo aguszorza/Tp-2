@@ -57,6 +57,10 @@ public class Personaje {
 		return this.vidaActual;
 	}
 	
+	public int obtenerPorcentajeDeVida(){
+		return this.vidaActual * 100/this.vidaMaxima;
+	}
+	
 	public float obtenerPoderDePelea(){
 		return this.modoDePelea.obtenerPoderDePelea();
 	}

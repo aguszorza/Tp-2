@@ -13,7 +13,7 @@ public class Goku extends Personaje {
 	}
 	
 	public float obtenerPoderDePelea(){
-		if (this.vidaActual < this.vidaMaxima * 30 / 100){
+		if (this.obtenerPorcentajeDeVida() < 30){
 			return super.obtenerPoderDePelea() * this.danioAdicional;
 		}
 		return super.obtenerPoderDePelea();
