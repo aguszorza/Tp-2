@@ -1,6 +1,7 @@
 package fiuba.algo3.ejemplo1.HabilidadesEspeciales;
 
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
+import fiuba.algo3.ejemplo1.Personaje.Personaje;
 
 public class RayoMortal extends HabilidadEspecial{
 	
@@ -11,7 +12,7 @@ public class RayoMortal extends HabilidadEspecial{
 		this.danioAdicional = (float)1.5;
 	}
 
-	public float lanzarHabilidad(){
-		return this.danioAdicional * super.lanzarHabilidad();
+	public float lanzarHabilidad(Personaje enemigo){
+		return this.danioAdicional * super.lanzarHabilidad(enemigo);
 	}
 }
