@@ -240,6 +240,17 @@ public class CellTest {
 	}
 	
 	@Test
+	public void testLanzarHabilidadEspecialReduceElKi(){
+		Cell cell = new Cell();
+		Freezer freezer = new Freezer();
+		cell.aumentarKi();
+		int ki = cell.ki();
+		cell.lanzarHabilidadEspecial(freezer);
+		ki = ki - cell.ki();
+		Assert.assertEquals("No paso: no se redujo el ki", 5, ki);
+	}
+	
+	@Test
 	public void testLanzarHabilidadEspecialHaceMenosDanioSiElPoderDeAtaqueDelEnemigoEsMayor(){
 		Cell cell = new Cell();
 		MajinBoo majin = new MajinBoo();

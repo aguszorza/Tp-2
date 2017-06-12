@@ -23,7 +23,7 @@ public class Gohan extends Personaje {
 		Iterator <Personaje> it = personajes.iterator();
 		while(it.hasNext()){
 			if (it.next().obtenerPorcentajeDeVida() >= 30){
-				//excepcion
+				throw new RequisitosDeTransformacionInsuficientes();
 			}
 		}
 		this.transformar(new FabricaDeModos().gohanSuperSaiyajin2(this.modoDePelea));

@@ -15,7 +15,7 @@ public class Piccolo extends Personaje{
 	
 	public void protector(Gohan gohan){
 		if (gohan.obtenerPorcentajeDeVida() >= 20){
-			//excepcion
+			throw new RequisitosDeTransformacionInsuficientes();
 		}
 		this.transformar(new FabricaDeModos().piccoloProtector());
 	}

@@ -32,7 +32,7 @@ public class FabricaDeModos {
 	
 	public Modo gohanSuperSaiyajin(Modo modoActual){
 		int costoKi = this.obtenerConsumoDeKi(modoActual, 30, 10);
-		Modo superSaiyajin = new Modo (30, 4, 3, costoKi);
+		Modo superSaiyajin = new Modo (30, 2, 2, costoKi);
 		return superSaiyajin;
 	}
 	
