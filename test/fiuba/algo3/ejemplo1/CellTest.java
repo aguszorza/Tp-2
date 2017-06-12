@@ -16,7 +16,7 @@ public class CellTest {
 	@Test
 	public void testObtenerNombreDevuelveElNombreCorrecto() {
 		Cell cell = new Cell();
-		Assert.assertEquals("No paso: no devolvio Goku como nombre", "Cell", cell.getNombre());
+		Assert.assertEquals("No paso: no devolvio Cell como nombre", "Cell", cell.getNombre());
 	}
 
 	@Test

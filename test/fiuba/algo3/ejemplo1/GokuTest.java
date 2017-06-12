@@ -1,5 +1,7 @@
 package fiuba.algo3.ejemplo1;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
@@ -8,8 +10,8 @@ import fiuba.algo3.ejemplo1.Personaje.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Personaje.MajinBoo;
 import junit.framework.Assert;
 
-public class PersonajeTest {
-	
+public class GokuTest {
+
 	@Test
 	public void testObtenerNombreDevuelveElNombreCorrecto() {
 		Goku goku = new Goku();
@@ -252,4 +254,5 @@ public class PersonajeTest {
 		vida = vida - majin.obtenerVida();
 		Assert.assertEquals("No paso: no se redujo la vida", 24, vida);
 	}
+
 }

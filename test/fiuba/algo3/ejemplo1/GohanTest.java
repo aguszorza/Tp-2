@@ -20,7 +20,7 @@ public class GohanTest {
 	@Test
 	public void testObtenerNombreDevuelveElNombreCorrecto() {
 		Gohan gohan = new Gohan();
-		Assert.assertEquals("No paso: no devolvio Goku como nombre", "Gohan", gohan.getNombre());
+		Assert.assertEquals("No paso: no devolvio Gohan como nombre", "Gohan", gohan.getNombre());
 	}
 
 	@Test
