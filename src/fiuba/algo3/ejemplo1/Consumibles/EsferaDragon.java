@@ -19,7 +19,7 @@ public class EsferaDragon extends Consumible {
 
     @Override
     public void afectar(Modo modo) {
-        modo.incrementarPoderPelea(25);
+        modo.incrementarPoderPelea((float)1.25);
     }
 
     @Override

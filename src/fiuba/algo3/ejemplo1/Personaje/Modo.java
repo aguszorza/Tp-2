@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class Modo {
 
 	private Ataque ataque;
+	private float danioAdicional;
+	private int velocidadAdicional;
 	//private int poderDePeleaOriginal;
 	//private int distanciaDeAtaqueOriginal;
 	//private int velocidadOriginal;
@@ -17,8 +19,6 @@ public class Modo {
 	//protected int distanciaDeAtaque;
 	protected int velocidad;
 
-	//Habria que ver si para los distintos modos creamos subclases o
-	//lo hacemos a mano como esta hecho ahora en cada personaje 
 	public Modo(int poder, int distancia, int velocidad, int costoDeKi){
 		this.ataque = new Ataque(poder, distancia);
 		//this.poderDePelea = this.poderDePeleaOriginal = poder;
@@ -26,14 +26,15 @@ public class Modo {
 		//this.velocidad = this.velocidadOriginal = velocidad;
 		this.velocidad = velocidad;
 		this.costoDeKi = costoDeKi;
+		this.danioAdicional = this.velocidadAdicional = 1;
 	}
 	
 	public int obtenerCostoDeKi(){
 		return this.costoDeKi;
 	}
 
-	public int obtenerPoderDePelea(){
-		return this.ataque.obtenerDanio();
+	public float obtenerPoderDePelea(){
+		return this.ataque.obtenerDanio() * this.danioAdicional;
 	}
 	
 	public int obtenerDistanciaDeAtaque(){
@@ -41,26 +42,26 @@ public class Modo {
 	}
 	
 	public int obtenerVelocidad(){
-		return this.velocidad;
+		return this.velocidad * this.velocidadAdicional;
 	}
 	
 	public float obtenerDanioDeAtaque(Personaje enemigo){
-		return this.ataque.atacar(enemigo);
+		return this.ataque.atacar(enemigo) * this.danioAdicional;
 	}
 
-	/*public void incrementarPoderPelea(int porcentaje) {
-		this.poderDePelea *= (int)(porcentaje/100.0);
-	}*/
+	public void incrementarPoderPelea(float danioAdicional) {
+		this.danioAdicional = danioAdicional;
+	}
 
-	/*public void actualizarPoderPeleaOriginal() {
-		this.poderDePelea = this.poderDePeleaOriginal;
-	}*/
+	public void actualizarPoderPeleaOriginal() {
+		this.danioAdicional = 1;
+	}
 
-	/*public void incrementarVelocidad(int porcentaje) {
-		this.velocidad *= (int)(porcentaje/100.0);
-	}*/
+	public void incrementarVelocidad(int velocidadAdicional) {
+		this.velocidadAdicional = velocidadAdicional;
+	}
 
-	/*public void actualizarVelocidadOriginal() {
-		this.velocidad = this.velocidadOriginal;
-	}*/
+	public void actualizarVelocidadOriginal() {
+		this.velocidadAdicional = 1;
+	}
 }

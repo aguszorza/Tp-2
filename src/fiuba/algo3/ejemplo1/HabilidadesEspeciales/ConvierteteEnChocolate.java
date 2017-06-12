@@ -9,9 +9,9 @@ public class ConvierteteEnChocolate extends HabilidadEspecial{
 		super(30, majin);
 	}
 	
-	public float lanzarHabilidad(Personaje enemigo){
+	/*public float lanzarHabilidad(Personaje enemigo){
 		super.lanzarHabilidad();
 		
 		return super.lanzarHabilidad();
-	}
+	}*/
 }

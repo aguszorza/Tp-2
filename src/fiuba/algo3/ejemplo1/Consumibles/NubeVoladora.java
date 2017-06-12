@@ -18,7 +18,7 @@ public class NubeVoladora extends Consumible {
 
     @Override
     public void afectar(Modo modo) {
-        modo.incrementarVelocidad(50);
+        modo.incrementarVelocidad(2);
     }
 
     @Override
