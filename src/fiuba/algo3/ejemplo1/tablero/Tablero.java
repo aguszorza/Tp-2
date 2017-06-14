@@ -44,16 +44,6 @@ public class Tablero {
 		}
 	}
 	
-	private void comprobarPosicion(int fila, int columna){
-		if(!this.filas.containsKey(fila) || !this.filas.containsKey(columna)){
-			throw new PosicionFueraDelTablero();
-		}
-		if(this.filas.get(fila).obtenerCelda(columna).estaVacia()){
-			throw new CeldaVacia();
-		}
-	}
-	
-	//unir las dos funciones
 	private void comprobarNuevaPosicion(Celda celda){
 		// como es un tablero cuadrado, verifico que ambos numeros sean clave del tablero 
 		if(!this.filas.containsKey(celda.obtenerFila()) || !this.filas.containsKey(celda.obtenerColumna())){
