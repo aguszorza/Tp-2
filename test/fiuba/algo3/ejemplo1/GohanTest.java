@@ -19,13 +19,21 @@ public class GohanTest {
 
 	@Test
 	public void testObtenerNombreDevuelveElNombreCorrecto() {
+		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
 		Gohan gohan = new Gohan();
+		gohan.agregarAliados(aliado);
 		Assert.assertEquals("No paso: no devolvio Gohan como nombre", "Gohan", gohan.getNombre());
 	}
 
 	@Test
 	public void testAumentarKiAumentaEnCincoElKi() {
+		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
 		Gohan gohan = new Gohan();
+		gohan.agregarAliados(aliado);
 		int ki = gohan.ki();
 		gohan.aumentarKi();
 		ki = gohan.ki() - ki;
@@ -34,7 +42,11 @@ public class GohanTest {
 	
 	@Test
 	public void testReducirKiDisminuyeElKiEnElValorPasado() {
+		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
 		Gohan gohan = new Gohan();
+		gohan.agregarAliados(aliado);
 		gohan.aumentarKi();
 		gohan.aumentarKi();
 		gohan.aumentarKi();
@@ -46,7 +58,11 @@ public class GohanTest {
 	
 	@Test
 	public void testReducirVidaDisminuyeLaVidaEnElValorPasado() {
+		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
 		Gohan gohan = new Gohan();
+		gohan.agregarAliados(aliado);
 		int vida = gohan.obtenerVida();
 		gohan.reducirVida(20);
 		vida = vida - gohan.obtenerVida();
@@ -55,7 +71,11 @@ public class GohanTest {
 	
 	@Test
 	public void testAumentarVidaAumentaLaVidaEnElValorPasadoSiNoSobrepasaLaVidaMaxima() {
+		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
 		Gohan gohan = new Gohan();
+		gohan.agregarAliados(aliado);
 		gohan.reducirVida(200);
 		int vida = gohan.obtenerVida();
 		gohan.aumentarVida(100);
@@ -65,7 +85,11 @@ public class GohanTest {
 	
 	@Test
 	public void testAumentarVidaAumentaLaVidaHastaLaVidaMaximaSiElAumentoSobrepasaLaVidaMaxima() {
+		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
 		Gohan gohan = new Gohan();
+		gohan.agregarAliados(aliado);
 		gohan.reducirVida(30);
 		gohan.aumentarVida(100);
 		Assert.assertEquals("No paso: no devolvio 300", 300, gohan.obtenerVida());
@@ -73,115 +97,154 @@ public class GohanTest {
 
 	@Test
 	public void testObtenerVidaDevuelveLaVidaDelPersonaje() {
+		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
 		Gohan gohan = new Gohan();
+		gohan.agregarAliados(aliado);
 		Assert.assertEquals("No paso: no devolvio 300", 300, gohan.obtenerVida());
 	}
 	
 	@Test
 	public void testPoderDePeleaDevuelveElPoderDePeleaDelPersonaje() {
+		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
 		Gohan gohan = new Gohan();
+		gohan.agregarAliados(aliado);
 		Assert.assertEquals("No paso: no devolvio 15", (float)15, gohan.obtenerPoderDePelea());
 	}
 	
 	@Test
 	public void testDistanciaDeAtaqueDevuelveLaDistanciaDeAtaqueDelPersonaje() {
+		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
 		Gohan gohan = new Gohan();
+		gohan.agregarAliados(aliado);
 		Assert.assertEquals("No paso: no devolvio 2", 2, gohan.obtenerDistanciaDeAtaque());
 	}
 	
 	@Test
 	public void testVelocidadDevuelveLaVelocidadDelPersonaje() {
+		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
 		Gohan gohan = new Gohan();
+		gohan.agregarAliados(aliado);
 		Assert.assertEquals("No paso: no devolvio 2", 2, gohan.obtenerVelocidad());
 	}
 	
 	@Test(expected = KiInsuficiente.class)
 	public void testSuperSaiyajinLevantaExcepcionSiNoSeTieneElKiSuficinte(){
+		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
 		Gohan gohan = new Gohan();
-		gohan.SuperSaiyajin();
+		gohan.agregarAliados(aliado);
+		gohan.transformar();
 		Assert.fail("No levanto excepcion");
 	}
 	
 	@Test
 	public void testSuperSaiyajinCambiaElPoderDePelea(){
+		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
 		Gohan gohan = new Gohan();
+		gohan.agregarAliados(aliado);
 		gohan.aumentarKi();
 		gohan.aumentarKi();
-		gohan.SuperSaiyajin();
+		gohan.transformar();
 		Assert.assertEquals("No paso: no devolvio 30", (float)30, gohan.obtenerPoderDePelea());
 	}
 	
 	@Test
 	public void testSuperSaiyajinCambiaLaDistanciaDeAtaque(){
+		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
 		Gohan gohan = new Gohan();
+		gohan.agregarAliados(aliado);
 		gohan.aumentarKi();
 		gohan.aumentarKi();		
-		gohan.SuperSaiyajin();
+		gohan.transformar();
 		Assert.assertEquals("No paso: no devolvio 2", 2, gohan.obtenerDistanciaDeAtaque());
 	}
 	
 	@Test
 	public void testSuperSaiyajinCambiaLaVelocidad(){
+		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
 		Gohan gohan = new Gohan();
+		gohan.agregarAliados(aliado);
 		gohan.aumentarKi();
 		gohan.aumentarKi();	
-		gohan.SuperSaiyajin();
+		gohan.transformar();
 		Assert.assertEquals("No paso: no devolvio 2", 2, gohan.obtenerVelocidad());
 	}
 	
 	@Test
 	public void testSuperSaiyajinReduceElKi(){
+		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
 		Gohan gohan = new Gohan();
+		gohan.agregarAliados(aliado);
 		gohan.aumentarKi();
 		gohan.aumentarKi();
 		gohan.aumentarKi();
 		int ki = gohan.ki();
-		gohan.SuperSaiyajin();
+		gohan.transformar();
 		ki = ki - gohan.ki();
 		Assert.assertEquals("No paso: el ki se redujo", 10, ki);
 	}
 	
 	@Test(expected = RequisitosDeTransformacionInsuficientes.class)
 	public void testSuperSaiyajin2LevantaExcepcionSiSusAliadosTienenMasDel30PorcientoDeVida(){
+		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
 		Gohan gohan = new Gohan();
-		Goku goku = new Goku();
-		Piccolo piccolo = new Piccolo();
-		ArrayList <Personaje> personajes = new ArrayList <Personaje>();
-		personajes.add(goku);
-		personajes.add(piccolo);
-		gohan.SuperSaiyajin2(personajes);
+		gohan.agregarAliados(aliado);
+		for(int i = 0; i < 10; i++){
+			gohan.aumentarKi();
+		}
+		gohan.transformar();
+		gohan.transformar();
 		Assert.fail("No levanto excepcion");
 	}
 	
 	@Test(expected = KiInsuficiente.class)
 	public void testSuperSaiyajin2LevantaExcepcionSiNoTieneElKiNecesario(){
+		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
 		Gohan gohan = new Gohan();
-		Goku goku = new Goku();
-		Piccolo piccolo = new Piccolo();
-		goku.reducirVida(351);
-		piccolo.reducirVida(351);
-		ArrayList <Personaje> personajes = new ArrayList <Personaje>();
-		personajes.add(goku);
-		personajes.add(piccolo);
-		gohan.SuperSaiyajin2(personajes);
+		gohan.agregarAliados(aliado);
+		freezer.reducirVida(300);
+		gohan.aumentarKi();
+		gohan.aumentarKi();
+		gohan.transformar();
+		gohan.transformar();
 		Assert.fail("No levanto excepcion");
 	}
 	
 	@Test
 	public void testSuperSaiyajin2AumentaLosStats(){
+		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
 		Gohan gohan = new Gohan();
+		gohan.agregarAliados(aliado);
+		freezer.reducirVida(300);
 		Boolean estado = true;
-		for(int i = 0; i < 8; i++){
+		for(int i = 0; i < 10; i++){
 			gohan.aumentarKi();
 		}
-		Goku goku = new Goku();
-		Piccolo piccolo = new Piccolo();
-		goku.reducirVida(351);
-		piccolo.reducirVida(351);
-		ArrayList <Personaje> personajes = new ArrayList <Personaje>();
-		personajes.add(goku);
-		personajes.add(piccolo);
-		gohan.SuperSaiyajin2(personajes);
+		gohan.transformar();
+		gohan.transformar();
 		estado = estado && gohan.obtenerVelocidad() == 3;
 		estado = estado && gohan.obtenerDistanciaDeAtaque() == 4;
 		estado = estado && gohan.obtenerPoderDePelea() == 100;
@@ -190,40 +253,47 @@ public class GohanTest {
 	
 	@Test
 	public void testSuperSaiyajin2DisminuyeElKi(){
+		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
 		Gohan gohan = new Gohan();
-		for(int i = 0; i < 8; i++){
+		gohan.agregarAliados(aliado);
+		for(int i = 0; i < 10; i++){
 			gohan.aumentarKi();
 		}
+		freezer.reducirVida(300);
+		gohan.transformar();
 		int ki = gohan.ki();
-		Goku goku = new Goku();
-		Piccolo piccolo = new Piccolo();
-		goku.reducirVida(351);
-		piccolo.reducirVida(351);
-		ArrayList <Personaje> personajes = new ArrayList <Personaje>();
-		personajes.add(goku);
-		personajes.add(piccolo);
-		gohan.SuperSaiyajin2(personajes);
+		gohan.transformar();
 		ki = ki - gohan.ki();
 		Assert.assertEquals("No paso: el ki se redujo", 30, ki);
 	}
 	
 	@Test
 	public void testAtacarReduceLaVidaDelEnemigo(){
-		Gohan gohan = new Gohan();
-		gohan.aumentarKi();
-		gohan.aumentarKi();
-		gohan.SuperSaiyajin();
 		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
+		Gohan gohan = new Gohan();
+		aliado.add(freezer);
+		gohan.aumentarKi();
+		gohan.aumentarKi();
+		gohan.transformar();
+		Freezer enemigo = new Freezer();
 		float danio = gohan.obtenerPoderDePelea();
-		int vida = freezer.obtenerVida();
-		gohan.atacar(freezer);
-		vida = vida - freezer.obtenerVida();
+		int vida = enemigo.obtenerVida();
+		gohan.atacar(enemigo);
+		vida = vida - enemigo.obtenerVida();
 		Assert.assertEquals("No paso: no se redujo la vida", (int)danio, vida);
 	}
 	
 	@Test
 	public void testAtacarHaceMenosDanioSiElPoderDeAtaqueDelEnemigoEsMayor(){
+		Freezer freezer = new Freezer();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(freezer);
 		Gohan gohan = new Gohan();
+		aliado.add(freezer);
 		MajinBoo majin = new MajinBoo();
 		float danio = gohan.obtenerPoderDePelea();
 		int vida = majin.obtenerVida();
@@ -247,7 +317,7 @@ public class GohanTest {
 		int vida = freezer.obtenerVida();
 		gohan.aumentarKi();
 		gohan.aumentarKi();
-		gohan.SuperSaiyajin();
+		gohan.transformar();
 		gohan.aumentarKi();
 		gohan.aumentarKi();
 		gohan.lanzarHabilidadEspecial(freezer);

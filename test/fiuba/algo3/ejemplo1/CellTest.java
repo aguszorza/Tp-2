@@ -101,10 +101,11 @@ public class CellTest {
 	@Test
 	public void testSemiPerfectoCambiaElPoderDePelea(){
 		Cell cell = new Cell();
-		cell.aumentarAbsorciones();
-		cell.aumentarAbsorciones();
-		cell.aumentarAbsorciones();
-		cell.aumentarAbsorciones();
+		Freezer freezer = new Freezer();
+		for(int i = 0; i < 4; i++){
+			cell.aumentarKi();
+			cell.lanzarHabilidadEspecial(freezer);
+		}
 		cell.semiPerfecto();
 		Assert.assertEquals("No paso: no devolvio 40", (float)40, cell.obtenerPoderDePelea());
 	}
@@ -112,10 +113,11 @@ public class CellTest {
 	@Test
 	public void testSemiPerfectoCambiaLaDistanciaDeAtaque(){
 		Cell cell = new Cell();
-		cell.aumentarAbsorciones();
-		cell.aumentarAbsorciones();
-		cell.aumentarAbsorciones();
-		cell.aumentarAbsorciones();		
+		Freezer freezer = new Freezer();
+		for(int i = 0; i < 4; i++){
+			cell.aumentarKi();
+			cell.lanzarHabilidadEspecial(freezer);
+		}		
 		cell.semiPerfecto();
 		Assert.assertEquals("No paso: no devolvio 4", 4, cell.obtenerDistanciaDeAtaque());
 	}
@@ -123,10 +125,11 @@ public class CellTest {
 	@Test
 	public void testSemiPerfectoCambiaLaVelocidad(){
 		Cell cell = new Cell();
-		cell.aumentarAbsorciones();
-		cell.aumentarAbsorciones();
-		cell.aumentarAbsorciones();
-		cell.aumentarAbsorciones();		
+		Freezer freezer = new Freezer();
+		for(int i = 0; i < 4; i++){
+			cell.aumentarKi();
+			cell.lanzarHabilidadEspecial(freezer);
+		}
 		cell.semiPerfecto();
 		Assert.assertEquals("No paso: no devolvio 3", 3, cell.obtenerVelocidad());
 	}
@@ -135,10 +138,11 @@ public class CellTest {
 	public void testSemiPerfectoNoReduceElKi(){
 		Cell cell = new Cell();
 		cell.aumentarKi();
-		cell.aumentarAbsorciones();
-		cell.aumentarAbsorciones();
-		cell.aumentarAbsorciones();
-		cell.aumentarAbsorciones();		
+		Freezer freezer = new Freezer();
+		for(int i = 0; i < 4; i++){
+			cell.aumentarKi();
+			cell.lanzarHabilidadEspecial(freezer);
+		}
 		cell.semiPerfecto();
 		Assert.assertEquals("No paso: el ki se redujo", 5, cell.ki());
 	}
@@ -154,8 +158,10 @@ public class CellTest {
 	public void testPerfectoAumentaLosStats(){
 		Cell cell = new Cell();
 		Boolean estado = true;
+		Freezer freezer = new Freezer();
 		for(int i = 0; i < 8; i++){
-			cell.aumentarAbsorciones();
+			cell.aumentarKi();
+			cell.lanzarHabilidadEspecial(freezer);
 		}
 		cell.Perfecto();
 		estado = estado && cell.obtenerVelocidad() == 4;
@@ -168,8 +174,10 @@ public class CellTest {
 	public void testPerfectoNoDisminuyeElKi(){
 		Cell cell = new Cell();
 		cell.aumentarKi();
+		Freezer freezer = new Freezer();
 		for(int i = 0; i < 8; i++){
-			cell.aumentarAbsorciones();
+			cell.aumentarKi();
+			cell.lanzarHabilidadEspecial(freezer);
 		}
 		cell.Perfecto();
 		Assert.assertEquals("No paso: el ki se redujo", 5, cell.ki());

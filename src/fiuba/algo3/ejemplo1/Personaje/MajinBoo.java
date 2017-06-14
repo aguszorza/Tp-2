@@ -6,11 +6,11 @@ public class MajinBoo extends Personaje {
 		super(300, "Majin Boo", new FabricaDeModos().majinBooNormal());
 	}
 	
-	public void BooMalo(){
+	/*public void BooMalo(){
 		this.transformar(new FabricaDeModos().majinBooMalo(this.modoDePelea));
 	}
 	
 	public void BooOriginal(){
 		this.transformar(new FabricaDeModos().majinBooOriginal(this.modoDePelea));
-	}	
+	}*/	
 }

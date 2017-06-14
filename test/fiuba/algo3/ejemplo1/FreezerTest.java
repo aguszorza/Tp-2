@@ -95,7 +95,7 @@ public class FreezerTest {
 	@Test(expected = KiInsuficiente.class)
 	public void testSegundaFormaLevantaExcepcionSiNoSeTieneElKiSuficinte(){
 		Freezer freezer = new Freezer();
-		freezer.segundaForma();
+		freezer.transformar();
 		Assert.fail("No levanto excepcion");
 	}
 	
@@ -106,7 +106,7 @@ public class FreezerTest {
 		freezer.aumentarKi();
 		freezer.aumentarKi();
 		freezer.aumentarKi();
-		freezer.segundaForma();
+		freezer.transformar();
 		Assert.assertEquals("No paso: no devolvio 40", (float)40, freezer.obtenerPoderDePelea());
 	}
 	
@@ -117,7 +117,7 @@ public class FreezerTest {
 		freezer.aumentarKi();
 		freezer.aumentarKi();
 		freezer.aumentarKi();
-		freezer.segundaForma();
+		freezer.transformar();
 		Assert.assertEquals("No paso: no devolvio 3", 3, freezer.obtenerDistanciaDeAtaque());
 	}
 	
@@ -128,7 +128,7 @@ public class FreezerTest {
 		freezer.aumentarKi();
 		freezer.aumentarKi();
 		freezer.aumentarKi();
-		freezer.segundaForma();
+		freezer.transformar();
 		Assert.assertEquals("No paso: no devolvio 4", 4, freezer.obtenerVelocidad());
 	}
 	
@@ -140,7 +140,7 @@ public class FreezerTest {
 		freezer.aumentarKi();
 		freezer.aumentarKi();
 		int ki = freezer.ki();
-		freezer.segundaForma();
+		freezer.transformar();
 		ki = ki - freezer.ki();
 		Assert.assertEquals("No paso: el ki se redujo", 20, ki);
 	}
@@ -148,7 +148,12 @@ public class FreezerTest {
 	@Test(expected = KiInsuficiente.class)
 	public void testDefinitivoLevantaExcepcionSiNoTieneElKiNecesario(){
 		Freezer freezer = new Freezer();
-		freezer.definitivo();
+		freezer.aumentarKi();
+		freezer.aumentarKi();
+		freezer.aumentarKi();
+		freezer.aumentarKi();
+		freezer.transformar();
+		freezer.transformar();
 		Assert.fail("No levanto excepcion");
 	}
 	
@@ -156,10 +161,11 @@ public class FreezerTest {
 	public void testDefinitivoAumentaLosStats(){
 		Freezer freezer = new Freezer();
 		Boolean estado = true;
-		for(int i = 0; i < 10; i++){
+		for(int i = 0; i < 14; i++){
 			freezer.aumentarKi();
 		}
-		freezer.definitivo();
+		freezer.transformar();
+		freezer.transformar();
 		estado = estado && freezer.obtenerVelocidad() == 6;
 		estado = estado && freezer.obtenerDistanciaDeAtaque() == 3;
 		estado = estado && freezer.obtenerPoderDePelea() == 50;
@@ -169,11 +175,12 @@ public class FreezerTest {
 	@Test
 	public void testDefinitivoDisminuyeElKi(){
 		Freezer freezer = new Freezer();
-		for(int i = 0; i < 10; i++){
+		for(int i = 0; i < 14; i++){
 			freezer.aumentarKi();
 		}
+		freezer.transformar();
 		int ki = freezer.ki();
-		freezer.definitivo();
+		freezer.transformar();
 		ki = ki - freezer.ki();
 		Assert.assertEquals("No paso: el ki se redujo", 50, ki);
 	}

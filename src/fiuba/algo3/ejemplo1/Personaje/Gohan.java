@@ -7,13 +7,15 @@ import fiuba.algo3.ejemplo1.HabilidadesEspeciales.Masenko;
 
 
 public class Gohan extends Personaje {
+	
+	ArrayList <Personaje> aliados;
 		
 	public Gohan(){
 		super(300, "Gohan", new FabricaDeModos().gohanNormal());
 		this.habilidad = new Masenko(this);
 	}
 	
-	public void SuperSaiyajin(){
+	/*public void SuperSaiyajin(){
 		this.transformar(new FabricaDeModos().gohanSuperSaiyajin(this.modoDePelea));
 	}
 	
@@ -27,5 +29,5 @@ public class Gohan extends Personaje {
 			}
 		}
 		this.transformar(new FabricaDeModos().gohanSuperSaiyajin2(this.modoDePelea));
-	}	
+	}*/
 }

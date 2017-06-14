@@ -9,7 +9,7 @@ public class Piccolo extends Personaje{
 		this.habilidad = new Makankosappo (this);
 	}
 	
-	public void fortalecido(){
+	/*public void fortalecido(){
 		this.transformar(new FabricaDeModos().piccoloFortalecido(this.modoDePelea));
 	}
 	
@@ -18,5 +18,5 @@ public class Piccolo extends Personaje{
 			throw new RequisitosDeTransformacionInsuficientes();
 		}
 		this.transformar(new FabricaDeModos().piccoloProtector());
-	}
+	}*/
 }

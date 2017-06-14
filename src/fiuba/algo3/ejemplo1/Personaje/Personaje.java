@@ -13,6 +13,7 @@ public class Personaje {
 	protected int ki;
 	protected Modo modoDePelea;
 	protected HabilidadEspecial habilidad;
+	ArrayList <Personaje> aliados;
 	private ArrayList<Consumible> consumiblesActivos;
 
 	public Personaje(int vida, String nombre, Modo modo){
@@ -22,6 +23,14 @@ public class Personaje {
 		this.ki = 0;
 		this.modoDePelea = modo;
         this.consumiblesActivos = new ArrayList<>();
+	}
+	
+	public void agregarAliados(ArrayList <Personaje> aliados){
+		this.aliados = aliados;
+	}
+	
+	public ArrayList <Personaje> obtenerAliados(){
+		return this.aliados;
 	}
 	
 	public void aumentarKi(){
@@ -73,12 +82,15 @@ public class Personaje {
 		return this.modoDePelea.obtenerVelocidad();
 	}
 	
-	public void transformar(Modo modo){
-		if (this.ki() < modo.obtenerCostoDeKi()){
-			throw new KiInsuficiente();
-		}
-		this.modoDePelea = modo;
-		this.ki = this.ki - modo.obtenerCostoDeKi();
+	public void transformar(){
+		Modo modoNuevo = this.modoDePelea.transformar(this);
+		this.modoDePelea = modoNuevo;
+		this.ki = this.ki - modoNuevo.obtenerCostoDeKi();
+	}
+	
+	public void validarTransformacion(Modo modoNuevo){
+		System.out.println("Mal");
+		System.out.println(modoNuevo.getClass());
 	}
 	
 	//Ver lo de modo chocolate

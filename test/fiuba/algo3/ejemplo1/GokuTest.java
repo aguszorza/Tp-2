@@ -93,7 +93,7 @@ public class GokuTest {
 	@Test(expected = KiInsuficiente.class)
 	public void testKaioKenLevantaExcepcionSiNoSeTieneElKiSuficinte(){
 		Goku goku = new Goku();
-		goku.kaioKen();
+		goku.transformar();
 		Assert.fail("No levanto excepcion");
 	}
 	
@@ -104,7 +104,7 @@ public class GokuTest {
 		goku.aumentarKi();
 		goku.aumentarKi();
 		goku.aumentarKi();		
-		goku.kaioKen();
+		goku.transformar();
 		Assert.assertEquals("No paso: no devolvio 40", (float)40, goku.obtenerPoderDePelea());
 	}
 	
@@ -115,7 +115,7 @@ public class GokuTest {
 		goku.aumentarKi();
 		goku.aumentarKi();
 		goku.aumentarKi();		
-		goku.kaioKen();
+		goku.transformar();
 		Assert.assertEquals("No paso: no devolvio 4", 4, goku.obtenerDistanciaDeAtaque());
 	}
 	
@@ -126,7 +126,7 @@ public class GokuTest {
 		goku.aumentarKi();
 		goku.aumentarKi();
 		goku.aumentarKi();		
-		goku.kaioKen();
+		goku.transformar();
 		Assert.assertEquals("No paso: no devolvio 3", 3, goku.obtenerVelocidad());
 	}
 	
@@ -137,14 +137,19 @@ public class GokuTest {
 		goku.aumentarKi();
 		goku.aumentarKi();
 		goku.aumentarKi();		
-		goku.kaioKen();
+		goku.transformar();
 		Assert.assertEquals("No paso: no devolvio 0", 0, goku.ki());
 	}
 	
 	@Test(expected = KiInsuficiente.class)
 	public void testSuperSaiyajinLevantaExcepcionSiNoSeTieneElKiSuficiente(){
 		Goku goku = new Goku();
-		goku.SuperSaiyajin();
+		goku.aumentarKi();
+		goku.aumentarKi();
+		goku.aumentarKi();
+		goku.aumentarKi();	
+		goku.transformar();
+		goku.transformar();
 		Assert.fail("No levanto excepcion");
 	}
 	
@@ -152,10 +157,11 @@ public class GokuTest {
 	public void testSuperSaiyajinAumentaLosStats(){
 		Goku goku = new Goku();
 		Boolean estado = true;
-		for(int i = 0; i < 10; i++){
+		for(int i = 0; i < 14; i++){
 			goku.aumentarKi();
 		}
-		goku.SuperSaiyajin();
+		goku.transformar();
+		goku.transformar();
 		estado = estado && goku.obtenerVelocidad() == 5;
 		estado = estado && goku.obtenerDistanciaDeAtaque() == 4;
 		estado = estado && goku.obtenerPoderDePelea() == 60;
@@ -165,11 +171,12 @@ public class GokuTest {
 	@Test
 	public void testSuperSaiyajinDisminuyeElKiEn50(){
 		Goku goku = new Goku();
-		for(int i = 0; i < 11; i++){
+		for(int i = 0; i < 15; i++){
 			goku.aumentarKi();
 		}
+		goku.transformar();
 		int ki = goku.ki();
-		goku.SuperSaiyajin();
+		goku.transformar();
 		ki = ki - goku.ki();
 		Assert.assertEquals("No paso: no disminuyo en 50 el ki", 50, ki);
 	}
@@ -186,7 +193,7 @@ public class GokuTest {
 		Goku goku = new Goku();
 		for(int i = 0; i < 10; i++)
 			goku.aumentarKi();
-		goku.kaioKen();
+		goku.transformar();
 		goku.reducirVida(351);
 		Assert.assertEquals("No paso: no devolvio 48", (float)48, goku.obtenerPoderDePelea());
 	}
@@ -194,9 +201,10 @@ public class GokuTest {
 	@Test
 	public void testPoderDePeleaAumentaUn20PorcientoSiTieneMenosDe150DeVidaEnModoSuperSaiyajin() {
 		Goku goku = new Goku();
-		for(int i = 0; i < 10; i++)
+		for(int i = 0; i < 14; i++)
 			goku.aumentarKi();
-		goku.SuperSaiyajin();
+		goku.transformar();
+		goku.transformar();
 		goku.reducirVida(351);
 		Assert.assertEquals("No paso: no devolvio 72", (float)72, goku.obtenerPoderDePelea());
 	}

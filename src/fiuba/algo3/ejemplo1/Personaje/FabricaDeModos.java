@@ -1,119 +1,176 @@
 package fiuba.algo3.ejemplo1.Personaje;
 
-public class FabricaDeModos {
+import java.util.function.Function;
 
-	private int obtenerConsumoDeKi(Modo modoActual, int nuevoAtaque, int costoKi){
-		if(modoActual.obtenerPoderDePelea() < nuevoAtaque)
-			return costoKi;
-		return 0;
+import fiuba.algo3.ejemplo1.Ataque;
+
+public class FabricaDeModos {
+	
+	public Modo transformacionInvalida(){
+		throw new TransformacionInexistente();
 	}
 	
 	public Modo gokuNormal(){
-		Modo goku = new Modo (20, 2, 2, 0);
+		Function <FabricaDeModos, Modo> transformacion;
+		transformacion = (FabricaDeModos fabrica) -> 
+		{return fabrica.gokuKaioKen();};
+		Ataque ataque = new Ataque(20, 2);
+		Modo goku = new Modo (ataque, 2, 0, transformacion);
 		return goku;
 	}
 	
-	public Modo gokuKaioKen(Modo modoActual){
-		int costoKi = this.obtenerConsumoDeKi(modoActual, 40, 20);
-		Modo kaioKen = new Modo (40, 4, 3, costoKi);
+	public Modo gokuKaioKen(){
+		Function <FabricaDeModos, Modo> transformacion;
+		transformacion = (FabricaDeModos fabrica) -> 
+		{return fabrica.gokuSuperSaiyajin();};
+		Ataque ataque = new Ataque(40, 4);
+		Modo kaioKen = new Modo (ataque, 3, 20, transformacion);
 		return kaioKen;
 	}
 	
-	public Modo gokuSuperSaiyajin(Modo modoActual){
-		int costoKi = this.obtenerConsumoDeKi(modoActual, 60, 50);
-		Modo superSaiyajin = new Modo (60, 4, 5, costoKi);
+	public Modo gokuSuperSaiyajin(){
+		Function <FabricaDeModos, Modo> transformacion;
+		transformacion = (FabricaDeModos fabrica) -> 
+		{return fabrica.transformacionInvalida();};
+		Ataque ataque = new Ataque(60, 4);
+		Modo superSaiyajin = new Modo (ataque, 5, 50, transformacion);
 		return superSaiyajin;
 	}
 	
 	public Modo gohanNormal(){
-		Modo gohan = new Modo (15, 2, 2, 0);
+		Function <FabricaDeModos, Modo> transformacion;
+		transformacion = (FabricaDeModos fabrica) -> 
+		{return fabrica.gohanSuperSaiyajin();};
+		Ataque ataque = new Ataque(15, 2);
+		Modo gohan = new Modo (ataque, 2, 0, transformacion);
 		return gohan;
 	}
 	
-	public Modo gohanSuperSaiyajin(Modo modoActual){
-		int costoKi = this.obtenerConsumoDeKi(modoActual, 30, 10);
-		Modo superSaiyajin = new Modo (30, 2, 2, costoKi);
+	public Modo gohanSuperSaiyajin(){
+		Function <FabricaDeModos, Modo> transformacion;
+		transformacion = (FabricaDeModos fabrica) -> 
+		{return fabrica.gohanSuperSaiyajin2();};
+		Ataque ataque = new Ataque(30, 2);
+		Modo superSaiyajin = new Modo (ataque, 2, 10, transformacion);
 		return superSaiyajin;
 	}
 	
 	//falta verificar la vida de los aliados
-	public Modo gohanSuperSaiyajin2(Modo modoActual){
-		int costoKi = this.obtenerConsumoDeKi(modoActual, 100, 30);
-		Modo superSaiyajin2 = new Modo (100, 4, 3, costoKi);
+	public Modo gohanSuperSaiyajin2(){
+		Modo superSaiyajin2 = new GohanSSJ2 ();
 		return superSaiyajin2;
 	}
 	
 	public Modo piccoloNormal(){
-		Modo piccolo = new Modo (20, 2, 2, 0);
+		Function <FabricaDeModos, Modo> transformacion;
+		transformacion = (FabricaDeModos fabrica) -> 
+		{return fabrica.piccoloFortalecido();};
+		Ataque ataque = new Ataque(20, 2);
+		Modo piccolo = new Modo (ataque, 2, 0, transformacion);
 		return piccolo;
 	}
 	
-	public Modo piccoloFortalecido(Modo modoActual){
-		int costoKi = this.obtenerConsumoDeKi(modoActual, 40, 20);
-		Modo piccolo = new Modo (40, 4, 3, costoKi);
+	public Modo piccoloFortalecido(){
+		Function <FabricaDeModos, Modo> transformacion;
+		transformacion = (FabricaDeModos fabrica) -> 
+		{return fabrica.piccoloProtector();};
+		Ataque ataque = new Ataque(40, 4);
+		Modo piccolo = new Modo (ataque, 3, 20, transformacion);
 		return piccolo;
 	}
 	
 	//falta verificar la vida de Gohan
 	public Modo piccoloProtector(){
-		Modo piccolo = new Modo (60, 6, 4, 0);
+		Modo piccolo = new PiccoloProtector ();
 		return piccolo;
 	}
 	
 	public Modo cellNormal(){
-		Modo cell = new Modo (20, 3, 2, 0);
+		Function <FabricaDeModos, Modo> transformacion;
+		transformacion = (FabricaDeModos fabrica) -> 
+		{return fabrica.cellSemiPerfecto();};
+		Ataque ataque = new Ataque(20, 3);
+		Modo cell = new Modo (ataque, 2, 0, transformacion);
 		return cell;
 	}
 	
 	//falta verificar las absorciones
 	public Modo cellSemiPerfecto(){
-		Modo cell = new Modo (40, 4, 3, 0);
+		Function <FabricaDeModos, Modo> transformacion;
+		transformacion = (FabricaDeModos fabrica) -> 
+		{return fabrica.cellPerfecto();};
+		Ataque ataque = new Ataque(40, 4);
+		Modo cell = new Modo (ataque, 3, 0, transformacion);
 		return cell;
 	}
 	
 	//falta verificar las absorciones
 	public Modo cellPerfecto(){
-		Modo cell = new Modo (80, 4, 4, 0);
+		Function <FabricaDeModos, Modo> transformacion;
+		transformacion = (FabricaDeModos fabrica) -> 
+		{return fabrica.transformacionInvalida();};
+		Ataque ataque = new Ataque(80, 4);
+		Modo cell = new Modo (ataque, 4, 0, transformacion);
 		return cell;
 	}
 	
 	public Modo freezerNormal(){
-		Modo freezer = new Modo (20, 2, 4, 0);
+		Function <FabricaDeModos, Modo> transformacion;
+		transformacion = (FabricaDeModos fabrica) -> 
+		{return fabrica.freezerSegundaForma();};
+		Ataque ataque = new Ataque(20, 2);
+		Modo freezer = new Modo (ataque, 4, 0, transformacion);
 		return freezer;
 	}
 	
-	public Modo freezerSegundaForma(Modo modoActual){
-		int costoKi = this.obtenerConsumoDeKi(modoActual, 40, 20);
-		Modo freezer = new Modo (40, 3, 4, costoKi);
+	public Modo freezerSegundaForma(){
+		Function <FabricaDeModos, Modo> transformacion;
+		transformacion = (FabricaDeModos fabrica) -> 
+		{return fabrica.freezerDefinitivo();};
+		Ataque ataque = new Ataque(40, 3);
+		Modo freezer = new Modo (ataque, 4, 20, transformacion);
 		return freezer;
 	}
 	
-	public Modo freezerDefinitivo(Modo modoActual){
-		int costoKi = this.obtenerConsumoDeKi(modoActual, 50, 50);
-		Modo freezer = new Modo (50, 3, 6, costoKi);
+	public Modo freezerDefinitivo(){
+		Function <FabricaDeModos, Modo> transformacion;
+		transformacion = (FabricaDeModos fabrica) -> 
+		{return fabrica.transformacionInvalida();};
+		Ataque ataque = new Ataque(50, 3);
+		Modo freezer = new Modo (ataque, 6, 50, transformacion);
 		return freezer;
 	}
 	
 	public Modo majinBooNormal(){
-		Modo majin = new Modo (30, 2, 2, 0);
+		Function <FabricaDeModos, Modo> transformacion;
+		transformacion = (FabricaDeModos fabrica) -> 
+		{return fabrica.majinBooMalo();};
+		Ataque ataque = new Ataque(30, 2);
+		Modo majin = new Modo (ataque, 2, 0, transformacion);
 		return majin;
 	}
 	
-	public Modo majinBooMalo(Modo modoActual){
-		int costoKi = this.obtenerConsumoDeKi(modoActual, 50, 20);
-		Modo majin = new Modo (50, 2, 3, costoKi);
+	public Modo majinBooMalo(){
+		Function <FabricaDeModos, Modo> transformacion;
+		transformacion = (FabricaDeModos fabrica) -> 
+		{return fabrica.majinBooOriginal();};
+		Ataque ataque = new Ataque(50, 2);
+		Modo majin = new Modo (ataque, 3, 20, transformacion);
 		return majin;
 	}
 	
-	public Modo majinBooOriginal(Modo modoActual){
-		int costoKi = this.obtenerConsumoDeKi(modoActual, 60, 50);
-		Modo majin = new Modo (60, 3, 4, costoKi);
+	public Modo majinBooOriginal(){
+		Function <FabricaDeModos, Modo> transformacion;
+		transformacion = (FabricaDeModos fabrica) -> 
+		{return fabrica.transformacionInvalida();};
+		Ataque ataque = new Ataque(60, 3);
+		Modo majin = new Modo (ataque, 4, 50, transformacion);
 		return majin;
 	}
 	
 	//agregar la imposibilidad de ganar ki
-	public Modo chocolate(){
+	/*public Modo chocolate(){
 		Modo chocolate = new Modo(0, 0, 0, 0);
 		return chocolate;
-	}
+	}*/
 }

@@ -4,6 +4,7 @@ import fiuba.algo3.ejemplo1.Ataque;
 import fiuba.algo3.ejemplo1.Consumibles.Consumible;
 
 import java.util.ArrayList;
+import java.util.function.Function;
 
 
 public class Modo {
@@ -18,15 +19,35 @@ public class Modo {
 	//protected int poderDePelea;
 	//protected int distanciaDeAtaque;
 	protected int velocidad;
+	protected Function <FabricaDeModos, Modo> nuevaTranformacion;
 
-	public Modo(int poder, int distancia, int velocidad, int costoDeKi){
-		this.ataque = new Ataque(poder, distancia);
+	public Modo(Ataque ataque, int velocidad, int costoDeKi,  Function <FabricaDeModos, Modo> funcion){
+		this.ataque = ataque;
 		//this.poderDePelea = this.poderDePeleaOriginal = poder;
 		//this.distanciaDeAtaque = this.distanciaDeAtaqueOriginal = distancia;
 		//this.velocidad = this.velocidadOriginal = velocidad;
 		this.velocidad = velocidad;
 		this.costoDeKi = costoDeKi;
 		this.danioAdicional = this.velocidadAdicional = 1;
+		this.nuevaTranformacion = funcion;
+	}
+	
+	public void igualarAdicionales(Modo modo){
+		this.incrementarVelocidad(modo.velocidadAdicional());
+		this.incrementarPoderPelea(modo.danioAdicional());
+	}
+	
+	public void validarTransformacion(Personaje personaje){
+	}
+	
+	public Modo transformar(Personaje personaje){
+		Modo modoNuevo = this.nuevaTranformacion.apply(new FabricaDeModos());
+		if(personaje.ki() < modoNuevo.obtenerCostoDeKi()){
+			throw new KiInsuficiente();
+		}
+		modoNuevo.validarTransformacion(personaje);
+		modoNuevo.igualarAdicionales(this);
+		return modoNuevo;
 	}
 	
 	public int obtenerCostoDeKi(){
@@ -63,5 +84,13 @@ public class Modo {
 
 	public void actualizarVelocidadOriginal() {
 		this.velocidadAdicional = 1;
+	}
+	
+	public int velocidadAdicional(){
+		return this.velocidadAdicional;
+	}
+	
+	public float danioAdicional(){
+		return this.danioAdicional;
 	}
 }

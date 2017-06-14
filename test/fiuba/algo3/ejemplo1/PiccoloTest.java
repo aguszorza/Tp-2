@@ -2,10 +2,13 @@ package fiuba.algo3.ejemplo1;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 import junit.framework.Assert;
 import fiuba.algo3.ejemplo1.Personaje.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Personaje.MajinBoo;
+import fiuba.algo3.ejemplo1.Personaje.Personaje;
 import fiuba.algo3.ejemplo1.Personaje.Piccolo;
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
 import fiuba.algo3.ejemplo1.Personaje.Gohan;
@@ -94,7 +97,7 @@ public class PiccoloTest {
 	@Test(expected = KiInsuficiente.class)
 	public void testFortalecidoLevantaExcepcionSiNoSeTieneElKiSuficinte(){
 		Piccolo piccolo = new Piccolo();
-		piccolo.fortalecido();
+		piccolo.transformar();
 		Assert.fail("No levanto excepcion");
 	}
 	
@@ -105,7 +108,7 @@ public class PiccoloTest {
 		piccolo.aumentarKi();
 		piccolo.aumentarKi();
 		piccolo.aumentarKi();
-		piccolo.fortalecido();
+		piccolo.transformar();
 		Assert.assertEquals("No paso: no devolvio 40", (float)40, piccolo.obtenerPoderDePelea());
 	}
 	
@@ -116,7 +119,7 @@ public class PiccoloTest {
 		piccolo.aumentarKi();
 		piccolo.aumentarKi();
 		piccolo.aumentarKi();
-		piccolo.fortalecido();
+		piccolo.transformar();
 		Assert.assertEquals("No paso: no devolvio 4", 4, piccolo.obtenerDistanciaDeAtaque());
 	}
 	
@@ -127,7 +130,7 @@ public class PiccoloTest {
 		piccolo.aumentarKi();
 		piccolo.aumentarKi();
 		piccolo.aumentarKi();
-		piccolo.fortalecido();
+		piccolo.transformar();
 		Assert.assertEquals("No paso: no devolvio 3", 3, piccolo.obtenerVelocidad());
 	}
 	
@@ -139,7 +142,7 @@ public class PiccoloTest {
 		piccolo.aumentarKi();
 		piccolo.aumentarKi();
 		int ki = piccolo.ki();
-		piccolo.fortalecido();
+		piccolo.transformar();
 		ki = ki - piccolo.ki();
 		Assert.assertEquals("No paso: el ki se redujo", 20, ki);
 	}
@@ -148,7 +151,15 @@ public class PiccoloTest {
 	public void testProtectorLevantaExcepcionSiGohanTieneMasDel20PorcientoDeVida(){
 		Piccolo piccolo = new Piccolo();
 		Gohan gohan = new Gohan();
-		piccolo.protector(gohan);
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(gohan);
+		piccolo.agregarAliados(aliado);
+		piccolo.aumentarKi();
+		piccolo.aumentarKi();
+		piccolo.aumentarKi();
+		piccolo.aumentarKi();
+		piccolo.transformar();
+		piccolo.transformar();
 		Assert.fail("No levanto excepcion");
 	}
 	
@@ -157,8 +168,16 @@ public class PiccoloTest {
 		Piccolo piccolo = new Piccolo();
 		Boolean estado = true;
 		Gohan gohan = new Gohan();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(gohan);
+		piccolo.agregarAliados(aliado);
 		gohan.reducirVida(241);
-		piccolo.protector(gohan);
+		piccolo.aumentarKi();
+		piccolo.aumentarKi();
+		piccolo.aumentarKi();
+		piccolo.aumentarKi();
+		piccolo.transformar();
+		piccolo.transformar();
 		estado = estado && piccolo.obtenerVelocidad() == 4;
 		estado = estado && piccolo.obtenerDistanciaDeAtaque() == 6;
 		estado = estado && piccolo.obtenerPoderDePelea() == 60;
@@ -169,10 +188,18 @@ public class PiccoloTest {
 	public void testProtectorNoDisminuyeElKi(){
 		Piccolo piccolo = new Piccolo();
 		piccolo.aumentarKi();
-		int ki = piccolo.ki();
 		Gohan gohan = new Gohan();
+		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		aliado.add(gohan);
+		piccolo.agregarAliados(aliado);
 		gohan.reducirVida(241);
-		piccolo.protector(gohan);
+		piccolo.aumentarKi();
+		piccolo.aumentarKi();
+		piccolo.aumentarKi();
+		piccolo.aumentarKi();
+		piccolo.transformar();
+		int ki = piccolo.ki();
+		piccolo.transformar();
 		ki = ki - piccolo.ki();
 		Assert.assertEquals("No paso: el ki se redujo", 0, ki);
 	}

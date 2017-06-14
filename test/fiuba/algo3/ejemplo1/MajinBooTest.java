@@ -92,7 +92,7 @@ public class MajinBooTest {
 	@Test(expected = KiInsuficiente.class)
 	public void testBooMaloLevantaExcepcionSiNoSeTieneElKiSuficinte(){
 		MajinBoo majin = new MajinBoo();
-		majin.BooMalo();
+		majin.transformar();
 		Assert.fail("No levanto excepcion");
 	}
 	
@@ -103,7 +103,7 @@ public class MajinBooTest {
 		majin.aumentarKi();
 		majin.aumentarKi();
 		majin.aumentarKi();
-		majin.BooMalo();
+		majin.transformar();
 		Assert.assertEquals("No paso: no devolvio 50", (float)50, majin.obtenerPoderDePelea());
 	}
 	
@@ -114,7 +114,7 @@ public class MajinBooTest {
 		majin.aumentarKi();
 		majin.aumentarKi();
 		majin.aumentarKi();
-		majin.BooMalo();
+		majin.transformar();
 		Assert.assertEquals("No paso: no devolvio 2", 2, majin.obtenerDistanciaDeAtaque());
 	}
 	
@@ -125,7 +125,7 @@ public class MajinBooTest {
 		majin.aumentarKi();
 		majin.aumentarKi();
 		majin.aumentarKi();
-		majin.BooMalo();
+		majin.transformar();
 		Assert.assertEquals("No paso: no devolvio 3", 3, majin.obtenerVelocidad());
 	}
 	
@@ -137,7 +137,7 @@ public class MajinBooTest {
 		majin.aumentarKi();
 		majin.aumentarKi();
 		int ki = majin.ki();
-		majin.BooMalo();
+		majin.transformar();
 		ki = ki - majin.ki();
 		Assert.assertEquals("No paso: el ki se redujo", 20, ki);
 	}
@@ -145,7 +145,12 @@ public class MajinBooTest {
 	@Test(expected = KiInsuficiente.class)
 	public void testBooOriginalLevantaExcepcionSiNoTieneElKiNecesario(){
 		MajinBoo majin = new MajinBoo();
-		majin.BooOriginal();
+		majin.aumentarKi();
+		majin.aumentarKi();
+		majin.aumentarKi();
+		majin.aumentarKi();
+		majin.transformar();
+		majin.transformar();
 		Assert.fail("No levanto excepcion");
 	}
 	
@@ -153,10 +158,11 @@ public class MajinBooTest {
 	public void testBooOriginalAumentaLosStats(){
 		MajinBoo majin = new MajinBoo();
 		Boolean estado = true;
-		for(int i = 0; i < 10; i++){
+		for(int i = 0; i < 14; i++){
 			majin.aumentarKi();
 		}
-		majin.BooOriginal();
+		majin.transformar();
+		majin.transformar();
 		estado = estado && majin.obtenerVelocidad() == 4;
 		estado = estado && majin.obtenerDistanciaDeAtaque() == 3;
 		estado = estado && majin.obtenerPoderDePelea() == 60;
@@ -166,11 +172,12 @@ public class MajinBooTest {
 	@Test
 	public void testBooOriginalDisminuyeElKi(){
 		MajinBoo majin = new MajinBoo();
-		for(int i = 0; i < 10; i++){
+		for(int i = 0; i < 14; i++){
 			majin.aumentarKi();
 		}
+		majin.transformar();
 		int ki = majin.ki();
-		majin.BooOriginal();
+		majin.transformar();
 		ki = ki - majin.ki();
 		Assert.assertEquals("No paso: el ki se redujo", 50, ki);
 	}
@@ -196,7 +203,7 @@ public class MajinBooTest {
 		goku.aumentarKi();
 		goku.aumentarKi();
 		goku.aumentarKi();
-		goku.kaioKen();
+		goku.transformar();
 		float danio = majin.obtenerPoderDePelea();
 		int vida = goku.obtenerVida();
 		majin.atacar(goku);

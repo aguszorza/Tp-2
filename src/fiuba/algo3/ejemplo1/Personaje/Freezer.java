@@ -9,11 +9,11 @@ public class Freezer extends Personaje{
 		this.habilidad = new RayoMortal(this);
 	}
 	
-	public void segundaForma(){
+	/*public void segundaForma(){
 		this.transformar(new FabricaDeModos().freezerSegundaForma(this.modoDePelea));
 	}
 	
 	public void definitivo(){
 		this.transformar(new FabricaDeModos().freezerDefinitivo(this.modoDePelea));
-	}
+	}*/
 }
