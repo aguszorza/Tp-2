@@ -41,15 +41,15 @@ public class Jugador {
 		atacante.atacar(atacado);
 	}
 	
-	public void lanzarHablidadEspecial(Celda atacante, Celda atacado){
-		if(!existePersonaje(atacante.obtenerPersonaje())){ // no es un personaje del jugador
-			//levantar excepcion
+	public void lanzarHablidadEspecial(Personaje atacante, Personaje atacado){
+		if(!existePersonaje(atacante)){
+			throw new PersonajeInexistente();
 		}
-		if(existePersonaje(atacado.obtenerPersonaje())){ // es un personaje aliado
-			//levantar excepcion
+		if(existePersonaje(atacado)){
+			throw new AtaqueAliadoInvalido();
 		}
-		this.tablero.verificarAtaque(atacante, atacado); 
-		atacante.obtenerPersonaje().lanzarHabilidadEspecial(atacado.obtenerPersonaje());
+		this.tablero.verificarAtaque(atacante.obtenerDistanciaDeAtaque(), obtenerCelda(atacante), obtenerCelda(atacado)); 
+		atacante.lanzarHabilidadEspecial(atacado);
 	}
 	
 	public void mover(Personaje personaje, int filaNueva, int colNueva){
