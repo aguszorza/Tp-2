@@ -49,9 +49,7 @@ public class Jugador {
 		atacante.lanzarHabilidadEspecial(atacado);
 	}
 	
-	public void mover(Personaje personaje, int filaNueva, int colNueva){
-		int filaActual = this.personajes.get(personaje).obtenerFila();
-		int colActual = this.personajes.get(personaje).obtenerColumna();
-		this.tablero.moverPersonaje(filaActual, colActual, filaNueva, colNueva); 
+	public void mover(Personaje personaje, Celda celdaNueva){
+		this.tablero.moverPersonaje(personaje, obtenerCelda(personaje), celdaNueva); 
 	}
 }
