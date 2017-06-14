@@ -54,12 +54,12 @@ public class Tablero {
 	}
 	
 	//unir las dos funciones
-	private void comprobarNuevaPosicion(int fila, int columna){
+	private void comprobarNuevaPosicion(Celda celda){
 		// como es un tablero cuadrado, verifico que ambos numeros sean clave del tablero 
-		if(!this.filas.containsKey(fila) || !this.filas.containsKey(columna)){
+		if(!this.filas.containsKey(celda.obtenerFila()) || !this.filas.containsKey(celda.obtenerColumna())){
 			throw new PosicionFueraDelTablero();
 		}
-		if(!this.filas.get(fila).obtenerCelda(columna).estaVacia()){
+		if(!celda.estaVacia()){
 			throw new CeldaOcupada();
 		}
 	}
@@ -81,13 +81,10 @@ public class Tablero {
 		this.filas.get(fila).obtenerCelda(columna).agregarPersonaje(personaje);
 	}
 	
-	public void moverPersonaje(int filaAct, int colAct, int nuevaFila, int nuevaCol){
-		comprobarPosicion(filaAct, colAct); // verifica que haya un personaje y que sea parte del tablero
-		comprobarNuevaPosicion (nuevaFila, nuevaCol); // verifica que sea parte del tablero y que no haya un personaje
-		Celda celdaInicial = this.obtenerCelda(filaAct, colAct);
-		Celda celdaFinal = this.obtenerCelda(nuevaFila, nuevaCol);
-		this.comprobarAdyacencia(celdaInicial, celdaFinal);
-		Personaje personaje = this.filas.get(filaAct).removerPersonaje(colAct);
-		this.filas.get(nuevaFila).agregarPersonaje(nuevaCol, personaje);
+	public void moverPersonaje(Personaje personaje, Celda celdaAct, Celda celdaFin){
+		comprobarNuevaPosicion (celdaFin); // verifica que sea parte del tablero y que no haya un personaje
+		this.comprobarAdyacencia(celdaAct, celdaFin);
+		celdaAct.removerPersonaje();
+		celdaFin.agregarPersonaje(personaje);
 	}
 }
