@@ -50,8 +50,10 @@ public class TableroTest {
 	public void testMoverPersonajeAOtraCeldaLoMueve() {
 		Tablero tablero = new Tablero(10);
 		Goku personaje = new Goku();
-		tablero.agregarPersonaje(3,6,personaje);
-		tablero.moverPersonaje(3, 6, 4, 6);
+		Celda celdaInicial = new Celda(3,6);
+		Celda celdaFinal = new Celda(4,6);
+		tablero.agregarPersonaje(celdaInicial, personaje);
+		tablero.moverPersonaje(personaje, celdaInicial, celdaFinal);
 		Assert.assertEquals("No paso", personaje, tablero.obtenerCelda(4, 6).obtenerPersonaje());
 	}
 

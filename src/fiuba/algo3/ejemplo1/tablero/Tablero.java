@@ -67,8 +67,8 @@ public class Tablero {
 		return this.filas.get(fila).obtenerCelda(columna);
 	}
 	
-	public void agregarPersonaje(int fila, int columna, Personaje personaje){
-		this.filas.get(fila).obtenerCelda(columna).agregarPersonaje(personaje);
+	public void agregarPersonaje(Celda celda, Personaje personaje){
+		celda.agregarPersonaje(personaje);
 	}
 	
 	public void moverPersonaje(Personaje personaje, Celda celdaAct, Celda celdaFin){

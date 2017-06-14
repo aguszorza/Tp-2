@@ -1,4 +1,4 @@
-package fiuba.algo3.ejemplo1;
+package fiuba.algo3.ejemplo1.juego;
 
 import java.util.Hashtable;
 
@@ -26,10 +26,12 @@ public class Juego {
 		Hashtable <Personaje, Celda> personajes = new Hashtable <Personaje, Celda>();
 		Goku goku = new Goku();
 		Gohan gohan = new Gohan();
-		this.tablero.agregarPersonaje(1, 5, goku);
-		this.tablero.agregarPersonaje(1, 1, gohan);
-		personajes.put(goku, this.tablero.obtenerCelda(1, 5));
-		personajes.put(gohan, this.tablero.obtenerCelda(1, 1));
+		Celda celdaGoku = new Celda(1,5);
+		Celda celdaGohan = new Celda (1,1);
+		this.tablero.agregarPersonaje(celdaGoku, goku);
+		this.tablero.agregarPersonaje(celdaGohan, gohan);
+		personajes.put(goku, celdaGoku);
+		personajes.put(gohan, celdaGohan);
 		return personajes;
 	}
 	
@@ -37,10 +39,12 @@ public class Juego {
 		Hashtable <Personaje, Celda> personajes = new Hashtable <Personaje, Celda>();
 		Freezer freezer = new Freezer();
 		MajinBoo boo = new MajinBoo();
-		this.tablero.agregarPersonaje(10, 5, freezer);
-		this.tablero.agregarPersonaje(10, 10, boo);
-		personajes.put(freezer, this.tablero.obtenerCelda(10, 5));
-		personajes.put(boo, this.tablero.obtenerCelda(10, 10));
+		Celda celdaFreezer = new Celda(10,5);
+		Celda celdaBoo = new Celda(10,10);
+		this.tablero.agregarPersonaje(celdaFreezer, freezer);
+		this.tablero.agregarPersonaje(celdaBoo, boo);
+		personajes.put(freezer, celdaFreezer);
+		personajes.put(boo, celdaBoo);
 		return personajes;
 	}
 	
