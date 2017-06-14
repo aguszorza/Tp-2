@@ -3,6 +3,7 @@ package fiuba.algo3.ejemplo1.tablero;
 import java.util.Hashtable;
 
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
+import fiuba.algo3.ejemplo1.juego.AtaqueFueraDeRango;
 
 public class Tablero {
 	
@@ -63,13 +64,12 @@ public class Tablero {
 		}
 	}
 	
-	public void verificarAtaque(Celda atacante, Celda atacado){
-		int rango = atacante.obtenerPersonaje().obtenerDistanciaDeAtaque();
-		if (Math.abs(atacante.obtenerFila() - atacado.obtenerFila()) > rango){
-			//levantar excepcion
+	public void verificarAtaque(int rango, Celda celdaAtacante, Celda celdaAtacado){
+		if (Math.abs(celdaAtacante.obtenerFila() - celdaAtacado.obtenerFila()) > rango){
+			throw new AtaqueFueraDeRango();
 		}
-		if (Math.abs(atacante.obtenerColumna() - atacado.obtenerColumna()) > rango){
-			//levantar excepcion
+		if (Math.abs(celdaAtacante.obtenerColumna() - celdaAtacado.obtenerColumna()) > rango){
+			throw new AtaqueFueraDeRango();
 		}
 	}
 

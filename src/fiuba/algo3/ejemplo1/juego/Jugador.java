@@ -1,4 +1,4 @@
-package fiuba.algo3.ejemplo1;
+package fiuba.algo3.ejemplo1.juego;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -21,20 +21,24 @@ public class Jugador {
 		return this.personajes.keys();
 	}
 	
+	private Celda obtenerCelda(Personaje personaje){
+		return this.personajes.get(personaje);
+	}
+	
 	public Boolean existePersonaje(Personaje personaje){
 		return this.personajes.containsKey(personaje);
 	}
 	
 	//ver de unir las dos. Ya sea usando una funcion o bien uniendo ataque con habilidad
-	public void atacar(Celda atacante, Celda atacado){
-		if(!existePersonaje(atacante.obtenerPersonaje())){ // no es un personaje del jugador
-			//levantar excepcion
+	public void atacar(Personaje atacante, Personaje atacado){
+		if(!existePersonaje(atacante)){
+			throw new PersonajeInexistente();
 		}
-		if(existePersonaje(atacado.obtenerPersonaje())){ // es un personaje aliado
-			//levantar excepcion
+		if(existePersonaje(atacante)){
+			throw new AtaqueAliadoInvalido();
 		}
-		this.tablero.verificarAtaque(atacante, atacado); //verificar que este dentro del rango
-		atacante.obtenerPersonaje().atacar(atacado.obtenerPersonaje());
+		this.tablero.verificarAtaque(atacante.obtenerDistanciaDeAtaque(),obtenerCelda(atacante), obtenerCelda(atacado)); //verificar que este dentro del rango
+		atacante.atacar(atacado);
 	}
 	
 	public void lanzarHablidadEspecial(Celda atacante, Celda atacado){
