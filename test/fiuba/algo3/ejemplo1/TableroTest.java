@@ -42,7 +42,8 @@ public class TableroTest {
 	public void testAgregarPersonajeAgregaAlPersonajeEnLaCeldaCorrecta() {
 		Tablero tablero = new Tablero(10);
 		Goku personaje = new Goku();
-		tablero.agregarPersonaje(3,6,personaje);
+		Celda celda = new Celda(3,6);
+		tablero.agregarPersonaje(celda,personaje);
 		Assert.assertEquals("No paso", personaje, tablero.obtenerCelda(3, 6).obtenerPersonaje());
 	}
 	
@@ -61,19 +62,13 @@ public class TableroTest {
 	public void testIntentarMoverAUnaPosicionFueraDelTableroLanzaExcepcion() {
 		Tablero tablero = new Tablero(10);
 		Goku personaje = new Goku();
-		tablero.agregarPersonaje(10,7,personaje);
-		tablero.moverPersonaje(10, 7, 11, 7);
+		Celda celdaInicial = new Celda(10,7);
+		Celda celdaFinal = new Celda(11,7);
+		tablero.agregarPersonaje(celdaInicial,personaje);
+		tablero.moverPersonaje(personaje, celdaInicial, celdaFinal);
 		Assert.fail("No levanto excepcion");
 	}
 	
-	@Test (expected = CeldaVacia.class)
-	public void testIntentarMoverDesdeUnaCeldaVaciaLanzaExcepcion() {
-		Tablero tablero = new Tablero(10);
-		Goku personaje = new Goku();
-		tablero.agregarPersonaje(10,7,personaje);
-		tablero.moverPersonaje(9, 7, 9, 8);
-		Assert.fail("No levanto excepcion");
-	}
 	
 	@Test (expected = CeldaOcupada.class)
 	public void testIntentarMoverAUnaCeldaOcupadaLanzaExcepcion() {
