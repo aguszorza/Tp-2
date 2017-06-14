@@ -10,14 +10,17 @@ import fiuba.algo3.ejemplo1.Personaje.Personaje;
 import fiuba.algo3.ejemplo1.tablero.Celda;
 import fiuba.algo3.ejemplo1.tablero.Tablero;
 
-public class Juego {
 
+public class Juego {
+	
+	public static final int TAMANIO_TABLERO = 10;
 	private Jugador guerreroZ;
 	private Jugador enemigoTierra;
 	private Tablero tablero;
 	
+	
 	public Juego(){
-		this.tablero = new Tablero(10);
+		this.tablero = new Tablero(TAMANIO_TABLERO);
 		this.guerreroZ = new Jugador(inicializarGuerrerosZ());
 		this.enemigoTierra = new Jugador(inicializarEnemigosDeLaTierra());
 	}
