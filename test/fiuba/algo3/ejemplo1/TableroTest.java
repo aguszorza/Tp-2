@@ -74,10 +74,12 @@ public class TableroTest {
 	public void testIntentarMoverAUnaCeldaOcupadaLanzaExcepcion() {
 		Tablero tablero = new Tablero(10);
 		Goku personaje = new Goku(); 
-		tablero.agregarPersonaje(10,7,personaje);
+		Celda celda = new Celda(10,7);
+		tablero.agregarPersonaje(celda,personaje);
 		Freezer personaje2 = new Freezer();
-		tablero.agregarPersonaje(10,8,personaje2);
-		tablero.moverPersonaje(10, 7, 10, 8);
+		Celda celda2 = new Celda(10,8);
+		tablero.agregarPersonaje(celda2,personaje2);
+		tablero.moverPersonaje(personaje, celda, celda2);
 		Assert.fail("No levanto excepcion");
 	}
 	
@@ -85,8 +87,10 @@ public class TableroTest {
 	public void testIntentarMoverAUnaCeldaNoAdyacenteLanzaExcepcion() {
 		Tablero tablero = new Tablero(10);
 		Goku personaje = new Goku(); 
-		tablero.agregarPersonaje(10,7,personaje);
-		tablero.moverPersonaje(10, 7, 2, 1);
+		Celda celdaInicial = new Celda(10,7);
+		Celda celdaFinal = new Celda(2,1);
+		tablero.agregarPersonaje(celdaInicial,personaje);
+		tablero.moverPersonaje(personaje, celdaInicial, celdaFinal);
 		Assert.fail("No levanto excepcion");
 	}
 }
