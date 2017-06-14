@@ -29,19 +29,7 @@ public class Jugador {
 		return this.personajes.containsKey(personaje);
 	}
 	
-	//ver de unir las dos. Ya sea usando una funcion o bien uniendo ataque con habilidad
-	public void atacar(Personaje atacante, Personaje atacado){
-		if(!existePersonaje(atacante)){
-			throw new PersonajeInexistente();
-		}
-		if(existePersonaje(atacante)){
-			throw new AtaqueAliadoInvalido();
-		}
-		this.tablero.verificarAtaque(atacante.obtenerDistanciaDeAtaque(),obtenerCelda(atacante), obtenerCelda(atacado)); //verificar que este dentro del rango
-		atacante.atacar(atacado);
-	}
-	
-	public void lanzarHablidadEspecial(Personaje atacante, Personaje atacado){
+	public void verificarAtaque(Personaje atacante, Personaje atacado){
 		if(!existePersonaje(atacante)){
 			throw new PersonajeInexistente();
 		}
@@ -49,6 +37,15 @@ public class Jugador {
 			throw new AtaqueAliadoInvalido();
 		}
 		this.tablero.verificarAtaque(atacante.obtenerDistanciaDeAtaque(), obtenerCelda(atacante), obtenerCelda(atacado)); 
+	}
+	//ver de unir las dos. Ya sea usando una funcion o bien uniendo ataque con habilidad
+	public void atacar(Personaje atacante, Personaje atacado){
+		verificarAtaque(atacante,atacado);
+		atacante.atacar(atacado);
+	}
+	
+	public void lanzarHablidadEspecial(Personaje atacante, Personaje atacado){
+		verificarAtaque(atacante,atacado);
 		atacante.lanzarHabilidadEspecial(atacado);
 	}
 	
