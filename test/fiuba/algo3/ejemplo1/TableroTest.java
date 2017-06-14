@@ -44,7 +44,7 @@ public class TableroTest {
 		Goku personaje = new Goku();
 		Celda celda = new Celda(3,6);
 		tablero.agregarPersonaje(celda,personaje);
-		Assert.assertEquals("No paso", personaje, tablero.obtenerCelda(3, 6).obtenerPersonaje());
+		Assert.assertEquals("No paso", personaje, celda.obtenerPersonaje());
 	}
 	
 	@Test
@@ -55,7 +55,7 @@ public class TableroTest {
 		Celda celdaFinal = new Celda(4,6);
 		tablero.agregarPersonaje(celdaInicial, personaje);
 		tablero.moverPersonaje(personaje, celdaInicial, celdaFinal);
-		Assert.assertEquals("No paso", personaje, tablero.obtenerCelda(4, 6).obtenerPersonaje());
+		Assert.assertEquals("No paso", personaje, celdaFinal.obtenerPersonaje());
 	}
 
 	@Test (expected = PosicionFueraDelTablero.class)
