@@ -15,7 +15,8 @@ public class PiccoloProtector extends Modo {
 		super(new Ataque(60, 6), 4, 0, transformacion);
 	}
 
-	public void validarTransformacion(Personaje personaje){
+	public void validarTransformacion(Personaje personaje, int costoKi){
+		super.validarTransformacion(personaje, costoKi);
 		ArrayList <Personaje> aliados = personaje.obtenerAliados();
 		Iterator <Personaje> it = aliados.iterator();
 		while(it.hasNext()){

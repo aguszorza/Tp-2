@@ -15,7 +15,8 @@ public class GohanSSJ2 extends Modo {
 		super(new Ataque(100, 4), 3, 30, transformacion);
 	}
 	
-	public void validarTransformacion(Personaje personaje){
+	public void validarTransformacion(Personaje personaje, int costoKi){
+		super.validarTransformacion(personaje, costoKi);
 		ArrayList <Personaje> aliados = personaje.obtenerAliados();
 		Iterator <Personaje> it = aliados.iterator();
 		while(it.hasNext()){

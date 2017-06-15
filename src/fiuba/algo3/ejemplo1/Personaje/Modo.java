@@ -37,15 +37,15 @@ public class Modo {
 		this.incrementarPoderPelea(modo.danioAdicional());
 	}
 	
-	public void validarTransformacion(Personaje personaje){
+	public void validarTransformacion(Personaje personaje, int costoKi){
+		if(personaje.ki() < costoKi){
+			throw new KiInsuficiente();
+		}
 	}
 	
 	public Modo transformar(Personaje personaje){
 		Modo modoNuevo = this.nuevaTranformacion.apply(new FabricaDeModos());
-		if(personaje.ki() < modoNuevo.obtenerCostoDeKi()){
-			throw new KiInsuficiente();
-		}
-		modoNuevo.validarTransformacion(personaje);
+		modoNuevo.validarTransformacion(personaje, modoNuevo.obtenerCostoDeKi());
 		modoNuevo.igualarAdicionales(this);
 		return modoNuevo;
 	}
