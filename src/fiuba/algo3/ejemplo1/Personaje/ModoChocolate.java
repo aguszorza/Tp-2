@@ -16,7 +16,7 @@ public class ModoChocolate extends Modo{
 	
 	public Modo recuperarModoDePelea(){
 		if(this.turnos > 0){
-			throw new ChocolateError();
+			return this;
 		}
 		return this.modoAnterior;
 	}
