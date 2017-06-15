@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fiuba.algo3.ejemplo1.HabilidadesEspeciales.Masenko;
+import fiuba.algo3.ejemplo1.ModosDePelea.FabricaDeModos;
 
 
 public class Gohan extends Personaje {

@@ -3,6 +3,8 @@ package fiuba.algo3.ejemplo1.juego;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+import fiuba.algo3.ejemplo1.Excepciones.AtaqueAliadoInvalido;
+import fiuba.algo3.ejemplo1.Excepciones.PersonajeInexistente;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
 import fiuba.algo3.ejemplo1.tablero.Celda;
 import fiuba.algo3.ejemplo1.tablero.Tablero;

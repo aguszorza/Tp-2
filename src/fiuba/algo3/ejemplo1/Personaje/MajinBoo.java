@@ -1,5 +1,7 @@
 package fiuba.algo3.ejemplo1.Personaje;
 
+import fiuba.algo3.ejemplo1.ModosDePelea.FabricaDeModos;
+
 public class MajinBoo extends Personaje {
 	
 	public MajinBoo(){

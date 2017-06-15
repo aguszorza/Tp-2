@@ -2,8 +2,11 @@ package fiuba.algo3.ejemplo1.tablero;
 
 import java.util.Hashtable;
 
+import fiuba.algo3.ejemplo1.Excepciones.AtaqueFueraDeRango;
+import fiuba.algo3.ejemplo1.Excepciones.CeldaOcupada;
+import fiuba.algo3.ejemplo1.Excepciones.MovimientoInvalido;
+import fiuba.algo3.ejemplo1.Excepciones.PosicionFueraDelTablero;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
-import fiuba.algo3.ejemplo1.juego.AtaqueFueraDeRango;
 
 public class Tablero {
 	

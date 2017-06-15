@@ -2,13 +2,13 @@ package fiuba.algo3.ejemplo1;
 
 import org.junit.Test;
 
+import fiuba.algo3.ejemplo1.Excepciones.CeldaOcupada;
+import fiuba.algo3.ejemplo1.Excepciones.CeldaVacia;
+import fiuba.algo3.ejemplo1.Excepciones.MovimientoInvalido;
+import fiuba.algo3.ejemplo1.Excepciones.PosicionFueraDelTablero;
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
 import fiuba.algo3.ejemplo1.Personaje.Goku;
 import fiuba.algo3.ejemplo1.tablero.Celda;
-import fiuba.algo3.ejemplo1.tablero.CeldaVacia;
-import fiuba.algo3.ejemplo1.tablero.MovimientoInvalido;
-import fiuba.algo3.ejemplo1.tablero.CeldaOcupada;
-import fiuba.algo3.ejemplo1.tablero.PosicionFueraDelTablero;
 import fiuba.algo3.ejemplo1.tablero.Tablero;
 import junit.framework.Assert;
 

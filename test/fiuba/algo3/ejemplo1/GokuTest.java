@@ -4,9 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
 import fiuba.algo3.ejemplo1.Personaje.Goku;
-import fiuba.algo3.ejemplo1.Personaje.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Personaje.MajinBoo;
 import junit.framework.Assert;
 

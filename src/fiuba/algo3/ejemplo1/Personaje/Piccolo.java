@@ -1,6 +1,7 @@
 package fiuba.algo3.ejemplo1.Personaje;
 
 import fiuba.algo3.ejemplo1.HabilidadesEspeciales.Makankosappo;
+import fiuba.algo3.ejemplo1.ModosDePelea.FabricaDeModos;
 
 public class Piccolo extends Personaje{
 

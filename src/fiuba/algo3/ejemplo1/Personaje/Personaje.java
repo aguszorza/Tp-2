@@ -2,6 +2,8 @@ package fiuba.algo3.ejemplo1.Personaje;
 
 import fiuba.algo3.ejemplo1.Consumibles.Consumible;
 import fiuba.algo3.ejemplo1.HabilidadesEspeciales.HabilidadEspecial;
+import fiuba.algo3.ejemplo1.ModosDePelea.Modo;
+import fiuba.algo3.ejemplo1.ModosDePelea.ModoChocolate;
 
 import java.util.ArrayList;
 
