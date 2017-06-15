@@ -2,10 +2,10 @@ package fiuba.algo3.ejemplo1.ModosDePelea;
 
 import java.util.function.Function;
 
-import fiuba.algo3.ejemplo1.Ataque;
 import fiuba.algo3.ejemplo1.Excepciones.AbsorcionesInsuficientes;
 import fiuba.algo3.ejemplo1.Personaje.Cell;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
+import fiuba.algo3.ejemplo1.juego.Ataque;
 
 public class CellSemiPerfecto extends Modo{
 

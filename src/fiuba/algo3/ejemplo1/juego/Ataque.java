@@ -1,8 +1,8 @@
-package fiuba.algo3.ejemplo1;
+package fiuba.algo3.ejemplo1.juego;
 
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
 
-public class Ataque {
+public class Ataque extends Accion{
 	
 	private int danio;
 	private int distanciaDeAtaque;
@@ -20,10 +20,11 @@ public class Ataque {
 		return this.distanciaDeAtaque;
 	}
 
-	public float atacar(Personaje enemigo){
+	public float calcularDanio(Personaje enemigo){
 		float danio = this.obtenerDanio();
 		if(enemigo.obtenerPoderDePelea() > danio)
 			danio = danio * (float)0.8;
 		return danio;
 	}
+	
 }
