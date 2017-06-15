@@ -24,5 +24,4 @@ public class GohanSSJ2 extends Modo {
 			}
 		}
 	}
-
 }
