@@ -75,7 +75,7 @@ public class Modo {
 	}
 	
 	public float obtenerDanioDeAtaque(Personaje enemigo){
-		return this.ataque.atacar(enemigo) * this.danioAdicional;
+		return this.ataque.calcularDanio(enemigo) * this.danioAdicional;
 	}
 
 	public void incrementarPoderPelea(float danioAdicional) {
