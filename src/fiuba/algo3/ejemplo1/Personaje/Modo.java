@@ -19,6 +19,7 @@ public class Modo {
 	//protected int poderDePelea;
 	//protected int distanciaDeAtaque;
 	protected int velocidad;
+	protected int cantidadDeTurnos;
 	protected Function <FabricaDeModos, Modo> nuevaTranformacion;
 
 	public Modo(Ataque ataque, int velocidad, int costoDeKi,  Function <FabricaDeModos, Modo> funcion){
@@ -30,6 +31,7 @@ public class Modo {
 		this.costoDeKi = costoDeKi;
 		this.danioAdicional = this.velocidadAdicional = 1;
 		this.nuevaTranformacion = funcion;
+		cantidadDeTurnos = 0;
 	}
 	
 	public void igualarAdicionales(Modo modo){
@@ -92,5 +94,13 @@ public class Modo {
 	
 	public float danioAdicional(){
 		return this.danioAdicional;
+	}
+	
+	public void pasarTurno(){
+		this.cantidadDeTurnos++;
+	}
+	
+	public Modo recuperarModoDePelea() {
+		return this;
 	}
 }
