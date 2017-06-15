@@ -6,7 +6,8 @@ import fiuba.algo3.ejemplo1.HabilidadesEspeciales.HabilidadEspecial;
 import java.util.ArrayList;
 
 public class Personaje {
-
+	
+	private static final int TURNOS_CHOCOLATE = 3;
 	protected int vidaActual;
 	protected int vidaMaxima;
 	protected String nombre;
@@ -93,14 +94,19 @@ public class Personaje {
 		System.out.println(modoNuevo.getClass());
 	}
 	
-	//Ver lo de modo chocolate
-	//public void transformarEnChocolate(){
-		//this.modoDePelea = new ModoChocolate (this.modoDePelea, );
-	//}
 	
-	//public void recuperarModoDePelea(){
-	//	
-//	}
+	public void transformarEnChocolate(){
+		this.modoDePelea = new ModoChocolate (this.modoDePelea, TURNOS_CHOCOLATE );
+	}
+	
+	// recordar recuperar modo de pelea todos los turnos para los guerreros Z
+	public void recuperarModoDePelea(){
+		this.modoDePelea.recuperarModoDePelea();
+	}
+	
+	public void pasarTurno(){
+		this.modoDePelea.pasarTurno();
+	}
 	
 	public void atacar(Personaje enemigo){
 		float danio = this.obtenerDanioDeAtaque(enemigo);

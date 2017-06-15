@@ -1,25 +1,28 @@
 package fiuba.algo3.ejemplo1.Personaje;
 
+import fiuba.algo3.ejemplo1.Ataque;
+
 public class ModoChocolate extends Modo{
 
-	private int cantidadDeTurnos;
 	private Modo modoAnterior;
+	private int turnos;
 	
 	public ModoChocolate(Modo modoAnterior,int turnos){
-		super(0, 0, 0, 0);
+		super(new Ataque(0,0), 0, 0, (FabricaDeModos fabrica) -> 
+		{return fabrica.transformacionInvalida();});
 		this.modoAnterior = modoAnterior;
-		this.cantidadDeTurnos = turnos;
+		this.turnos = turnos;
 	}
 	
-	public Modo modoAnterior(){
+	public Modo recuperarModoDePelea(){
+		if(this.turnos > 0){
+			throw new ChocolateError();
+		}
 		return this.modoAnterior;
 	}
 	
-	public int cantidadDeTurnos(){
-		return this.cantidadDeTurnos;
-	}
-	
-	public void reducirTurnos(){
-		this.cantidadDeTurnos --;
+	public void pasarTurno(){
+		this.cantidadDeTurnos++;
+		this.turnos--;		
 	}
 }

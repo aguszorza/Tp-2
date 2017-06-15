@@ -16,14 +16,14 @@ public class Cell extends Personaje{
 		if (this.cantidadAbsorciones < 4){
 			throw new AbsorcionesInsuficientes();
 		}
-		this.transformar(new FabricaDeModos().cellSemiPerfecto());
+		this.transformar();
 	}
 	
 	public void Perfecto(){
 		if (this.cantidadAbsorciones < 8){
 			throw new AbsorcionesInsuficientes();
 		}
-		this.transformar(new FabricaDeModos().cellPerfecto());
+		this.transformar();
 	}
 	
 	public void aumentarAbsorciones(){
