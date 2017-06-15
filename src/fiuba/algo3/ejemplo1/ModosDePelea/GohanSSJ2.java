@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.function.Function;
 
-import fiuba.algo3.ejemplo1.Ataque;
 import fiuba.algo3.ejemplo1.Excepciones.RequisitosDeTransformacionInsuficientes;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
+import fiuba.algo3.ejemplo1.juego.Ataque;
 
 public class GohanSSJ2 extends Modo {
 	

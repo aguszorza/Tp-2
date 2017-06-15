@@ -104,7 +104,7 @@ public class Personaje {
 	// recordar recuperar modo de pelea todos los turnos para los guerreros Z
 	// crear excepcion para cuando se pida obtener ataque y esas cosas
 	public void recuperarModoDePelea(){
-			this.modoDePelea.recuperarModoDePelea();
+		this.modoDePelea = this.modoDePelea.recuperarModoDePelea();
 	}
 
 	public void pasarTurno(){

@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import junit.framework.Assert;
 import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
+import fiuba.algo3.ejemplo1.Excepciones.PersonajeInutilizado;
 import fiuba.algo3.ejemplo1.Personaje.Gohan;
 import fiuba.algo3.ejemplo1.Personaje.Goku;
 import fiuba.algo3.ejemplo1.Personaje.MajinBoo;
@@ -211,5 +212,124 @@ public class MajinBooTest {
 		Assert.assertEquals("No paso: no se redujo la vida", (int)(danio * 0.8), vida);
 	}
 	
-	//AGREGAR PRUEBAS DE LA HABILIDAD ESPECIAL
+	@Test (expected = KiInsuficiente.class)
+	public void testLanzarHabilidadEspecialLanzaExcepcionSiNoSeTieneElKiSuficiente(){
+		MajinBoo majin = new MajinBoo();
+		Goku goku = new Goku();
+		majin.lanzarHabilidadEspecial(goku);
+		Assert.fail("No levanto excepcion");
+	}
+	
+	@Test
+	public void testLanzarHabilidadEspecialNoPermiteQueElEnemigoAumenteElKi(){
+		MajinBoo majin = new MajinBoo();
+		Goku goku = new Goku();
+		goku.aumentarKi();
+		for (int i = 0; i < 6; i++){
+			majin.aumentarKi();
+		}
+		majin.lanzarHabilidadEspecial(goku);
+		int ki = goku.ki();
+		goku.aumentarKi();
+		ki = ki - goku.ki();
+		Assert.assertEquals("No paso: aumento el ki", 0, ki);
+	}
+	
+	@Test (expected = PersonajeInutilizado.class)
+	public void testAtacarLevantaExcepcionSiElPersonajeFueConvertidoEnChocolate(){
+		MajinBoo majin = new MajinBoo();
+		Goku goku = new Goku();
+		for (int i = 0; i < 6; i++){
+			majin.aumentarKi();
+		}
+		majin.lanzarHabilidadEspecial(goku);
+		goku.atacar(majin);
+		Assert.fail("No levanto excepcion");
+	}
+	
+	@Test (expected = PersonajeInutilizado.class)
+	public void testObtenerVelocidadLevantaExcepcionSiElPersonajeFueConvertidoEnChocolate(){
+		MajinBoo majin = new MajinBoo();
+		Goku goku = new Goku();
+		for (int i = 0; i < 6; i++){
+			majin.aumentarKi();
+		}
+		majin.lanzarHabilidadEspecial(goku);
+		goku.obtenerVelocidad();
+		Assert.fail("No levanto excepcion");
+	}
+	
+	@Test (expected = PersonajeInutilizado.class)
+	public void testObtenerDistanciaDeAtaqueLevantaExcepcionSiElPersonajeFueConvertidoEnChocolate(){
+		MajinBoo majin = new MajinBoo();
+		Goku goku = new Goku();
+		for (int i = 0; i < 6; i++){
+			majin.aumentarKi();
+		}
+		majin.lanzarHabilidadEspecial(goku);
+		goku.obtenerDistanciaDeAtaque();
+		Assert.fail("No levanto excepcion");
+	}
+	
+
+	@Test (expected = PersonajeInutilizado.class)
+	public void testObtenerDanioDeAtaqueLevantaExcepcionSiElPersonajeFueConvertidoEnChocolate(){
+		MajinBoo majin = new MajinBoo();
+		Goku goku = new Goku();
+		for (int i = 0; i < 6; i++){
+			majin.aumentarKi();
+		}
+		majin.lanzarHabilidadEspecial(goku);
+		goku.obtenerDanioDeAtaque(majin);
+		Assert.fail("No levanto excepcion");
+	}
+	
+	@Test (expected = PersonajeInutilizado.class)
+	public void testRecuperarModoDePeleaNoCambiaElModoDePeleaSiNoPasaronTresTurnos(){
+		MajinBoo majin = new MajinBoo();
+		Goku goku = new Goku();
+		for (int i = 0; i < 6; i++){
+			majin.aumentarKi();
+		}
+		majin.lanzarHabilidadEspecial(goku);
+		goku.recuperarModoDePelea();
+		goku.atacar(majin);
+		Assert.fail("No levanto excepcion");
+	}
+
+	@Test
+	public void testRecuperarModoDePeleaCambiaElModoDePeleaSiPasaronTresTurnos(){
+		MajinBoo majin = new MajinBoo();
+		Goku goku = new Goku();
+		for (int i = 0; i < 6; i++){
+			majin.aumentarKi();
+		}
+		majin.lanzarHabilidadEspecial(goku);
+		goku.pasarTurno();
+		goku.pasarTurno();
+		goku.pasarTurno();
+		goku.recuperarModoDePelea();
+		int vida = majin.obtenerVida();
+		goku.atacar(majin);
+		vida = vida - majin.obtenerVida();
+		Assert.assertEquals("No paso: no disminuyo la vida del enemigo", 16, vida);
+	}
+	
+	@Test
+	public void testAumentarKiAumentaElKiTrasRecuperarElModoDePelea(){
+		MajinBoo majin = new MajinBoo();
+		Goku goku = new Goku();
+		for (int i = 0; i < 6; i++){
+			majin.aumentarKi();
+		}
+		majin.lanzarHabilidadEspecial(goku);
+		goku.pasarTurno();
+		goku.pasarTurno();
+		goku.pasarTurno();
+		goku.recuperarModoDePelea();
+		int ki = goku.ki();
+		goku.aumentarKi();
+		ki = goku.ki() - ki;
+		Assert.assertEquals("No paso: no aumento en 5 el ki", 5, ki);
+	}
 }

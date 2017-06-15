@@ -1,9 +1,9 @@
 package fiuba.algo3.ejemplo1.ModosDePelea;
 
-import fiuba.algo3.ejemplo1.Ataque;
 import fiuba.algo3.ejemplo1.Consumibles.Consumible;
 import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
+import fiuba.algo3.ejemplo1.juego.Ataque;
 
 import java.util.ArrayList;
 import java.util.function.Function;
@@ -21,7 +21,7 @@ public class Modo {
 	//protected int poderDePelea;
 	//protected int distanciaDeAtaque;
 	protected int velocidad;
-	protected int cantidadDeTurnos;
+	protected int cantidadDeTurnosRestantes;
 	protected Function <FabricaDeModos, Modo> nuevaTransformacion;
 
 	public Modo(Ataque ataque, int velocidad, int costoDeKi,  Function <FabricaDeModos, Modo> funcion){
@@ -33,7 +33,7 @@ public class Modo {
 		this.costoDeKi = costoDeKi;
 		this.danioAdicional = this.velocidadAdicional = 1;
 		this.nuevaTransformacion = funcion;
-		cantidadDeTurnos = 0;
+		cantidadDeTurnosRestantes = 0;
 	}
 	
 	public int aumentarKi(){
@@ -103,7 +103,7 @@ public class Modo {
 	}
 	
 	public void pasarTurno(){
-		this.cantidadDeTurnos++;
+		this.cantidadDeTurnosRestantes --;
 	}
 	
 	public Modo recuperarModoDePelea() {
