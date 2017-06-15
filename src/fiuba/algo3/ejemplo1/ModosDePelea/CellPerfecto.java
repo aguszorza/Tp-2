@@ -19,9 +19,9 @@ public class CellPerfecto extends Modo{
 		this.costoAbsorciones = 8;
 	}
 	
-	public int obtenerCostoAbsorciones(){
+	/*public int obtenerCostoAbsorciones(){
 		return this.costoAbsorciones;
-	}
+	}*/
 	
 	public void validarTransformacion(Personaje personaje, int costoKi){
 		super.validarTransformacion(personaje, costoKi);

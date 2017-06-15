@@ -92,10 +92,10 @@ public class Personaje {
 		this.ki = this.ki - modoNuevo.obtenerCostoDeKi();
 	}
 	
-	public void validarTransformacion(Modo modoNuevo){
+	/*public void validarTransformacion(Modo modoNuevo){
 		System.out.println("Mal");
 		System.out.println(modoNuevo.getClass());
-	}
+	}*/
 	
 	public void transformarEnChocolate(){
 		this.modoDePelea = new ModoChocolate (this.modoDePelea, TURNOS_CHOCOLATE );

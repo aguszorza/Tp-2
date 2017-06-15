@@ -9,7 +9,7 @@ import fiuba.algo3.ejemplo1.ModosDePelea.FabricaDeModos;
 
 public class Gohan extends Personaje {
 	
-	ArrayList <Personaje> aliados;
+	//ArrayList <Personaje> aliados;
 		
 	public Gohan(){
 		super(300, "Gohan", new FabricaDeModos().gohanNormal());
