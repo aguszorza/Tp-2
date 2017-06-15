@@ -3,6 +3,7 @@ package fiuba.algo3.ejemplo1.tablero;
 import java.util.Hashtable;
 
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
+import fiuba.algo3.ejemplo1.juego.AtaqueFueraDeRango;
 
 public class Tablero {
 	
@@ -43,33 +44,22 @@ public class Tablero {
 		}
 	}
 	
-	private void comprobarPosicion(int fila, int columna){
-		if(!this.filas.containsKey(fila) || !this.filas.containsKey(columna)){
-			throw new PosicionFueraDelTablero();
-		}
-		if(this.filas.get(fila).obtenerCelda(columna).estaVacia()){
-			throw new CeldaVacia();
-		}
-	}
-	
-	//unir las dos funciones
-	private void comprobarNuevaPosicion(int fila, int columna){
+	private void comprobarNuevaPosicion(Celda celda){
 		// como es un tablero cuadrado, verifico que ambos numeros sean clave del tablero 
-		if(!this.filas.containsKey(fila) || !this.filas.containsKey(columna)){
+		if(!this.filas.containsKey(celda.obtenerFila()) || !this.filas.containsKey(celda.obtenerColumna())){
 			throw new PosicionFueraDelTablero();
 		}
-		if(!this.filas.get(fila).obtenerCelda(columna).estaVacia()){
+		if(!celda.estaVacia()){
 			throw new CeldaOcupada();
 		}
 	}
 	
-	public void verificarAtaque(Celda atacante, Celda atacado){
-		int rango = atacante.obtenerPersonaje().obtenerDistanciaDeAtaque();
-		if (Math.abs(atacante.obtenerFila() - atacado.obtenerFila()) > rango){
-			//levantar excepcion
+	public void verificarAtaque(int rango, Celda celdaAtacante, Celda celdaAtacado){
+		if (Math.abs(celdaAtacante.obtenerFila() - celdaAtacado.obtenerFila()) > rango){
+			throw new AtaqueFueraDeRango();
 		}
-		if (Math.abs(atacante.obtenerColumna() - atacado.obtenerColumna()) > rango){
-			//levantar excepcion
+		if (Math.abs(celdaAtacante.obtenerColumna() - celdaAtacado.obtenerColumna()) > rango){
+			throw new AtaqueFueraDeRango();
 		}
 	}
 
@@ -77,17 +67,14 @@ public class Tablero {
 		return this.filas.get(fila).obtenerCelda(columna);
 	}
 	
-	public void agregarPersonaje(int fila, int columna, Personaje personaje){
-		this.filas.get(fila).obtenerCelda(columna).agregarPersonaje(personaje);
+	public void agregarPersonaje(Celda celda, Personaje personaje){
+		celda.agregarPersonaje(personaje);
 	}
 	
-	public void moverPersonaje(int filaAct, int colAct, int nuevaFila, int nuevaCol){
-		comprobarPosicion(filaAct, colAct); // verifica que haya un personaje y que sea parte del tablero
-		comprobarNuevaPosicion (nuevaFila, nuevaCol); // verifica que sea parte del tablero y que no haya un personaje
-		Celda celdaInicial = this.obtenerCelda(filaAct, colAct);
-		Celda celdaFinal = this.obtenerCelda(nuevaFila, nuevaCol);
-		this.comprobarAdyacencia(celdaInicial, celdaFinal);
-		Personaje personaje = this.filas.get(filaAct).removerPersonaje(colAct);
-		this.filas.get(nuevaFila).agregarPersonaje(nuevaCol, personaje);
+	public void moverPersonaje(Personaje personaje, Celda celdaAct, Celda celdaFin){
+		comprobarNuevaPosicion (celdaFin); // verifica que sea parte del tablero y que no haya un personaje
+		this.comprobarAdyacencia(celdaAct, celdaFin);
+		celdaAct.removerPersonaje();
+		celdaFin.agregarPersonaje(personaje);
 	}
 }
