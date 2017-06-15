@@ -94,7 +94,7 @@ public class CellTest {
 	@Test(expected = AbsorcionesInsuficientes.class)
 	public void testSemiPerfectoLevantaExcepcionSiNoSeTieneAbsorcionesSuficinte(){
 		Cell cell = new Cell();
-		cell.semiPerfecto();
+		cell.transformar();
 		Assert.fail("No levanto excepcion");
 	}
 	
@@ -106,7 +106,7 @@ public class CellTest {
 			cell.aumentarKi();
 			cell.lanzarHabilidadEspecial(freezer);
 		}
-		cell.semiPerfecto();
+		cell.transformar();
 		Assert.assertEquals("No paso: no devolvio 40", (float)40, cell.obtenerPoderDePelea());
 	}
 	
@@ -118,7 +118,7 @@ public class CellTest {
 			cell.aumentarKi();
 			cell.lanzarHabilidadEspecial(freezer);
 		}		
-		cell.semiPerfecto();
+		cell.transformar();
 		Assert.assertEquals("No paso: no devolvio 4", 4, cell.obtenerDistanciaDeAtaque());
 	}
 	
@@ -130,7 +130,7 @@ public class CellTest {
 			cell.aumentarKi();
 			cell.lanzarHabilidadEspecial(freezer);
 		}
-		cell.semiPerfecto();
+		cell.transformar();
 		Assert.assertEquals("No paso: no devolvio 3", 3, cell.obtenerVelocidad());
 	}
 	
@@ -143,14 +143,20 @@ public class CellTest {
 			cell.aumentarKi();
 			cell.lanzarHabilidadEspecial(freezer);
 		}
-		cell.semiPerfecto();
+		cell.transformar();
 		Assert.assertEquals("No paso: el ki se redujo", 5, cell.ki());
 	}
 	
 	@Test(expected = AbsorcionesInsuficientes.class)
 	public void testPerfectoLevantaExcepcionSiNoSeTieneLasAbsorcionesSuficientes(){
 		Cell cell = new Cell();
-		cell.Perfecto();;
+		Freezer freezer = new Freezer();
+		for(int i = 0; i < 4; i++){
+			cell.aumentarKi();
+			cell.lanzarHabilidadEspecial(freezer);
+		}
+		cell.transformar();
+		cell.transformar();
 		Assert.fail("No levanto excepcion");
 	}
 	
@@ -159,11 +165,12 @@ public class CellTest {
 		Cell cell = new Cell();
 		Boolean estado = true;
 		Freezer freezer = new Freezer();
-		for(int i = 0; i < 8; i++){
+		for(int i = 0; i < 12; i++){
 			cell.aumentarKi();
 			cell.lanzarHabilidadEspecial(freezer);
 		}
-		cell.Perfecto();
+		cell.transformar();
+		cell.transformar();
 		estado = estado && cell.obtenerVelocidad() == 4;
 		estado = estado && cell.obtenerDistanciaDeAtaque() == 4;
 		estado = estado && cell.obtenerPoderDePelea() == 80;
@@ -175,11 +182,11 @@ public class CellTest {
 		Cell cell = new Cell();
 		cell.aumentarKi();
 		Freezer freezer = new Freezer();
-		for(int i = 0; i < 8; i++){
+		for(int i = 0; i < 12; i++){
 			cell.aumentarKi();
 			cell.lanzarHabilidadEspecial(freezer);
 		}
-		cell.Perfecto();
+		cell.transformar();
 		Assert.assertEquals("No paso: el ki se redujo", 5, cell.ki());
 	}
 	

@@ -96,21 +96,13 @@ public class FabricaDeModos {
 	
 	//falta verificar las absorciones
 	public Modo cellSemiPerfecto(){
-		Function <FabricaDeModos, Modo> transformacion;
-		transformacion = (FabricaDeModos fabrica) -> 
-		{return fabrica.cellPerfecto();};
-		Ataque ataque = new Ataque(40, 4);
-		Modo cell = new Modo (ataque, 3, 0, transformacion);
+		CellSemiPerfecto cell = new CellSemiPerfecto();
 		return cell;
 	}
 	
 	//falta verificar las absorciones
 	public Modo cellPerfecto(){
-		Function <FabricaDeModos, Modo> transformacion;
-		transformacion = (FabricaDeModos fabrica) -> 
-		{return fabrica.transformacionInvalida();};
-		Ataque ataque = new Ataque(80, 4);
-		Modo cell = new Modo (ataque, 4, 0, transformacion);
+		CellPerfecto cell = new CellPerfecto ();
 		return cell;
 	}
 	

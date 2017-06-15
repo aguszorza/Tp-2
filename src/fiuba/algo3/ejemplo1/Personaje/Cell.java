@@ -12,7 +12,7 @@ public class Cell extends Personaje{
 		this.habilidad = new Absorber(this);
 	}
 	
-	public void semiPerfecto(){
+	/*public void semiPerfecto(){
 		if (this.cantidadAbsorciones < 4){
 			throw new AbsorcionesInsuficientes();
 		}
@@ -24,10 +24,14 @@ public class Cell extends Personaje{
 			throw new AbsorcionesInsuficientes();
 		}
 		this.transformar(new FabricaDeModos().cellPerfecto());
-	}
+	}*/
 	
 	public void aumentarAbsorciones(){
 		this.cantidadAbsorciones ++;
+	}
+	
+	public void disminuirAbsorciones(int cantidad){
+		this.cantidadAbsorciones -= cantidad;
 	}
 	
 	public int obtenerAbsorciones(){
