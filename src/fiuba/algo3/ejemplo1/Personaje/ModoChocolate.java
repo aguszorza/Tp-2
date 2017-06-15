@@ -15,6 +15,10 @@ public class ModoChocolate extends Modo{
 		this.cantidadDeTurnos = turnos;
 	}
 	
+	public int aumentarKi(){
+		return 0;
+	}
+	
 	public Modo recuperarModoDePelea(){
   		if(this.cantidadDeTurnos > 0){
 			return this;

@@ -34,6 +34,10 @@ public class Modo {
 		cantidadDeTurnos = 0;
 	}
 	
+	public int aumentarKi(){
+		return 5;
+	}
+	
 	public void igualarAdicionales(Modo modo){
 		this.incrementarVelocidad(modo.velocidadAdicional());
 		this.incrementarPoderPelea(modo.danioAdicional());

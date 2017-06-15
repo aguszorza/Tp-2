@@ -36,7 +36,7 @@ public class Personaje {
 	}
 	
 	public void aumentarKi(){
-		this.ki = this.ki + 5;
+		this.ki = this.ki + this.modoDePelea.aumentarKi();
 	}
 	
 	public void reducirKi(int costoKi){
@@ -100,6 +100,7 @@ public class Personaje {
 	}
 
 	// recordar recuperar modo de pelea todos los turnos para los guerreros Z
+	// crear excepcion para cuando se pida obtener ataque y esas cosas
 	public void recuperarModoDePelea(){
 			this.modoDePelea.recuperarModoDePelea();
 	}
