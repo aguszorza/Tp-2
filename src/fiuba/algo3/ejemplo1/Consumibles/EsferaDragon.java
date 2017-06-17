@@ -8,8 +8,8 @@ public class EsferaDragon extends Consumible {
 
     private static final int DURACION = 2;
 
-    protected EsferaDragon() {
-        super(DURACION);
+    public EsferaDragon() {
+        super(DURACION, "Esfera del dragon");
     }
 
     @Override
@@ -28,5 +28,12 @@ public class EsferaDragon extends Consumible {
     @Override
     public void desafectar(Modo modo) {
         modo.actualizarPoderPeleaOriginal();
+    }
+    
+    public void pasarTurno() {
+    }
+    
+    public void atacar(){
+		this.duracionRestante -= 1;
     }
 }

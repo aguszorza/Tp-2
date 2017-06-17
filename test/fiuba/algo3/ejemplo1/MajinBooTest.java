@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 import junit.framework.Assert;
+import fiuba.algo3.ejemplo1.Consumibles.EsferaDragon;
+import fiuba.algo3.ejemplo1.Consumibles.NubeVoladora;
+import fiuba.algo3.ejemplo1.Consumibles.SemillaErmitanio;
 import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Excepciones.PersonajeInutilizado;
 import fiuba.algo3.ejemplo1.Personaje.Gohan;
@@ -248,6 +251,19 @@ public class MajinBooTest {
 	}
 	
 	@Test (expected = PersonajeInutilizado.class)
+	public void testLanzarHabilidadLevantaExcepcionSiElPersonajeFueConvertidoEnChocolate(){
+		MajinBoo majin = new MajinBoo();
+		Goku goku = new Goku();
+		for (int i = 0; i < 6; i++){
+			majin.aumentarKi();
+			goku.aumentarKi();
+		}
+		majin.lanzarHabilidadEspecial(goku);
+		goku.lanzarHabilidadEspecial(majin);
+		Assert.fail("No levanto excepcion");
+	}
+	
+	@Test (expected = PersonajeInutilizado.class)
 	public void testObtenerVelocidadLevantaExcepcionSiElPersonajeFueConvertidoEnChocolate(){
 		MajinBoo majin = new MajinBoo();
 		Goku goku = new Goku();
@@ -331,5 +347,132 @@ public class MajinBooTest {
 		goku.aumentarKi();
 		ki = goku.ki() - ki;
 		Assert.assertEquals("No paso: no aumento en 5 el ki", 5, ki);
+	}
+	
+	@Test
+	public void testConsumirEsferaDelDragonAumentaElDanioDeAtaque(){
+		MajinBoo majin = new MajinBoo();
+		EsferaDragon esfera = new EsferaDragon();
+		majin.consumir(esfera);
+		float danio = (float)37.5;
+		Assert.assertEquals("No paso: no aumento el danio de ataque", danio, majin.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testPasarDeTurnoNoReduceElEfectoDeLaEsferaDelDragon(){
+		MajinBoo majin = new MajinBoo();
+		EsferaDragon esfera = new EsferaDragon();
+		majin.consumir(esfera);
+		majin.pasarTurno();
+		majin.pasarTurno();
+		float danio = (float)37.5;
+		Assert.assertEquals("No paso: se termino el efecto al pasar de turno", danio, majin.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testAtacarNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
+		MajinBoo majin = new MajinBoo();
+		EsferaDragon esfera = new EsferaDragon();
+		majin.consumir(esfera);
+		Gohan gohan = new Gohan();
+		majin.atacar(gohan);
+		float danio = (float)37.5;
+		Assert.assertEquals("No paso: se termino el efecto con un solo ataque", danio, majin.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testAtacarReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
+		MajinBoo majin = new MajinBoo();
+		EsferaDragon esfera = new EsferaDragon();
+		majin.consumir(esfera);
+		Gohan gohan = new Gohan();
+		majin.atacar(gohan);
+		majin.atacar(gohan);
+		float danio = 30;
+		Assert.assertEquals("No paso: no se termino el efecto tras dos ataques", danio, majin.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testLanzarHabilidadNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
+		MajinBoo majin = new MajinBoo();
+		EsferaDragon esfera = new EsferaDragon();
+		majin.consumir(esfera);
+		for(int i = 0; i < 10; i++)
+			majin.aumentarKi();
+		Gohan gohan = new Gohan();
+		majin.lanzarHabilidadEspecial(gohan);
+		float danio = (float)37.5;
+		Assert.assertEquals("No paso: se termino el efecto con un solo ataque", danio, majin.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testLanzarHabilidadReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
+		MajinBoo majin = new MajinBoo();
+		EsferaDragon esfera = new EsferaDragon();
+		majin.consumir(esfera);
+		Gohan gohan = new Gohan();
+		for(int i = 0; i < 12; i++)
+			majin.aumentarKi();
+		majin.lanzarHabilidadEspecial(gohan);
+		majin.lanzarHabilidadEspecial(gohan);
+		float danio = 30;
+		Assert.assertEquals("No paso: no se termino el efecto tras dos ataques", danio, majin.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testConsumirSemillaErmitanioAumentaLaVidaEnCien(){
+		MajinBoo majin = new MajinBoo();
+		majin.reducirVida(200);
+		int vida = majin.obtenerVida();
+		SemillaErmitanio semilla = new SemillaErmitanio();
+		majin.consumir(semilla);
+		vida = majin.obtenerVida() - vida;
+		Assert.assertEquals("No paso: no aumento en 100 la vida", 100, vida);
+	}
+	
+	@Test
+	public void testConsumirNubeVoladoraAumentaLaVelocidadAlDoble(){
+		MajinBoo majin = new MajinBoo();
+		int velocidad = majin.obtenerVelocidad();
+		NubeVoladora nube = new NubeVoladora();
+		majin.consumir(nube);
+		velocidad = majin.obtenerVelocidad()/velocidad;
+		Assert.assertEquals("No paso: no aumento al doble la velocidad", 2, velocidad);
+	}
+	
+	@Test
+	public void testPasarUnTurnoNoEliminaElEfectoDeLaNubeVoladora(){
+		MajinBoo majin = new MajinBoo();
+		int velocidad = majin.obtenerVelocidad();
+		NubeVoladora nube = new NubeVoladora();
+		majin.consumir(nube);
+		majin.pasarTurno();
+		velocidad = majin.obtenerVelocidad()/velocidad;
+		Assert.assertEquals("No paso: se termino el efecto tras un turno", 2, velocidad);
+	}
+	
+	@Test
+	public void testPasarDosTurnoEliminaElEfectoDeLaNubeVoladora(){
+		MajinBoo majin = new MajinBoo();
+		int velocidad = majin.obtenerVelocidad();
+		NubeVoladora nube = new NubeVoladora();
+		majin.consumir(nube);
+		majin.pasarTurno();
+		majin.pasarTurno();
+		velocidad = majin.obtenerVelocidad()/velocidad;
+		Assert.assertEquals("No paso: no se termino el efecto tras dos turnos", 1, velocidad);
+	}
+	
+	@Test
+	public void testAtacarNoReduceElEfectoDeLaNubeVoladora(){
+		MajinBoo majin = new MajinBoo();
+		int velocidad = majin.obtenerVelocidad();
+		NubeVoladora nube = new NubeVoladora();
+		majin.consumir(nube);
+		Gohan gohan = new Gohan();
+		majin.atacar(gohan);
+		majin.atacar(gohan);
+		velocidad = majin.obtenerVelocidad()/velocidad;
+		Assert.assertEquals("No paso: atacar elimino el efecto", 2, velocidad);
 	}
 }

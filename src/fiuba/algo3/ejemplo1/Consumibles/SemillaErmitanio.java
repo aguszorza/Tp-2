@@ -9,7 +9,7 @@ public class SemillaErmitanio extends Consumible {
     private static final int DURACION = 1;
 
     public SemillaErmitanio() {
-        super(DURACION);
+        super(DURACION, "Semilla del ermitanio");
     }
 
     @Override
@@ -25,4 +25,11 @@ public class SemillaErmitanio extends Consumible {
 
     @Override
     public void desafectar(Modo modo) { }
+    
+    public void pasarTurno() {
+    	this.duracionRestante -= 1;
+    }
+    
+    public void atacar(){
+    }
 }

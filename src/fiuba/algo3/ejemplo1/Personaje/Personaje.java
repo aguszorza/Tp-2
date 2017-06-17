@@ -6,6 +6,10 @@ import fiuba.algo3.ejemplo1.ModosDePelea.Modo;
 import fiuba.algo3.ejemplo1.ModosDePelea.ModoChocolate;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.function.Function;
 
 public class Personaje {
 	
@@ -18,7 +22,7 @@ public class Personaje {
 	protected Modo modoDePelea;
 	protected HabilidadEspecial habilidad;
 	ArrayList <Personaje> aliados;
-	private ArrayList<Consumible> consumiblesActivos;
+	private Hashtable <String, Consumible> consumiblesActivos;
 
 	public Personaje(int vida, String nombre, Modo modo){
 		this.vidaActual = vida;
@@ -26,7 +30,7 @@ public class Personaje {
 		this.nombre = nombre;
 		this.ki = 0;
 		this.modoDePelea = modo;
-        this.consumiblesActivos = new ArrayList<>();
+        this.consumiblesActivos = new  Hashtable <String, Consumible>();
 	}
 	
 	public void agregarAliados(ArrayList <Personaje> aliados){
@@ -108,12 +112,22 @@ public class Personaje {
 	}
 
 	public void pasarTurno(){
+		Function <Consumible, Void> funcion;
+		funcion = (Consumible consumible) -> {
+		consumible.pasarTurno();
+		return null;};
+		actualizarConsumibles(funcion);
 		this.modoDePelea.pasarTurno();
 	}
 	
 	public void atacar(Personaje enemigo){
 		float danio = this.obtenerDanioDeAtaque(enemigo);
 		enemigo.reducirVida((int)danio);
+		Function <Consumible, Void> funcion;
+		funcion = (Consumible consumible) -> {
+		consumible.atacar();
+		return null;};
+		actualizarConsumibles(funcion);
 	}
 	
 	public float obtenerDanioDeAtaque(Personaje enemigo){
@@ -123,29 +137,44 @@ public class Personaje {
 	public void lanzarHabilidadEspecial(Personaje enemigo){
 		float danio = this.habilidad.lanzarHabilidad(enemigo);
 		enemigo.reducirVida((int)danio);
+		Function <Consumible, Void> funcion;
+		funcion = (Consumible consumible) -> {
+		consumible.atacar();
+		return null;};
+		actualizarConsumibles(funcion);
 	}
 
-    public void consumir(Consumible consumible) {
-        this.consumiblesActivos.add(consumible);
-        consumible.afectar(this);
-        consumible.afectar(modoDePelea);
-    }
+	public void consumir(Consumible consumible) {
+		this.consumiblesActivos.put(consumible.obtenerNombre(), consumible);
+		consumible.afectar(this);
+		consumible.afectar(modoDePelea);
+	}
 
-    public void actualizarConsumibles() {
-        ArrayList<Consumible> consumiblesCaducados = new ArrayList<>();
-        // Uso el Consumible y Guardo los caducados.
-        for(int i = 0; i <= this.consumiblesActivos.size(); i++) {
-            Consumible consumible = this.consumiblesActivos.get(i);
-            consumible.usarConsumible();
-            if( consumible.caducoEfecto() ) {
-                consumible.desafectar(this);
-                consumible.desafectar(this.modoDePelea);
-                consumiblesCaducados.add(consumible);
-            }
-        }
-        // Elimino de los Activos los caducados.
-        for(int i = 0; i <= consumiblesCaducados.size(); i++) {
-            this.consumiblesActivos.remove(consumiblesCaducados.get(i));
-        }
-    }
+	public void actualizarConsumibles(Function <Consumible, Void> funcion) {
+		Iterator <Consumible> iterador = this.consumiblesActivos.values().iterator();
+		// Uso el Consumible y Guardo los caducados.
+		while(iterador.hasNext()){
+			Consumible consumible = iterador.next();
+			funcion.apply(consumible);
+			//consumible.pasarTurno();
+			if(consumible.caducoEfecto()){
+				consumible.desafectar(this);
+				consumible.desafectar(this.modoDePelea);
+				iterador.remove();
+			}
+		}
+		/*for(int i = 0; i <= this.consumiblesActivos.size(); i++) {
+			Consumible consumible = this.consumiblesActivos.get(i);
+			consumible.usarConsumible();
+			if( consumible.caducoEfecto() ) {
+				consumible.desafectar(this);
+				consumible.desafectar(this.modoDePelea);
+				consumiblesCaducados.add(consumible);
+			}
+		}
+		// Elimino de los Activos los caducados.
+		for(int i = 0; i <= consumiblesCaducados.size(); i++) {
+			this.consumiblesActivos.remove(consumiblesCaducados.get(i));
+		}*/
+	}
 }

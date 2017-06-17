@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 import junit.framework.Assert;
+import fiuba.algo3.ejemplo1.Consumibles.EsferaDragon;
+import fiuba.algo3.ejemplo1.Consumibles.NubeVoladora;
+import fiuba.algo3.ejemplo1.Consumibles.SemillaErmitanio;
 import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Excepciones.RequisitosDeTransformacionInsuficientes;
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
@@ -347,5 +350,132 @@ public class GohanTest {
 		gohan.lanzarHabilidadEspecial(majin);
 		vida = vida - majin.obtenerVida();
 		Assert.assertEquals("No paso: no se redujo la vida", 15, vida);
+	}
+	
+	@Test
+	public void testConsumirEsferaDelDragonAumentaElDanioDeAtaque(){
+		Gohan gohan = new Gohan();
+		EsferaDragon esfera = new EsferaDragon();
+		gohan.consumir(esfera);
+		float danio = (float) 18.75;
+		Assert.assertEquals("No paso: no aumento el danio de ataque", danio, gohan.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testPasarDeTurnoNoReduceElEfectoDeLaEsferaDelDragon(){
+		Gohan gohan = new Gohan();
+		EsferaDragon esfera = new EsferaDragon();
+		gohan.consumir(esfera);
+		gohan.pasarTurno();
+		gohan.pasarTurno();
+		float danio = (float) 18.75;
+		Assert.assertEquals("No paso: se termino el efecto al pasar de turno", danio, gohan.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testAtacarNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
+		Gohan gohan = new Gohan();
+		EsferaDragon esfera = new EsferaDragon();
+		gohan.consumir(esfera);
+		Freezer freezer = new Freezer();
+		gohan.atacar(freezer);
+		float danio = (float) 18.75;
+		Assert.assertEquals("No paso: se termino el efecto con un solo ataque", danio, gohan.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testAtacarReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
+		Gohan gohan = new Gohan();
+		EsferaDragon esfera = new EsferaDragon();
+		gohan.consumir(esfera);
+		Freezer freezer = new Freezer();
+		gohan.atacar(freezer);
+		gohan.atacar(freezer);
+		float danio = 15;
+		Assert.assertEquals("No paso: no se termino el efecto tras dos ataques", danio, gohan.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testLanzarHabilidadNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
+		Gohan gohan = new Gohan();
+		EsferaDragon esfera = new EsferaDragon();
+		gohan.consumir(esfera);
+		for(int i = 0; i < 10; i++)
+			gohan.aumentarKi();
+		Freezer freezer = new Freezer();
+		gohan.lanzarHabilidadEspecial(freezer);
+		float danio = (float) 18.75;
+		Assert.assertEquals("No paso: se termino el efecto con un solo ataque", danio, gohan.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testLanzarHabilidadReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
+		Gohan gohan = new Gohan();
+		EsferaDragon esfera = new EsferaDragon();
+		gohan.consumir(esfera);
+		Freezer freezer = new Freezer();
+		for(int i = 0; i < 10; i++)
+			gohan.aumentarKi();
+		gohan.lanzarHabilidadEspecial(freezer);
+		gohan.lanzarHabilidadEspecial(freezer);
+		float danio = 15;
+		Assert.assertEquals("No paso: no se termino el efecto tras dos ataques", danio, gohan.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testConsumirSemillaErmitanioAumentaLaVidaEnCien(){
+		Gohan gohan = new Gohan();
+		gohan.reducirVida(200);
+		int vida = gohan.obtenerVida();
+		SemillaErmitanio semilla = new SemillaErmitanio();
+		gohan.consumir(semilla);
+		vida = gohan.obtenerVida() - vida;
+		Assert.assertEquals("No paso: no aumento en 100 la vida", 100, vida);
+	}
+	
+	@Test
+	public void testConsumirNubeVoladoraAumentaLaVelocidadAlDoble(){
+		Gohan gohan = new Gohan();
+		int velocidad = gohan.obtenerVelocidad();
+		NubeVoladora nube = new NubeVoladora();
+		gohan.consumir(nube);
+		velocidad = gohan.obtenerVelocidad()/velocidad;
+		Assert.assertEquals("No paso: no aumento al doble la velocidad", 2, velocidad);
+	}
+	
+	@Test
+	public void testPasarUnTurnoNoEliminaElEfectoDeLaNubeVoladora(){
+		Gohan gohan = new Gohan();
+		int velocidad = gohan.obtenerVelocidad();
+		NubeVoladora nube = new NubeVoladora();
+		gohan.consumir(nube);
+		gohan.pasarTurno();
+		velocidad = gohan.obtenerVelocidad()/velocidad;
+		Assert.assertEquals("No paso: se termino el efecto tras un turno", 2, velocidad);
+	}
+	
+	@Test
+	public void testPasarDosTurnoEliminaElEfectoDeLaNubeVoladora(){
+		Gohan gohan = new Gohan();
+		int velocidad = gohan.obtenerVelocidad();
+		NubeVoladora nube = new NubeVoladora();
+		gohan.consumir(nube);
+		gohan.pasarTurno();
+		gohan.pasarTurno();
+		velocidad = gohan.obtenerVelocidad()/velocidad;
+		Assert.assertEquals("No paso: no se termino el efecto tras dos turnos", 1, velocidad);
+	}
+	
+	@Test
+	public void testAtacarNoReduceElEfectoDeLaNubeVoladora(){
+		Gohan gohan = new Gohan();
+		int velocidad = gohan.obtenerVelocidad();
+		NubeVoladora nube = new NubeVoladora();
+		gohan.consumir(nube);
+		Freezer freezer = new Freezer();
+		gohan.atacar(freezer);
+		gohan.atacar(freezer);
+		velocidad = gohan.obtenerVelocidad()/velocidad;
+		Assert.assertEquals("No paso: atacar elimino el efecto", 2, velocidad);
 	}
 }

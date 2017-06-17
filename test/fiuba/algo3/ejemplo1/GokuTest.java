@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import fiuba.algo3.ejemplo1.Consumibles.EsferaDragon;
+import fiuba.algo3.ejemplo1.Consumibles.NubeVoladora;
+import fiuba.algo3.ejemplo1.Consumibles.SemillaErmitanio;
 import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
 import fiuba.algo3.ejemplo1.Personaje.Goku;
@@ -263,4 +266,130 @@ public class GokuTest {
 		Assert.assertEquals("No paso: no se redujo la vida", 24, vida);
 	}
 
+	@Test
+	public void testConsumirEsferaDelDragonAumentaElDanioDeAtaque(){
+		Goku goku = new Goku();
+		EsferaDragon esfera = new EsferaDragon();
+		goku.consumir(esfera);
+		float danio = 25;
+		Assert.assertEquals("No paso: no aumento el danio de ataque", danio, goku.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testPasarDeTurnoNoReduceElEfectoDeLaEsferaDelDragon(){
+		Goku goku = new Goku();
+		EsferaDragon esfera = new EsferaDragon();
+		goku.consumir(esfera);
+		goku.pasarTurno();
+		goku.pasarTurno();
+		float danio = 25;
+		Assert.assertEquals("No paso: se termino el efecto al pasar de turno", danio, goku.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testAtacarNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
+		Goku goku = new Goku();
+		EsferaDragon esfera = new EsferaDragon();
+		goku.consumir(esfera);
+		Freezer freezer = new Freezer();
+		goku.atacar(freezer);
+		float danio = 25;
+		Assert.assertEquals("No paso: se termino el efecto con un solo ataque", danio, goku.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testAtacarReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
+		Goku goku = new Goku();
+		EsferaDragon esfera = new EsferaDragon();
+		goku.consumir(esfera);
+		Freezer freezer = new Freezer();
+		goku.atacar(freezer);
+		goku.atacar(freezer);
+		float danio = 20;
+		Assert.assertEquals("No paso: no se termino el efecto tras dos ataques", danio, goku.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testLanzarHabilidadNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
+		Goku goku = new Goku();
+		EsferaDragon esfera = new EsferaDragon();
+		goku.consumir(esfera);
+		for(int i = 0; i < 10; i++)
+			goku.aumentarKi();
+		Freezer freezer = new Freezer();
+		goku.lanzarHabilidadEspecial(freezer);
+		float danio = 25;
+		Assert.assertEquals("No paso: se termino el efecto con un solo ataque", danio, goku.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testLanzarHabilidadReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
+		Goku goku = new Goku();
+		EsferaDragon esfera = new EsferaDragon();
+		goku.consumir(esfera);
+		Freezer freezer = new Freezer();
+		for(int i = 0; i < 10; i++)
+			goku.aumentarKi();
+		goku.lanzarHabilidadEspecial(freezer);
+		goku.lanzarHabilidadEspecial(freezer);
+		float danio = 20;
+		Assert.assertEquals("No paso: no se termino el efecto tras dos ataques", danio, goku.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testConsumirSemillaErmitanioAumentaLaVidaEnCien(){
+		Goku goku = new Goku();
+		goku.reducirVida(200);
+		int vida = goku.obtenerVida();
+		SemillaErmitanio semilla = new SemillaErmitanio();
+		goku.consumir(semilla);
+		vida = goku.obtenerVida() - vida;
+		Assert.assertEquals("No paso: no aumento en 100 la vida", 100, vida);
+	}
+	
+	@Test
+	public void testConsumirNubeVoladoraAumentaLaVelocidadAlDoble(){
+		Goku goku = new Goku();
+		int velocidad = goku.obtenerVelocidad();
+		NubeVoladora nube = new NubeVoladora();
+		goku.consumir(nube);
+		velocidad = goku.obtenerVelocidad()/velocidad;
+		Assert.assertEquals("No paso: no aumento al doble la velocidad", 2, velocidad);
+	}
+	
+	@Test
+	public void testPasarUnTurnoNoEliminaElEfectoDeLaNubeVoladora(){
+		Goku goku = new Goku();
+		int velocidad = goku.obtenerVelocidad();
+		NubeVoladora nube = new NubeVoladora();
+		goku.consumir(nube);
+		goku.pasarTurno();
+		velocidad = goku.obtenerVelocidad()/velocidad;
+		Assert.assertEquals("No paso: se termino el efecto tras un turno", 2, velocidad);
+	}
+	
+	@Test
+	public void testPasarDosTurnoEliminaElEfectoDeLaNubeVoladora(){
+		Goku goku = new Goku();
+		int velocidad = goku.obtenerVelocidad();
+		NubeVoladora nube = new NubeVoladora();
+		goku.consumir(nube);
+		goku.pasarTurno();
+		goku.pasarTurno();
+		velocidad = goku.obtenerVelocidad()/velocidad;
+		Assert.assertEquals("No paso: no se termino el efecto tras dos turnos", 1, velocidad);
+	}
+	
+	@Test
+	public void testAtacarNoReduceElEfectoDeLaNubeVoladora(){
+		Goku goku = new Goku();
+		int velocidad = goku.obtenerVelocidad();
+		NubeVoladora nube = new NubeVoladora();
+		goku.consumir(nube);
+		Freezer freezer = new Freezer();
+		goku.atacar(freezer);
+		goku.atacar(freezer);
+		velocidad = goku.obtenerVelocidad()/velocidad;
+		Assert.assertEquals("No paso: atacar elimino el efecto", 2, velocidad);
+	}
 }

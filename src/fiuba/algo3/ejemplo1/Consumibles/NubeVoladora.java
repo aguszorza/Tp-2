@@ -8,8 +8,8 @@ public class NubeVoladora extends Consumible {
 
     private static final int DURACION = 2;
 
-    protected NubeVoladora() {
-        super(DURACION);
+    public NubeVoladora() {
+        super(DURACION, "Nube voladora");
     }
 
 
@@ -27,5 +27,12 @@ public class NubeVoladora extends Consumible {
     @Override
     public void desafectar(Modo modo) {
         modo.actualizarVelocidadOriginal();
+    }
+    
+    public void pasarTurno() {
+    	this.duracionRestante -= 1;
+    }
+    
+    public void atacar(){
     }
 }

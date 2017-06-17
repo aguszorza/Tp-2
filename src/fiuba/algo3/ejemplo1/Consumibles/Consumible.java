@@ -7,10 +7,12 @@ public abstract class Consumible {
 
     private int duracionTotalEfecto;
     protected int duracionRestante;
+    protected String nombre;
 
-    protected Consumible(int duracionEfecto) {
+    public Consumible(int duracionEfecto, String nombre) {
         this.duracionTotalEfecto = duracionEfecto;
         this.duracionRestante = duracionEfecto;
+        this.nombre = nombre;
     }
 
     public abstract void afectar(Personaje personaje);
@@ -18,15 +20,19 @@ public abstract class Consumible {
 
     public abstract void desafectar(Personaje personaje);
     public abstract void desafectar(Modo modo);
+   
+    public String obtenerNombre(){
+    	return this.nombre;
+    }
 
     protected boolean esPrimerUso() {
-        return this.duracionRestante == this.duracionTotalEfecto;
+		return this.duracionRestante == this.duracionTotalEfecto;
     }
-
-    public void usarConsumible() {
-        this.duracionRestante -= 1;
-    }
+    
     public boolean caducoEfecto() {
-        return this.duracionRestante == 0;
+    	return this.duracionRestante == 0;
     }
+    
+    public abstract void pasarTurno();
+    public abstract void atacar();
 }

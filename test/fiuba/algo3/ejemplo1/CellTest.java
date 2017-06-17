@@ -4,10 +4,14 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import fiuba.algo3.ejemplo1.Consumibles.EsferaDragon;
+import fiuba.algo3.ejemplo1.Consumibles.NubeVoladora;
+import fiuba.algo3.ejemplo1.Consumibles.SemillaErmitanio;
 import fiuba.algo3.ejemplo1.Excepciones.AbsorcionesInsuficientes;
 import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Personaje.Cell;
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
+import fiuba.algo3.ejemplo1.Personaje.Gohan;
 import fiuba.algo3.ejemplo1.Personaje.MajinBoo;
 import junit.framework.Assert;
 
@@ -286,5 +290,132 @@ public class CellTest {
 		cell.lanzarHabilidadEspecial(majin);
 		vida = cell.obtenerVida() - vida;
 		Assert.assertEquals("No paso: no aumento la vida correctamente", 16, vida);
+	}
+	
+	@Test
+	public void testConsumirEsferaDelDragonAumentaElDanioDeAtaque(){
+		Cell cell = new Cell();
+		EsferaDragon esfera = new EsferaDragon();
+		cell.consumir(esfera);
+		float danio = 25;
+		Assert.assertEquals("No paso: no aumento el danio de ataque", danio, cell.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testPasarDeTurnoNoReduceElEfectoDeLaEsferaDelDragon(){
+		Cell cell = new Cell();
+		EsferaDragon esfera = new EsferaDragon();
+		cell.consumir(esfera);
+		cell.pasarTurno();
+		cell.pasarTurno();
+		float danio = 25;
+		Assert.assertEquals("No paso: se termino el efecto al pasar de turno", danio, cell.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testAtacarNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
+		Cell cell = new Cell();
+		EsferaDragon esfera = new EsferaDragon();
+		cell.consumir(esfera);
+		Gohan gohan = new Gohan();
+		cell.atacar(gohan);
+		float danio = 25;
+		Assert.assertEquals("No paso: se termino el efecto con un solo ataque", danio, cell.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testAtacarReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
+		Cell cell = new Cell();
+		EsferaDragon esfera = new EsferaDragon();
+		cell.consumir(esfera);
+		Gohan gohan = new Gohan();
+		cell.atacar(gohan);
+		cell.atacar(gohan);
+		float danio = 20;
+		Assert.assertEquals("No paso: no se termino el efecto tras dos ataques", danio, cell.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testLanzarHabilidadNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
+		Cell cell = new Cell();
+		EsferaDragon esfera = new EsferaDragon();
+		cell.consumir(esfera);
+		for(int i = 0; i < 10; i++)
+			cell.aumentarKi();
+		Gohan gohan = new Gohan();
+		cell.lanzarHabilidadEspecial(gohan);
+		float danio = 25;
+		Assert.assertEquals("No paso: se termino el efecto con un solo ataque", danio, cell.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testLanzarHabilidadReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
+		Cell cell = new Cell();
+		EsferaDragon esfera = new EsferaDragon();
+		cell.consumir(esfera);
+		Gohan gohan = new Gohan();
+		for(int i = 0; i < 10; i++)
+			cell.aumentarKi();
+		cell.lanzarHabilidadEspecial(gohan);
+		cell.lanzarHabilidadEspecial(gohan);
+		float danio = 20;
+		Assert.assertEquals("No paso: no se termino el efecto tras dos ataques", danio, cell.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testConsumirSemillaErmitanioAumentaLaVidaEnCien(){
+		Cell cell = new Cell();
+		cell.reducirVida(200);
+		int vida = cell.obtenerVida();
+		SemillaErmitanio semilla = new SemillaErmitanio();
+		cell.consumir(semilla);
+		vida = cell.obtenerVida() - vida;
+		Assert.assertEquals("No paso: no aumento en 100 la vida", 100, vida);
+	}
+	
+	@Test
+	public void testConsumirNubeVoladoraAumentaLaVelocidadAlDoble(){
+		Cell cell = new Cell();
+		int velocidad = cell.obtenerVelocidad();
+		NubeVoladora nube = new NubeVoladora();
+		cell.consumir(nube);
+		velocidad = cell.obtenerVelocidad()/velocidad;
+		Assert.assertEquals("No paso: no aumento al doble la velocidad", 2, velocidad);
+	}
+	
+	@Test
+	public void testPasarUnTurnoNoEliminaElEfectoDeLaNubeVoladora(){
+		Cell cell = new Cell();
+		int velocidad = cell.obtenerVelocidad();
+		NubeVoladora nube = new NubeVoladora();
+		cell.consumir(nube);
+		cell.pasarTurno();
+		velocidad = cell.obtenerVelocidad()/velocidad;
+		Assert.assertEquals("No paso: se termino el efecto tras un turno", 2, velocidad);
+	}
+	
+	@Test
+	public void testPasarDosTurnoEliminaElEfectoDeLaNubeVoladora(){
+		Cell cell = new Cell();
+		int velocidad = cell.obtenerVelocidad();
+		NubeVoladora nube = new NubeVoladora();
+		cell.consumir(nube);
+		cell.pasarTurno();
+		cell.pasarTurno();
+		velocidad = cell.obtenerVelocidad()/velocidad;
+		Assert.assertEquals("No paso: no se termino el efecto tras dos turnos", 1, velocidad);
+	}
+	
+	@Test
+	public void testAtacarNoReduceElEfectoDeLaNubeVoladora(){
+		Cell cell = new Cell();
+		int velocidad = cell.obtenerVelocidad();
+		NubeVoladora nube = new NubeVoladora();
+		cell.consumir(nube);
+		Gohan gohan = new Gohan();
+		cell.atacar(gohan);
+		cell.atacar(gohan);
+		velocidad = cell.obtenerVelocidad()/velocidad;
+		Assert.assertEquals("No paso: atacar elimino el efecto", 2, velocidad);
 	}
 }

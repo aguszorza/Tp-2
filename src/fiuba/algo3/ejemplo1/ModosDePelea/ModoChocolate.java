@@ -33,9 +33,9 @@ public class ModoChocolate extends Modo{
 		//this.turnos --;
 	}*/
 	
-	public float obtenerPoderDePelea(){
+	/*public float obtenerPoderDePelea(){
 		throw new PersonajeInutilizado();
-	}
+	}*/
 	
 	public int obtenerDistanciaDeAtaque(){
 		throw new PersonajeInutilizado();

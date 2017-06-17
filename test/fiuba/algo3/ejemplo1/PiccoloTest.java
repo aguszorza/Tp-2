@@ -9,6 +9,9 @@ import junit.framework.Assert;
 import fiuba.algo3.ejemplo1.Personaje.MajinBoo;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
 import fiuba.algo3.ejemplo1.Personaje.Piccolo;
+import fiuba.algo3.ejemplo1.Consumibles.EsferaDragon;
+import fiuba.algo3.ejemplo1.Consumibles.NubeVoladora;
+import fiuba.algo3.ejemplo1.Consumibles.SemillaErmitanio;
 import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Excepciones.RequisitosDeTransformacionInsuficientes;
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
@@ -270,5 +273,132 @@ public class PiccoloTest {
 		piccolo.lanzarHabilidadEspecial(majin);
 		vida = vida - majin.obtenerVida();
 		Assert.assertEquals("No paso: no se redujo la vida", 20, vida);
+	}
+	
+	@Test
+	public void testConsumirEsferaDelDragonAumentaElDanioDeAtaque(){
+		Piccolo piccolo = new Piccolo();
+		EsferaDragon esfera = new EsferaDragon();
+		piccolo.consumir(esfera);
+		float danio = 25;
+		Assert.assertEquals("No paso: no aumento el danio de ataque", danio, piccolo.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testPasarDeTurnoNoReduceElEfectoDeLaEsferaDelDragon(){
+		Piccolo piccolo = new Piccolo();
+		EsferaDragon esfera = new EsferaDragon();
+		piccolo.consumir(esfera);
+		piccolo.pasarTurno();
+		piccolo.pasarTurno();
+		float danio = 25;
+		Assert.assertEquals("No paso: se termino el efecto al pasar de turno", danio, piccolo.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testAtacarNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
+		Piccolo piccolo = new Piccolo();
+		EsferaDragon esfera = new EsferaDragon();
+		piccolo.consumir(esfera);
+		Freezer freezer = new Freezer();
+		piccolo.atacar(freezer);
+		float danio = 25;
+		Assert.assertEquals("No paso: se termino el efecto con un solo ataque", danio, piccolo.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testAtacarReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
+		Piccolo piccolo = new Piccolo();
+		EsferaDragon esfera = new EsferaDragon();
+		piccolo.consumir(esfera);
+		Freezer freezer = new Freezer();
+		piccolo.atacar(freezer);
+		piccolo.atacar(freezer);
+		float danio = 20;
+		Assert.assertEquals("No paso: no se termino el efecto tras dos ataques", danio, piccolo.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testLanzarHabilidadNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
+		Piccolo piccolo = new Piccolo();
+		EsferaDragon esfera = new EsferaDragon();
+		piccolo.consumir(esfera);
+		for(int i = 0; i < 10; i++)
+			piccolo.aumentarKi();
+		Freezer freezer = new Freezer();
+		piccolo.lanzarHabilidadEspecial(freezer);
+		float danio = 25;
+		Assert.assertEquals("No paso: se termino el efecto con un solo ataque", danio, piccolo.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testLanzarHabilidadReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
+		Piccolo piccolo = new Piccolo();
+		EsferaDragon esfera = new EsferaDragon();
+		piccolo.consumir(esfera);
+		Freezer freezer = new Freezer();
+		for(int i = 0; i < 10; i++)
+			piccolo.aumentarKi();
+		piccolo.lanzarHabilidadEspecial(freezer);
+		piccolo.lanzarHabilidadEspecial(freezer);
+		float danio = 20;
+		Assert.assertEquals("No paso: no se termino el efecto tras dos ataques", danio, piccolo.obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testConsumirSemillaErmitanioAumentaLaVidaEnCien(){
+		Piccolo piccolo = new Piccolo();
+		piccolo.reducirVida(200);
+		int vida = piccolo.obtenerVida();
+		SemillaErmitanio semilla = new SemillaErmitanio();
+		piccolo.consumir(semilla);
+		vida = piccolo.obtenerVida() - vida;
+		Assert.assertEquals("No paso: no aumento en 100 la vida", 100, vida);
+	}
+	
+	@Test
+	public void testConsumirNubeVoladoraAumentaLaVelocidadAlDoble(){
+		Piccolo piccolo = new Piccolo();
+		int velocidad = piccolo.obtenerVelocidad();
+		NubeVoladora nube = new NubeVoladora();
+		piccolo.consumir(nube);
+		velocidad = piccolo.obtenerVelocidad()/velocidad;
+		Assert.assertEquals("No paso: no aumento al doble la velocidad", 2, velocidad);
+	}
+	
+	@Test
+	public void testPasarUnTurnoNoEliminaElEfectoDeLaNubeVoladora(){
+		Piccolo piccolo = new Piccolo();
+		int velocidad = piccolo.obtenerVelocidad();
+		NubeVoladora nube = new NubeVoladora();
+		piccolo.consumir(nube);
+		piccolo.pasarTurno();
+		velocidad = piccolo.obtenerVelocidad()/velocidad;
+		Assert.assertEquals("No paso: se termino el efecto tras un turno", 2, velocidad);
+	}
+	
+	@Test
+	public void testPasarDosTurnoEliminaElEfectoDeLaNubeVoladora(){
+		Piccolo piccolo = new Piccolo();
+		int velocidad = piccolo.obtenerVelocidad();
+		NubeVoladora nube = new NubeVoladora();
+		piccolo.consumir(nube);
+		piccolo.pasarTurno();
+		piccolo.pasarTurno();
+		velocidad = piccolo.obtenerVelocidad()/velocidad;
+		Assert.assertEquals("No paso: no se termino el efecto tras dos turnos", 1, velocidad);
+	}
+	
+	@Test
+	public void testAtacarNoReduceElEfectoDeLaNubeVoladora(){
+		Piccolo piccolo = new Piccolo();
+		int velocidad = piccolo.obtenerVelocidad();
+		NubeVoladora nube = new NubeVoladora();
+		piccolo.consumir(nube);
+		Freezer freezer = new Freezer();
+		piccolo.atacar(freezer);
+		piccolo.atacar(freezer);
+		velocidad = piccolo.obtenerVelocidad()/velocidad;
+		Assert.assertEquals("No paso: atacar elimino el efecto", 2, velocidad);
 	}
 }
