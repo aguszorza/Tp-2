@@ -2,6 +2,7 @@ package fiuba.algo3.ejemplo1;
 
 import org.junit.Test;
 
+import fiuba.algo3.ejemplo1.Consumibles.EsferaDragon;
 import fiuba.algo3.ejemplo1.Personaje.Goku;
 import fiuba.algo3.ejemplo1.tablero.Celda;
 import junit.framework.Assert;
@@ -75,5 +76,33 @@ public class CeldaTest {
 		celda.agregarPersonaje(personaje);
 		celda.removerPersonaje();
 		Assert.assertTrue("La celda no esta vacia", celda.estaVacia());
+	}
+	
+	@Test
+	public void testAgregarConsumibleAgregaElConsumible(){
+		Celda celda = new Celda(2,3);
+		EsferaDragon esfera = new EsferaDragon();
+		celda.agregarConsumible(esfera);
+		Assert.assertEquals("No devolvio el consumible", esfera, celda.obtenerConsumible());
+	}
+	
+	@Test
+	public void testAgregarPersonajeConsumeElConsumibleSiHayUno(){
+		Celda celda = new Celda(2,3);
+		Goku personaje = new Goku();
+		EsferaDragon esfera = new EsferaDragon();
+		celda.agregarConsumible(esfera);
+		celda.agregarPersonaje(personaje);
+		Assert.assertEquals("No consumio la esfera", (float)25, celda.obtenerPersonaje().obtenerPoderDePelea());
+	}
+	
+	@Test
+	public void testAgregarPersonajeEnUnaCeldaConConsumibleEliminaElConsumible(){
+		Celda celda = new Celda(2,3);
+		Goku personaje = new Goku();
+		EsferaDragon esfera = new EsferaDragon();
+		celda.agregarConsumible(esfera);
+		celda.agregarPersonaje(personaje);
+		Assert.assertEquals("No elimino el consumible de la celda", null, celda.obtenerConsumible());
 	}
 }

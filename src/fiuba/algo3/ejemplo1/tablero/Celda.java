@@ -1,5 +1,6 @@
 package fiuba.algo3.ejemplo1.tablero;
 
+import fiuba.algo3.ejemplo1.Consumibles.Consumible;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
 
 public class Celda {
@@ -7,11 +8,17 @@ public class Celda {
 	private int fila;
 	private int columna;
 	private Personaje personaje;
+	private Consumible consumible;
 	
 	public Celda(int fila, int columna){
 		this.fila = fila;
 		this.columna = columna;
 		this.personaje = null; // se podria llegar a cambiar a que tenga un personaje vacio
+		this.consumible = null;
+	}
+	
+	private Boolean hayConsumible(){
+		return this.consumible != null;
 	}
 	
 	public int obtenerFila(){
@@ -22,8 +29,16 @@ public class Celda {
 		return this.columna;
 	}
 	
+	public void agregarConsumible(Consumible consumible){
+		this.consumible = consumible;
+	}
+	
 	public void agregarPersonaje(Personaje personaje){
 		this.personaje = personaje;
+		if(this.hayConsumible()){
+			personaje.consumir(this.consumible);
+			this.consumible = null;
+		}
 	}
 	
 	public Personaje removerPersonaje(){
@@ -38,6 +53,10 @@ public class Celda {
 	
 	public Personaje obtenerPersonaje(){
 		return this.personaje;
+	}
+	
+	public Consumible obtenerConsumible(){
+		return this.consumible;
 	}
 	
 	public Boolean esAdyacente(Celda celda){

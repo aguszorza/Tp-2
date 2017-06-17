@@ -2,6 +2,7 @@ package fiuba.algo3.ejemplo1.tablero;
 
 import java.util.Hashtable;
 
+import fiuba.algo3.ejemplo1.Consumibles.Consumible;
 import fiuba.algo3.ejemplo1.Excepciones.AtaqueFueraDeRango;
 import fiuba.algo3.ejemplo1.Excepciones.CeldaOcupada;
 import fiuba.algo3.ejemplo1.Excepciones.MovimientoInvalido;
@@ -71,7 +72,15 @@ public class Tablero {
 	}
 	
 	public void agregarPersonaje(Celda celda, Personaje personaje){
-		celda.agregarPersonaje(personaje);
+		int fila = celda.obtenerFila();
+		int columna = celda.obtenerColumna(); 
+		this.filas.get(fila).obtenerCelda(columna).agregarPersonaje(personaje);
+	}
+	
+	public void agregarConsumible(Celda celda, Consumible consumible){
+		int fila = celda.obtenerFila();
+		int columna = celda.obtenerColumna(); 
+		this.filas.get(fila).obtenerCelda(columna).agregarConsumible(consumible);
 	}
 	
 	public void moverPersonaje(Personaje personaje, Celda celdaAct, Celda celdaFin){
