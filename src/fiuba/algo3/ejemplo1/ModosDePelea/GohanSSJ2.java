@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.function.Function;
 
 import fiuba.algo3.ejemplo1.Excepciones.RequisitosDeTransformacionInsuficientes;
+import fiuba.algo3.ejemplo1.Personaje.Equipo;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
 import fiuba.algo3.ejemplo1.juego.Ataque;
 
@@ -19,10 +20,14 @@ public class GohanSSJ2 extends Modo {
 	
 	public void validarTransformacion(Personaje personaje, int costoKi){
 		super.validarTransformacion(personaje, costoKi);
-		ArrayList <Personaje> aliados = personaje.obtenerAliados();
+		Equipo aliados = personaje.obtenerAliados();
 		Iterator <Personaje> it = aliados.iterator();
 		while(it.hasNext()){
-			if (it.next().obtenerPorcentajeDeVida() >= 30){
+			Personaje aliado = it.next();
+			if (aliado.getNombre() == "Gohan"){
+				continue;
+			}
+			if (aliado.obtenerPorcentajeDeVida() >= 30){
 				throw new RequisitosDeTransformacionInsuficientes();
 			}
 		}

@@ -21,7 +21,7 @@ public class Personaje {
 	protected int ki;
 	protected Modo modoDePelea;
 	protected HabilidadEspecial habilidad;
-	ArrayList <Personaje> aliados;
+	protected Equipo aliados;
 	private Hashtable <String, Consumible> consumiblesActivos;
 
 	public Personaje(int vida, String nombre, Modo modo){
@@ -33,11 +33,11 @@ public class Personaje {
         this.consumiblesActivos = new  Hashtable <String, Consumible>();
 	}
 	
-	public void agregarAliados(ArrayList <Personaje> aliados){
+	public void agregarAliados(Equipo aliados){
 		this.aliados = aliados;
 	}
 	
-	public ArrayList <Personaje> obtenerAliados(){
+	public Equipo obtenerAliados(){
 		return this.aliados;
 	}
 	

@@ -3,11 +3,14 @@ package fiuba.algo3.ejemplo1.juego;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import fiuba.algo3.ejemplo1.Personaje.Cell;
+import fiuba.algo3.ejemplo1.Personaje.Equipo;
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
 import fiuba.algo3.ejemplo1.Personaje.Gohan;
 import fiuba.algo3.ejemplo1.Personaje.Goku;
 import fiuba.algo3.ejemplo1.Personaje.MajinBoo;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
+import fiuba.algo3.ejemplo1.Personaje.Piccolo;
 import fiuba.algo3.ejemplo1.tablero.Celda;
 import fiuba.algo3.ejemplo1.tablero.Tablero;
 
@@ -30,25 +33,47 @@ public class Juego {
 		Hashtable <Personaje, Celda> personajes = new Hashtable <Personaje, Celda>();
 		Goku goku = new Goku();
 		Gohan gohan = new Gohan();
-		Celda celdaGoku = new Celda(1,5);
-		Celda celdaGohan = new Celda (1,1);
+		Piccolo piccolo = new Piccolo();
+		Equipo equipo = new Equipo();
+		equipo.add(goku);
+		equipo.add(gohan);
+		equipo.add(piccolo);
+		goku.agregarAliados(equipo);
+		gohan.agregarAliados(equipo);
+		piccolo.agregarAliados(equipo);
+		Celda celdaPiccolo = this.tablero.obtenerCelda(1, 10);
+		Celda celdaGoku = this.tablero.obtenerCelda(1, 5);
+		Celda celdaGohan = this.tablero.obtenerCelda(1,1);
 		this.tablero.agregarPersonaje(celdaGoku, goku);
 		this.tablero.agregarPersonaje(celdaGohan, gohan);
+		this.tablero.agregarPersonaje(celdaPiccolo, piccolo);
 		personajes.put(goku, celdaGoku);
 		personajes.put(gohan, celdaGohan);
+		personajes.put(piccolo, celdaPiccolo);
 		return personajes;
 	}
-	
+
 	private Hashtable <Personaje, Celda> inicializarEnemigosDeLaTierra(){
 		Hashtable <Personaje, Celda> personajes = new Hashtable <Personaje, Celda>();
 		Freezer freezer = new Freezer();
 		MajinBoo boo = new MajinBoo();
-		Celda celdaFreezer = new Celda(10,5);
-		Celda celdaBoo = new Celda(10,10);
+		Cell cell = new Cell();
+		Equipo equipo = new Equipo();
+		equipo.add(freezer);
+		equipo.add(cell);
+		equipo.add(boo);
+		freezer.agregarAliados(equipo);
+		cell.agregarAliados(equipo);
+		boo.agregarAliados(equipo);
+		Celda celdaCell = this.tablero.obtenerCelda(10,1);
+		Celda celdaFreezer = this.tablero.obtenerCelda(10,5);
+		Celda celdaBoo = this.tablero.obtenerCelda(10,10);
 		this.tablero.agregarPersonaje(celdaFreezer, freezer);
 		this.tablero.agregarPersonaje(celdaBoo, boo);
+		this.tablero.agregarPersonaje(celdaCell, cell);
 		personajes.put(freezer, celdaFreezer);
 		personajes.put(boo, celdaBoo);
+		personajes.put(cell, celdaCell);
 		return personajes;
 	}
 	

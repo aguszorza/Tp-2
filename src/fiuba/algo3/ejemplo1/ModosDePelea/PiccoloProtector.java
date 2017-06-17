@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.function.Function;
 
 import fiuba.algo3.ejemplo1.Excepciones.RequisitosDeTransformacionInsuficientes;
+import fiuba.algo3.ejemplo1.Personaje.Equipo;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
 import fiuba.algo3.ejemplo1.juego.Ataque;
 
@@ -19,7 +20,7 @@ public class PiccoloProtector extends Modo {
 
 	public void validarTransformacion(Personaje personaje, int costoKi){
 		super.validarTransformacion(personaje, costoKi);
-		ArrayList <Personaje> aliados = personaje.obtenerAliados();
+		Equipo aliados = personaje.obtenerAliados();
 		Iterator <Personaje> it = aliados.iterator();
 		while(it.hasNext()){
 			Personaje aliado = it.next();

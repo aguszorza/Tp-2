@@ -14,6 +14,7 @@ import fiuba.algo3.ejemplo1.Consumibles.NubeVoladora;
 import fiuba.algo3.ejemplo1.Consumibles.SemillaErmitanio;
 import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Excepciones.RequisitosDeTransformacionInsuficientes;
+import fiuba.algo3.ejemplo1.Personaje.Equipo;
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
 import fiuba.algo3.ejemplo1.Personaje.Gohan;
 
@@ -154,7 +155,7 @@ public class PiccoloTest {
 	public void testProtectorLevantaExcepcionSiGohanTieneMasDel20PorcientoDeVida(){
 		Piccolo piccolo = new Piccolo();
 		Gohan gohan = new Gohan();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(gohan);
 		piccolo.agregarAliados(aliado);
 		piccolo.aumentarKi();
@@ -171,7 +172,7 @@ public class PiccoloTest {
 		Piccolo piccolo = new Piccolo();
 		Boolean estado = true;
 		Gohan gohan = new Gohan();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(gohan);
 		piccolo.agregarAliados(aliado);
 		gohan.reducirVida(241);
@@ -192,7 +193,7 @@ public class PiccoloTest {
 		Piccolo piccolo = new Piccolo();
 		piccolo.aumentarKi();
 		Gohan gohan = new Gohan();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(gohan);
 		piccolo.agregarAliados(aliado);
 		gohan.reducirVida(241);

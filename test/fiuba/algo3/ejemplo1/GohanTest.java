@@ -11,6 +11,7 @@ import fiuba.algo3.ejemplo1.Consumibles.NubeVoladora;
 import fiuba.algo3.ejemplo1.Consumibles.SemillaErmitanio;
 import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Excepciones.RequisitosDeTransformacionInsuficientes;
+import fiuba.algo3.ejemplo1.Personaje.Equipo;
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
 import fiuba.algo3.ejemplo1.Personaje.Gohan;
 import fiuba.algo3.ejemplo1.Personaje.Goku;
@@ -23,7 +24,7 @@ public class GohanTest {
 	@Test
 	public void testObtenerNombreDevuelveElNombreCorrecto() {
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		gohan.agregarAliados(aliado);
@@ -33,7 +34,7 @@ public class GohanTest {
 	@Test
 	public void testAumentarKiAumentaEnCincoElKi() {
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		gohan.agregarAliados(aliado);
@@ -46,7 +47,7 @@ public class GohanTest {
 	@Test
 	public void testReducirKiDisminuyeElKiEnElValorPasado() {
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		gohan.agregarAliados(aliado);
@@ -62,7 +63,7 @@ public class GohanTest {
 	@Test
 	public void testReducirVidaDisminuyeLaVidaEnElValorPasado() {
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		gohan.agregarAliados(aliado);
@@ -75,7 +76,7 @@ public class GohanTest {
 	@Test
 	public void testAumentarVidaAumentaLaVidaEnElValorPasadoSiNoSobrepasaLaVidaMaxima() {
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		gohan.agregarAliados(aliado);
@@ -89,7 +90,7 @@ public class GohanTest {
 	@Test
 	public void testAumentarVidaAumentaLaVidaHastaLaVidaMaximaSiElAumentoSobrepasaLaVidaMaxima() {
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		gohan.agregarAliados(aliado);
@@ -101,7 +102,7 @@ public class GohanTest {
 	@Test
 	public void testObtenerVidaDevuelveLaVidaDelPersonaje() {
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		gohan.agregarAliados(aliado);
@@ -111,7 +112,7 @@ public class GohanTest {
 	@Test
 	public void testPoderDePeleaDevuelveElPoderDePeleaDelPersonaje() {
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		gohan.agregarAliados(aliado);
@@ -121,7 +122,7 @@ public class GohanTest {
 	@Test
 	public void testDistanciaDeAtaqueDevuelveLaDistanciaDeAtaqueDelPersonaje() {
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		gohan.agregarAliados(aliado);
@@ -131,7 +132,7 @@ public class GohanTest {
 	@Test
 	public void testVelocidadDevuelveLaVelocidadDelPersonaje() {
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		gohan.agregarAliados(aliado);
@@ -141,7 +142,7 @@ public class GohanTest {
 	@Test(expected = KiInsuficiente.class)
 	public void testSuperSaiyajinLevantaExcepcionSiNoSeTieneElKiSuficinte(){
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		gohan.agregarAliados(aliado);
@@ -152,7 +153,7 @@ public class GohanTest {
 	@Test
 	public void testSuperSaiyajinCambiaElPoderDePelea(){
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		gohan.agregarAliados(aliado);
@@ -165,7 +166,7 @@ public class GohanTest {
 	@Test
 	public void testSuperSaiyajinCambiaLaDistanciaDeAtaque(){
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		gohan.agregarAliados(aliado);
@@ -178,7 +179,7 @@ public class GohanTest {
 	@Test
 	public void testSuperSaiyajinCambiaLaVelocidad(){
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		gohan.agregarAliados(aliado);
@@ -191,7 +192,7 @@ public class GohanTest {
 	@Test
 	public void testSuperSaiyajinReduceElKi(){
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		gohan.agregarAliados(aliado);
@@ -207,7 +208,7 @@ public class GohanTest {
 	@Test(expected = RequisitosDeTransformacionInsuficientes.class)
 	public void testSuperSaiyajin2LevantaExcepcionSiSusAliadosTienenMasDel30PorcientoDeVida(){
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		gohan.agregarAliados(aliado);
@@ -222,7 +223,7 @@ public class GohanTest {
 	@Test(expected = KiInsuficiente.class)
 	public void testSuperSaiyajin2LevantaExcepcionSiNoTieneElKiNecesario(){
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		gohan.agregarAliados(aliado);
@@ -237,7 +238,7 @@ public class GohanTest {
 	@Test
 	public void testSuperSaiyajin2AumentaLosStats(){
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		gohan.agregarAliados(aliado);
@@ -257,7 +258,7 @@ public class GohanTest {
 	@Test
 	public void testSuperSaiyajin2DisminuyeElKi(){
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		gohan.agregarAliados(aliado);
@@ -275,7 +276,7 @@ public class GohanTest {
 	@Test
 	public void testAtacarReduceLaVidaDelEnemigo(){
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		aliado.add(freezer);
@@ -293,7 +294,7 @@ public class GohanTest {
 	@Test
 	public void testAtacarHaceMenosDanioSiElPoderDeAtaqueDelEnemigoEsMayor(){
 		Freezer freezer = new Freezer();
-		ArrayList <Personaje> aliado = new ArrayList <Personaje>();
+		Equipo aliado = new Equipo();
 		aliado.add(freezer);
 		Gohan gohan = new Gohan();
 		aliado.add(freezer);
