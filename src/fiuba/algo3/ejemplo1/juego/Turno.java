@@ -3,6 +3,7 @@ package fiuba.algo3.ejemplo1.juego;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import fiuba.algo3.ejemplo1.Excepciones.PersonajeNoMovilizable;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
 import fiuba.algo3.ejemplo1.tablero.Celda;
 
@@ -17,8 +18,16 @@ public class Turno {
 	public Turno(Jugador jugador1, Jugador jugador2){
 		this.cola = new LinkedList<Jugador> ();
 		this.cola.add(jugador1);
-		this.cola.add(jugador1);
+		this.cola.add(jugador2);
 		inicializarTurno();
+	}
+	
+	private void guardarAleatoriamente(){
+		
+	}
+	
+	public Jugador obtenerJugador(){
+		return this.cola.element();
 	}
 	
 	private void inicializarTurno(){
@@ -43,12 +52,15 @@ public class Turno {
 	
 	public void mover(Personaje personaje, Celda celdaFinal){
 		if(this.personajeEnMovimiento != null && personaje != this.personajeEnMovimiento){
-			//excepcion
+			throw new PersonajeNoMovilizable();
 		}
-		this.cola.element().mover(personaje, celdaFinal);
 		if (this.personajeEnMovimiento == null){
 			this.personajeEnMovimiento = personaje;
 		}
+		if (this.movimientos >= this.personajeEnMovimiento.obtenerVelocidad()){
+			throw new PersonajeNoMovilizable();
+		}
+		this.cola.element().mover(personaje, celdaFinal);
 		this.movimientos ++;
 		terminoTurno();
 	}

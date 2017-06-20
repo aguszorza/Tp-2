@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.layout.GridPane;
 
 public class botonCasilla implements EventHandler<ActionEvent>{

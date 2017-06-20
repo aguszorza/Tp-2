@@ -17,7 +17,7 @@ import fiuba.algo3.ejemplo1.tablero.Tablero;
 
 public class Juego {
 	
-	public static final int TAMANIO_TABLERO = 10;
+	public static final int TAMANIO_TABLERO = 9;
 	private Jugador guerreroZ;
 	private Jugador enemigoTierra;
 	private Tablero tablero;
@@ -25,8 +25,10 @@ public class Juego {
 	
 	public Juego(){
 		this.tablero = new Tablero(TAMANIO_TABLERO);
-		this.guerreroZ = new Jugador(inicializarGuerrerosZ());
-		this.enemigoTierra = new Jugador(inicializarEnemigosDeLaTierra());
+		Hashtable <Personaje, Celda> guerrerosZ = inicializarGuerrerosZ();
+		Hashtable <Personaje, Celda> enemigos = inicializarEnemigosDeLaTierra();
+		this.guerreroZ = new Jugador(guerrerosZ, enemigos, tablero);
+		this.enemigoTierra = new Jugador(enemigos, guerrerosZ, tablero);
 	}
 	
 	private Hashtable <Personaje, Celda> inicializarGuerrerosZ(){
@@ -41,7 +43,7 @@ public class Juego {
 		goku.agregarAliados(equipo);
 		gohan.agregarAliados(equipo);
 		piccolo.agregarAliados(equipo);
-		Celda celdaPiccolo = this.tablero.obtenerCelda(1, 10);
+		Celda celdaPiccolo = this.tablero.obtenerCelda(1, 9);
 		Celda celdaGoku = this.tablero.obtenerCelda(1, 5);
 		Celda celdaGohan = this.tablero.obtenerCelda(1,1);
 		this.tablero.agregarPersonaje(celdaGoku, goku);
@@ -65,9 +67,9 @@ public class Juego {
 		freezer.agregarAliados(equipo);
 		cell.agregarAliados(equipo);
 		boo.agregarAliados(equipo);
-		Celda celdaCell = this.tablero.obtenerCelda(10,1);
-		Celda celdaFreezer = this.tablero.obtenerCelda(10,5);
-		Celda celdaBoo = this.tablero.obtenerCelda(10,10);
+		Celda celdaCell = this.tablero.obtenerCelda(9,1);
+		Celda celdaFreezer = this.tablero.obtenerCelda(9,5);
+		Celda celdaBoo = this.tablero.obtenerCelda(9,9);
 		this.tablero.agregarPersonaje(celdaFreezer, freezer);
 		this.tablero.agregarPersonaje(celdaBoo, boo);
 		this.tablero.agregarPersonaje(celdaCell, cell);
@@ -77,7 +79,7 @@ public class Juego {
 		return personajes;
 	}
 	
-	public void jugar(){
+	/*public void jugar(){
 		//ArrayList <Jugador> jugadores = new ArrayList <Jugador>();
 		//jugadores.add(this.guerreroZ);
 		//jugadores.add(this.enemigoTierra);
@@ -88,5 +90,17 @@ public class Juego {
 			primero.jugar();
 			segundo.jugar();
 		}
+	}*/
+	
+	public Tablero obtenerTablero(){
+		return this.tablero;
+	}
+	
+	public Jugador obtenerGuerrerosZ(){
+		return this.guerreroZ;
+	}
+	
+	public Jugador obtenerEnemigos(){
+		return this.enemigoTierra;
 	}
 }

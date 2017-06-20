@@ -15,6 +15,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
@@ -106,6 +107,11 @@ public class VistaTablero extends Application{
 				toggle.actualizarImagen();
 			}
 		}
+		//Button boton = new Button();
+		//casilla.add(boton,3,1);
+		//boton.setMinSize(70, 70);
+		//boton.setVisible(false);
+		//boton.setBlendMode(BlendMode.BLUE);
 		stage.setScene(scene);
 		stage.show();
 	}

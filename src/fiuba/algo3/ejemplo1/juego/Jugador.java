@@ -17,9 +17,10 @@ public class Jugador {
 	private Tablero tablero;
 	private ControladorJugador controlador;
 	
-	public Jugador(Hashtable <Personaje, Celda> personajes,  Hashtable <Personaje, Celda> enemigos){
+	public Jugador(Hashtable <Personaje, Celda> personajes,  Hashtable <Personaje, Celda> enemigos, Tablero tablero){
 		this.personajes = personajes;
 		this.enemigos = enemigos;
+		this.tablero = tablero;
 	}
 	
 	public Enumeration<Personaje> obtenerPersonajesAliados(){
@@ -56,7 +57,9 @@ public class Jugador {
 	}
 	
 	public void mover(Personaje personaje, Celda celdaFinal){
-		this.existePersonaje(personaje);
+		if(!this.existePersonaje(personaje)){
+			throw new PersonajeInexistente();
+		}
 		Celda celdaAct = this.obtenerCelda(personaje);
 		this.tablero.moverPersonaje(personaje, celdaAct, celdaFinal);
 		this.personajes.put(personaje, celdaFinal);
