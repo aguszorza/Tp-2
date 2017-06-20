@@ -25,6 +25,7 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 	private Button botonArriba;
 	private Button botonAbajo;
 	private Button botonCancelar;
+	private Button botonAtacar;
 	
 	
 	public botonCasilla(Turno turno, Celda celda, GridPane grid){
@@ -36,20 +37,23 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 		this.botonAbajo = new Button("Abajo");
 		this.botonArriba = new Button("Arriba");
 		this.botonCancelar = new Button("Cancelar");
+		this.botonAtacar = new Button ("Atacar");
 	}
 	
 	@Override
 	public void handle(ActionEvent actionEvent) {
-		this.grid.add(botonDerecha, 3, 1);
-		this.grid.add(botonIzquierda, 4, 1);
-		this.grid.add(botonAbajo, 5, 1);
-		this.grid.add(botonArriba, 2, 1);
-		this.grid.add(botonCancelar, 6, 1);
-		this.setearAccionBoton(botonDerecha,1,0);
-		this.setearAccionBoton(botonIzquierda,-1,0);
-		this.setearAccionBoton(botonArriba,0,-1);
-		this.setearAccionBoton(botonAbajo,0,1);
-		this.setearBotonCancelar(botonCancelar);
+		if (!this.celda.estaVacia()){
+			this.grid.add(botonDerecha, 3, 1);
+			this.grid.add(botonIzquierda, 4, 1);
+			this.grid.add(botonAbajo, 5, 1);
+			this.grid.add(botonArriba, 2, 1);
+			this.grid.add(botonCancelar, 6, 1);
+			this.setearAccionBoton(botonDerecha,1,0);
+			this.setearAccionBoton(botonIzquierda,-1,0);
+			this.setearAccionBoton(botonArriba,0,-1);
+			this.setearAccionBoton(botonAbajo,0,1);
+			this.setearBotonCancelar(botonCancelar);
+		}
 	}
 	//Button botonDerecha, Button botonIzquierda, Button botonArriba, Button botonAbajo
 	private void limpiarBotones() {
