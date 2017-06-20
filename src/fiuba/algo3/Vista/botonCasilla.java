@@ -14,40 +14,62 @@ import javafx.scene.effect.BlendMode;
 import javafx.scene.layout.GridPane;
 
 public class botonCasilla implements EventHandler<ActionEvent>{
-
 	private Tablero tablero;
 	private Celda celda;
 	private GridPane grid;
+	private Button botonDerecha;
+	private Button botonIzquierda;
+	private Button botonArriba;
+	private Button botonAbajo;
+	
 	
 	public botonCasilla(Tablero tablero, Celda celda, GridPane grid){
 		this.tablero = tablero;
 		this.celda = celda;
 		this.grid = grid;
+		this.botonDerecha = new Button("Derecha");
+		this.botonIzquierda = new Button("Izquierda");
+		this.botonAbajo = new Button("Abajo");
+		this.botonArriba = new Button("Arriba");
 	}
 	
 	@Override
 	public void handle(ActionEvent actionEvent) {
-		Button boton = new Button("Derecha");
-		this.grid.add(boton, 3, 1);
+		this.grid.add(botonDerecha, 3, 1);
+		this.grid.add(botonIzquierda, 4, 1);
+		this.grid.add(botonAbajo, 5, 1);
+		this.grid.add(botonArriba, 2, 1);
+		this.setearAccionBoton(botonDerecha,1,0);
+		this.setearAccionBoton(botonIzquierda,-1,0);
+		this.setearAccionBoton(botonArriba,0,-1);
+		this.setearAccionBoton(botonAbajo,0,1);
+	}
+	
+	private void limpiarBotones(Button botonDerecha, Button botonIzquierda, Button botonArriba, Button botonAbajo) {
+		grid.getChildren().remove(botonDerecha);
+		grid.getChildren().remove(botonIzquierda);
+		grid.getChildren().remove(botonArriba);
+		grid.getChildren().remove(botonAbajo);
+		
+	}
+
+	void setearAccionBoton(Button boton, int x, int y){
 		boton.setOnAction(value->{
 			int fila = this.celda.obtenerFila();
 			int columna = this.celda.obtenerColumna();
 			try{
-				Celda celdaFinal = new Celda(fila, columna + 1);
+				Celda celdaFinal = new Celda(fila  + y , columna + x);
 				this.tablero.moverPersonaje(this.celda.obtenerPersonaje(), this.celda, celdaFinal);
-				//ToggleButton toggleinicio = (ToggleButton) ((GridPane)grid.getChildren().get(0)).getChildren().get(5*(fila-1)+columna-1);
-				//ToggleButton togglefin = (ToggleButton) ((GridPane)grid.getChildren().get(0)).getChildren().get(5*(fila-1)+columna);
-				//togglefin.setGraphic(toggleinicio.getGraphic());
-				//toggleinicio.setGraphic(null);
 			}
 			catch (PosicionFueraDelTablero e){
 				System.out.println("No se puede mover");
 			}
-			//this.grid.row
-			grid.getChildren().remove(boton);
+			this.limpiarBotones(botonDerecha,botonIzquierda,botonArriba,botonAbajo);
 			this.actualizarVista();
 		});
+		
 	}
+	
 	
 	public void actualizarVista(){
 		Iterator <Node> iter = ((GridPane)this.grid.getChildren().get(0)).getChildren().iterator();
