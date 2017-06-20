@@ -17,6 +17,7 @@ public class FabricaDeModos {
 		{return fabrica.gokuKaioKen();};
 		Ataque ataque = new Ataque(20, 2);
 		Modo goku = new Modo (ataque, 2, 0, transformacion);
+		goku.guardarDireccion("file:src/fiuba/algo3/Imagenes/Goku_normal.png");
 		return goku;
 	}
 	
@@ -26,6 +27,7 @@ public class FabricaDeModos {
 		{return fabrica.gokuSuperSaiyajin();};
 		Ataque ataque = new Ataque(40, 4);
 		Modo kaioKen = new Modo (ataque, 3, 20, transformacion);
+		kaioKen.guardarDireccion("file:src/fiuba/algo3/Imagenes/Goku_kaioken.png");
 		return kaioKen;
 	}
 	
@@ -35,6 +37,7 @@ public class FabricaDeModos {
 		{return fabrica.transformacionInvalida();};
 		Ataque ataque = new Ataque(60, 4);
 		Modo superSaiyajin = new Modo (ataque, 5, 50, transformacion);
+		superSaiyajin.guardarDireccion("file:src/fiuba/algo3/Imagenes/Goku_ssj.png");
 		return superSaiyajin;
 	}
 	
@@ -44,6 +47,7 @@ public class FabricaDeModos {
 		{return fabrica.gohanSuperSaiyajin();};
 		Ataque ataque = new Ataque(15, 2);
 		Modo gohan = new Modo (ataque, 2, 0, transformacion);
+		gohan.guardarDireccion("file:src/fiuba/algo3/Imagenes/Gohan.png");
 		return gohan;
 	}
 	
@@ -53,6 +57,7 @@ public class FabricaDeModos {
 		{return fabrica.gohanSuperSaiyajin2();};
 		Ataque ataque = new Ataque(30, 2);
 		Modo superSaiyajin = new Modo (ataque, 2, 10, transformacion);
+		superSaiyajin.guardarDireccion("file:src/fiuba/algo3/Imagenes/Gohan_SSJ.png");
 		return superSaiyajin;
 	}
 	
@@ -68,6 +73,7 @@ public class FabricaDeModos {
 		{return fabrica.piccoloFortalecido();};
 		Ataque ataque = new Ataque(20, 2);
 		Modo piccolo = new Modo (ataque, 2, 0, transformacion);
+		piccolo.guardarDireccion("file:src/fiuba/algo3/Imagenes/Piccolo.png");
 		return piccolo;
 	}
 	
@@ -77,6 +83,7 @@ public class FabricaDeModos {
 		{return fabrica.piccoloProtector();};
 		Ataque ataque = new Ataque(40, 4);
 		Modo piccolo = new Modo (ataque, 3, 20, transformacion);
+		piccolo.guardarDireccion("file:src/fiuba/algo3/Imagenes/Piccolo_fortalecido.png");
 		return piccolo;
 	}
 	
@@ -92,6 +99,7 @@ public class FabricaDeModos {
 		{return fabrica.cellSemiPerfecto();};
 		Ataque ataque = new Ataque(20, 3);
 		Modo cell = new Modo (ataque, 2, 0, transformacion);
+		cell.guardarDireccion("file:src/fiuba/algo3/Imagenes/cell.png");
 		return cell;
 	}
 	
@@ -113,6 +121,7 @@ public class FabricaDeModos {
 		{return fabrica.freezerSegundaForma();};
 		Ataque ataque = new Ataque(20, 2);
 		Modo freezer = new Modo (ataque, 4, 0, transformacion);
+		freezer.guardarDireccion("file:src/fiuba/algo3/Imagenes/Freezer.png");
 		return freezer;
 	}
 	
@@ -122,6 +131,7 @@ public class FabricaDeModos {
 		{return fabrica.freezerDefinitivo();};
 		Ataque ataque = new Ataque(40, 3);
 		Modo freezer = new Modo (ataque, 4, 20, transformacion);
+		freezer.guardarDireccion("file:src/fiuba/algo3/Imagenes/Freezer_segunda_forma.png");
 		return freezer;
 	}
 	
@@ -131,6 +141,7 @@ public class FabricaDeModos {
 		{return fabrica.transformacionInvalida();};
 		Ataque ataque = new Ataque(50, 3);
 		Modo freezer = new Modo (ataque, 6, 50, transformacion);
+		freezer.guardarDireccion("file:src/fiuba/algo3/Imagenes/Freezer_Definitivo.png");
 		return freezer;
 	}
 	
@@ -140,6 +151,7 @@ public class FabricaDeModos {
 		{return fabrica.majinBooMalo();};
 		Ataque ataque = new Ataque(30, 2);
 		Modo majin = new Modo (ataque, 2, 0, transformacion);
+		majin.guardarDireccion("file:src/fiuba/algo3/Imagenes/majin_boo.png");
 		return majin;
 	}
 	
@@ -149,6 +161,7 @@ public class FabricaDeModos {
 		{return fabrica.majinBooOriginal();};
 		Ataque ataque = new Ataque(50, 2);
 		Modo majin = new Modo (ataque, 3, 20, transformacion);
+		majin.guardarDireccion("file:src/fiuba/algo3/Imagenes/majin_boo_malo.png");
 		return majin;
 	}
 	
@@ -158,6 +171,7 @@ public class FabricaDeModos {
 		{return fabrica.transformacionInvalida();};
 		Ataque ataque = new Ataque(60, 3);
 		Modo majin = new Modo (ataque, 4, 50, transformacion);
+		majin.guardarDireccion("file:src/fiuba/algo3/Imagenes/majin_boo_original.png");
 		return majin;
 	}
 	

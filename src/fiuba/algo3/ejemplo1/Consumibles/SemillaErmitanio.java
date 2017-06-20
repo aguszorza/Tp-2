@@ -10,6 +10,7 @@ public class SemillaErmitanio extends Consumible {
 
     public SemillaErmitanio() {
         super(DURACION, "Semilla del ermitanio");
+        this.guardarDireccion("file:src/fiuba/algo3/Imagenes/semilla.png");
     }
 
     @Override

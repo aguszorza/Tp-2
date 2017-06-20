@@ -16,6 +16,7 @@ public class GohanSSJ2 extends Modo {
 
 	public GohanSSJ2(){
 		super(new Ataque(100, 4), 3, 30, transformacion);
+		this.guardarDireccion("file:src/fiuba/algo3/Imagenes/Gohan_SSJ2.png");
 	}
 	
 	public void validarTransformacion(Personaje personaje, int costoKi){

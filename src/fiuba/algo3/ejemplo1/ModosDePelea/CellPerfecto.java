@@ -17,6 +17,7 @@ public class CellPerfecto extends Modo{
 	public CellPerfecto(){
 		super(new Ataque(80, 4), 4, 0, transformacion);
 		this.costoAbsorciones = 8;
+		this.guardarDireccion("file:src/fiuba/algo3/Imagenes/Cell_Perfecto.png");
 	}
 	
 	/*public int obtenerCostoAbsorciones(){

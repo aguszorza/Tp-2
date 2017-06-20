@@ -8,6 +8,7 @@ public abstract class Consumible {
     private int duracionTotalEfecto;
     protected int duracionRestante;
     protected String nombre;
+    protected String direccionImagen;
 
     public Consumible(int duracionEfecto, String nombre) {
         this.duracionTotalEfecto = duracionEfecto;
@@ -21,6 +22,14 @@ public abstract class Consumible {
     public abstract void desafectar(Personaje personaje);
     public abstract void desafectar(Modo modo);
    
+    public void guardarDireccion(String direccion){
+		this.direccionImagen = direccion;
+	}
+    
+    public String obtenerImagen(){
+		return this.direccionImagen;
+	}
+    
     public String obtenerNombre(){
     	return this.nombre;
     }

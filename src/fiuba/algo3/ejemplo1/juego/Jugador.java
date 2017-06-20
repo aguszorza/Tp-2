@@ -17,8 +17,9 @@ public class Jugador {
 	private Tablero tablero;
 	private ControladorJugador controlador;
 	
-	public Jugador(Hashtable <Personaje, Celda> personajes){
+	public Jugador(Hashtable <Personaje, Celda> personajes,  Hashtable <Personaje, Celda> enemigos){
 		this.personajes = personajes;
+		this.enemigos = enemigos;
 	}
 	
 	public Enumeration<Personaje> obtenerPersonajesAliados(){
@@ -48,8 +49,36 @@ public class Jugador {
 	}
 	//ver de unir las dos. Ya sea usando una funcion o bien uniendo ataque con habilidad
 	
+	public void aumentarKi(){
+		Enumeration<Personaje> personajes = this.obtenerPersonajesAliados();
+		while(personajes.hasMoreElements())
+			personajes.nextElement().aumentarKi();
+	}
+	
+	public void mover(Personaje personaje, Celda celdaFinal){
+		this.existePersonaje(personaje);
+		Celda celdaAct = this.obtenerCelda(personaje);
+		this.tablero.moverPersonaje(personaje, celdaAct, celdaFinal);
+		this.personajes.put(personaje, celdaFinal);
+	}
+	
+	public void atacar(Personaje personaje, Personaje enemigo){
+		if (enemigo == null)
+			//excepcion
+		this.verificarAtaque(personaje, enemigo);
+		//Personaje enemigo = celdaEnemigo.obtenerPersonaje();
+		Celda celdaPersonaje = this.personajes.get(personaje);
+		Celda celdaEnemigo = this.enemigos.get(enemigo);
+		this.tablero.verificarAtaque(personaje.obtenerDistanciaDeAtaque(), celdaPersonaje, celdaEnemigo);
+		personaje.atacar(enemigo);
+	}
+	
 	public void lanzarHablidadEspecial(Personaje atacante, Personaje atacado){
+		if (atacado == null)
 		verificarAtaque(atacante,atacado);
+		Celda celdaPersonaje = this.personajes.get(atacante);
+		Celda celdaEnemigo = this.enemigos.get(atacado);
+		this.tablero.verificarAtaque(atacante.obtenerDistanciaDeAtaque(), celdaPersonaje, celdaEnemigo);
 		atacante.lanzarHabilidadEspecial(atacado);
 	}
 	

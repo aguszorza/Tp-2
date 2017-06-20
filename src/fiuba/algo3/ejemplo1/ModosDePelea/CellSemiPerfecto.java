@@ -17,6 +17,7 @@ public class CellSemiPerfecto extends Modo{
 	public CellSemiPerfecto(){
 		super(new Ataque(40, 4), 3, 0, transformacion);
 		this.costoAbsorciones = 4;
+		this.guardarDireccion("file:src/fiuba/algo3/Imagenes/cellSemi.png");
 	}
 	
 	public void validarTransformacion(Personaje personaje, int costoKi){

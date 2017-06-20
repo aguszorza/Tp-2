@@ -48,12 +48,12 @@ public class Tablero {
 		}
 	}
 	
-	private void comprobarNuevaPosicion(Celda celda){
+	private void comprobarNuevaPosicion(int fila, int columna){
 		// como es un tablero cuadrado, verifico que ambos numeros sean clave del tablero 
-		if(!this.filas.containsKey(celda.obtenerFila()) || !this.filas.containsKey(celda.obtenerColumna())){
+		if(!this.filas.containsKey(fila) || !this.filas.containsKey(columna)){
 			throw new PosicionFueraDelTablero();
 		}
-		if(!celda.estaVacia()){
+		if(!this.filas.get(fila).obtenerCelda(columna).estaVacia()){
 			throw new CeldaOcupada();
 		}
 	}
@@ -84,9 +84,12 @@ public class Tablero {
 	}
 	
 	public void moverPersonaje(Personaje personaje, Celda celdaAct, Celda celdaFin){
-		comprobarNuevaPosicion (celdaFin); // verifica que sea parte del tablero y que no haya un personaje
+		int filaFinal = celdaFin.obtenerFila();
+		int colFinal = celdaFin.obtenerColumna();
+		comprobarNuevaPosicion (filaFinal, colFinal); // verifica que sea parte del tablero y que no haya un personaje
+		//Celda celdaFin = this.obtenerCelda(filaFinal, colFinal);
 		this.comprobarAdyacencia(celdaAct, celdaFin);
 		celdaAct.removerPersonaje();
-		celdaFin.agregarPersonaje(personaje);
+		this.obtenerCelda(filaFinal, colFinal).agregarPersonaje(personaje);
 	}
 }

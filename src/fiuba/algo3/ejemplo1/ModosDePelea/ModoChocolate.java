@@ -15,6 +15,7 @@ public class ModoChocolate extends Modo{
 		this.modoAnterior = modoAnterior;
 		//this.turnos = turnos;
 		this.cantidadDeTurnosRestantes = turnos;
+		this.guardarDireccion("file:src/fiuba/algo3/Imagenes/chocolate.png");
 	}
 	
 	public int aumentarKi(){

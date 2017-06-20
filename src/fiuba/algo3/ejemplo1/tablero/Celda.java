@@ -17,6 +17,14 @@ public class Celda {
 		this.consumible = null;
 	}
 	
+	public String obtenerImagen(){
+		if(!this.estaVacia())
+			return this.personaje.obtenerImagen();
+		if(this.hayConsumible())
+			return this.consumible.obtenerImagen();
+		return "file:";
+	}
+	
 	private Boolean hayConsumible(){
 		return this.consumible != null;
 	}

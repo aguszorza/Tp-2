@@ -73,8 +73,8 @@ public class TableroTest {
 		Tablero tablero = new Tablero(10);
 		Goku personaje = new Goku();
 		Celda celdaInicial = tablero.obtenerCelda(3, 6);
-		Celda celdaFinal = tablero.obtenerCelda(4, 6);
 		tablero.agregarPersonaje(celdaInicial, personaje);
+		Celda celdaFinal = tablero.obtenerCelda(4, 6);
 		tablero.moverPersonaje(personaje, celdaInicial, celdaFinal);
 		Assert.assertEquals("No movio el personaje", personaje, celdaFinal.obtenerPersonaje());
 	}
@@ -84,8 +84,8 @@ public class TableroTest {
 		Tablero tablero = new Tablero(10);
 		Goku personaje = new Goku();
 		Celda celdaInicial = tablero.obtenerCelda(10, 7);
-		Celda celdaFinal = new Celda(11,7);
 		tablero.agregarPersonaje(celdaInicial,personaje);
+		Celda celdaFinal = new Celda(11,7);
 		tablero.moverPersonaje(personaje, celdaInicial, celdaFinal);
 		Assert.fail("No levanto excepcion");
 	}
@@ -112,6 +112,7 @@ public class TableroTest {
 		Celda celdaFinal = tablero.obtenerCelda(2, 1);
 		tablero.agregarPersonaje(celdaInicial,personaje);
 		tablero.moverPersonaje(personaje, celdaInicial, celdaFinal);
+		
 		Assert.fail("No levanto excepcion");
 	}
 }

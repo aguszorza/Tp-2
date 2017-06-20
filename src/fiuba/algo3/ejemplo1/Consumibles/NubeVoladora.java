@@ -10,6 +10,7 @@ public class NubeVoladora extends Consumible {
 
     public NubeVoladora() {
         super(DURACION, "Nube voladora");
+        this.guardarDireccion("file:src/fiuba/algo3/Imagenes/nube_voladora.png");
     }
 
 

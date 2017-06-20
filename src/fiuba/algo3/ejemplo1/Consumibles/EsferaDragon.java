@@ -10,6 +10,7 @@ public class EsferaDragon extends Consumible {
 
     public EsferaDragon() {
         super(DURACION, "Esfera del dragon");
+        this.guardarDireccion("file:src/fiuba/algo3/Imagenes/esfera_del_dragon.png");
     }
 
     @Override

@@ -23,6 +23,7 @@ public class Modo {
 	protected int velocidad;
 	protected int cantidadDeTurnosRestantes;
 	protected Function <FabricaDeModos, Modo> nuevaTransformacion;
+	protected String direccionImagen;
 
 	public Modo(Ataque ataque, int velocidad, int costoDeKi,  Function <FabricaDeModos, Modo> funcion){
 		this.ataque = ataque;
@@ -34,6 +35,14 @@ public class Modo {
 		this.danioAdicional = this.velocidadAdicional = 1;
 		this.nuevaTransformacion = funcion;
 		cantidadDeTurnosRestantes = 0;
+	}
+	
+	public void guardarDireccion(String direccion){
+		this.direccionImagen = direccion;
+	}
+	
+	public String obtenerImagen(){
+		return this.direccionImagen;
 	}
 	
 	public int aumentarKi(){

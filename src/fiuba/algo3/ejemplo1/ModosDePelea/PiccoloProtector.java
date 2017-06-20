@@ -16,6 +16,7 @@ public class PiccoloProtector extends Modo {
 	
 	public PiccoloProtector(){
 		super(new Ataque(60, 6), 4, 0, transformacion);
+		this.guardarDireccion("file:src/fiuba/algo3/Imagenes/Piccolo.png");
 	}
 
 	public void validarTransformacion(Personaje personaje, int costoKi){

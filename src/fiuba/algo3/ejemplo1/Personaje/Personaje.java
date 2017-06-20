@@ -33,6 +33,10 @@ public class Personaje {
         this.consumiblesActivos = new  Hashtable <String, Consumible>();
 	}
 	
+	public String obtenerImagen(){
+		return this.modoDePelea.obtenerImagen();
+	}
+	
 	public void agregarAliados(Equipo aliados){
 		this.aliados = aliados;
 	}
