@@ -1,5 +1,7 @@
 package fiuba.algo3.Vista;
 
+import java.io.File;
+
 import fiuba.algo3.ejemplo1.juego.Juego;
 import fiuba.algo3.ejemplo1.juego.Jugador;
 import fiuba.algo3.ejemplo1.juego.Turno;
@@ -13,10 +15,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 public class Aplicacion  extends Application{
 
+	static MediaPlayer mediaPlayer;
+	
 	public static void main(String[] args) {
         launch(args);
     }
@@ -55,8 +61,17 @@ public class Aplicacion  extends Application{
 				toggle.actualizarImagen();
 			}
 		}
+		stage.setFullScreen(true);
+		Aplicacion.reproducirMusica();
 		stage.setScene(scene);
 		stage.show();
-
+	}
+	
+	public static void reproducirMusica(){
+		String path = new File("src/fiuba/algo3/Musica/Pelea.mp3").getAbsolutePath();
+		Media musicFile = new Media(new File(path).toURI().toString());
+		mediaPlayer = new MediaPlayer(musicFile);
+		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+		mediaPlayer.setAutoPlay(true);
 	}
 }
