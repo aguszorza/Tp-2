@@ -19,7 +19,7 @@ import fiuba.algo3.ejemplo1.tablero.Tablero;
 import junit.framework.Assert;
 
 public class TurnoTest {
-
+	
 	@Test
 	public void testMoverPersonajeLoMueveSiEsSuTurnoYEsSuyo() {
 		Juego juego = new Juego();
@@ -27,6 +27,8 @@ public class TurnoTest {
 		Jugador enemigos = juego.obtenerEnemigos();
 		Tablero tablero = juego.obtenerTablero(); 
 		Turno turno = new Turno(guerreros, enemigos);
+		if(turno.obtenerJugador() != guerreros)
+			turno.pasarTurno();
 		Personaje goku = tablero.obtenerCelda(1, 5).obtenerPersonaje();
 		Celda celdaFinal = tablero.obtenerCelda(1, 6);
 		turno.mover(goku, celdaFinal);
@@ -40,6 +42,8 @@ public class TurnoTest {
 		Jugador enemigos = juego.obtenerEnemigos();
 		Tablero tablero = juego.obtenerTablero(); 
 		Turno turno = new Turno(guerreros, enemigos);
+		if(turno.obtenerJugador() != guerreros)
+			turno.pasarTurno();
 		Personaje freezer = tablero.obtenerCelda(9, 5).obtenerPersonaje();
 		Celda celdaFinal = tablero.obtenerCelda(9, 6);
 		turno.mover(freezer, celdaFinal);
@@ -53,6 +57,8 @@ public class TurnoTest {
 		Jugador enemigos = juego.obtenerEnemigos();
 		Tablero tablero = juego.obtenerTablero(); 
 		Turno turno = new Turno(guerreros, enemigos);
+		if(turno.obtenerJugador() != guerreros)
+			turno.pasarTurno();
 		Personaje freezer = tablero.obtenerCelda(9, 5).obtenerPersonaje();
 		Celda celdaFinal = tablero.obtenerCelda(9, 6);
 		turno.pasarTurno();
@@ -67,6 +73,8 @@ public class TurnoTest {
 		Jugador enemigos = juego.obtenerEnemigos();
 		Tablero tablero = juego.obtenerTablero(); 
 		Turno turno = new Turno(guerreros, enemigos);
+		if(turno.obtenerJugador() != guerreros)
+			turno.pasarTurno();
 		Personaje goku = tablero.obtenerCelda(1, 5).obtenerPersonaje();
 		Celda celdaFinal = tablero.obtenerCelda(1, 6);
 		turno.pasarTurno();
@@ -81,6 +89,8 @@ public class TurnoTest {
 		Jugador enemigos = juego.obtenerEnemigos();
 		Tablero tablero = juego.obtenerTablero(); 
 		Turno turno = new Turno(guerreros, enemigos);
+		if(turno.obtenerJugador() != guerreros)
+			turno.pasarTurno();
 		Personaje piccolo =  tablero.obtenerCelda(1, 9).obtenerPersonaje();
 		Celda celdaPiccolo = tablero.obtenerCelda(1, 8);
 		Personaje goku = tablero.obtenerCelda(1, 5).obtenerPersonaje();
@@ -97,6 +107,8 @@ public class TurnoTest {
 		Jugador enemigos = juego.obtenerEnemigos();
 		Tablero tablero = juego.obtenerTablero(); 
 		Turno turno = new Turno(guerreros, enemigos);
+		if(turno.obtenerJugador() != guerreros)
+			turno.pasarTurno();
 		Personaje goku = tablero.obtenerCelda(1, 5).obtenerPersonaje();
 		Celda celdaFinal = tablero.obtenerCelda(1, 6);
 		turno.mover(goku, celdaFinal);
@@ -114,12 +126,13 @@ public class TurnoTest {
 		Jugador enemigos = juego.obtenerEnemigos();
 		Tablero tablero = juego.obtenerTablero(); 
 		Turno turno = new Turno(guerreros, enemigos);
+		if(turno.obtenerJugador() != guerreros)
+			turno.pasarTurno();
 		Personaje goku = tablero.obtenerCelda(1, 5).obtenerPersonaje();
 		Celda celdaFinal = tablero.obtenerCelda(1, 6);
 		turno.mover(goku, celdaFinal);
 		celdaFinal = tablero.obtenerCelda(1, 7);
 		turno.mover(goku, celdaFinal);
 		Assert.assertEquals("No paso: ", goku, tablero.obtenerCelda(1, 7).obtenerPersonaje());
-	}
-	
+	}	
 }

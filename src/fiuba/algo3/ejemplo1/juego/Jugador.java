@@ -16,11 +16,17 @@ public class Jugador {
 	private Hashtable <Personaje, Celda> enemigos;
 	private Tablero tablero;
 	private ControladorJugador controlador;
+	private String nombre;
 	
-	public Jugador(Hashtable <Personaje, Celda> personajes,  Hashtable <Personaje, Celda> enemigos, Tablero tablero){
+	public Jugador(Hashtable <Personaje, Celda> personajes,  Hashtable <Personaje, Celda> enemigos, Tablero tablero, String nombre){
 		this.personajes = personajes;
 		this.enemigos = enemigos;
 		this.tablero = tablero;
+		this.nombre = nombre;
+	}
+	
+	public String obtenerNombre(){
+		return this.nombre;
 	}
 	
 	public Enumeration<Personaje> obtenerPersonajesAliados(){

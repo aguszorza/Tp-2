@@ -27,8 +27,8 @@ public class Juego {
 		this.tablero = new Tablero(TAMANIO_TABLERO);
 		Hashtable <Personaje, Celda> guerrerosZ = inicializarGuerrerosZ();
 		Hashtable <Personaje, Celda> enemigos = inicializarEnemigosDeLaTierra();
-		this.guerreroZ = new Jugador(guerrerosZ, enemigos, tablero);
-		this.enemigoTierra = new Jugador(enemigos, guerrerosZ, tablero);
+		this.guerreroZ = new Jugador(guerrerosZ, enemigos, tablero, "Guerreros Z");
+		this.enemigoTierra = new Jugador(enemigos, guerrerosZ, tablero, "Enemigos de la Tierra");
 	}
 	
 	private Hashtable <Personaje, Celda> inicializarGuerrerosZ(){

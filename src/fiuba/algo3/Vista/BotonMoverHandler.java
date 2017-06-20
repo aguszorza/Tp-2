@@ -1,6 +1,7 @@
 package fiuba.algo3.Vista;
 
 import fiuba.algo3.ejemplo1.Excepciones.PosicionFueraDelTablero;
+import fiuba.algo3.ejemplo1.juego.Turno;
 import fiuba.algo3.ejemplo1.tablero.Celda;
 import fiuba.algo3.ejemplo1.tablero.Tablero;
 import javafx.event.ActionEvent;
@@ -12,14 +13,14 @@ public class BotonMoverHandler implements EventHandler<ActionEvent>{
 
 	private int X;
 	private int Y;
-	private Tablero tablero;
+	private Turno turno;
 	private Celda celda;
 	
 	
-	public BotonMoverHandler(int x, int y, Tablero tablero, Celda celda){
+	public BotonMoverHandler(int x, int y, Turno turno, Celda celda){
 		this.X = x;
 		this.Y = y;
-		this.tablero = tablero;
+		this.turno = turno;
 		this.celda = celda;
 	}
 	
@@ -29,7 +30,7 @@ public class BotonMoverHandler implements EventHandler<ActionEvent>{
 		int columna = this.celda.obtenerColumna();
 		try{
 			Celda celdaFinal = new Celda(fila + this.X, columna + this.Y);
-			this.tablero.moverPersonaje(this.celda.obtenerPersonaje(), this.celda, celdaFinal);
+			this.turno.mover(this.celda.obtenerPersonaje(), celdaFinal);
 			//ToggleButton toggleinicio = (ToggleButton) ((GridPane)grid.getChildren().get(0)).getChildren().get(5*(fila-1)+columna-1);
 			//ToggleButton togglefin = (ToggleButton) ((GridPane)grid.getChildren().get(0)).getChildren().get(5*(fila-1)+columna);
 			//togglefin.setGraphic(toggleinicio.getGraphic());

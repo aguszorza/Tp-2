@@ -1,7 +1,9 @@
 package fiuba.algo3.ejemplo1.juego;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Random;
 
 import fiuba.algo3.ejemplo1.Excepciones.PersonajeNoMovilizable;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
@@ -17,13 +19,19 @@ public class Turno {
 	
 	public Turno(Jugador jugador1, Jugador jugador2){
 		this.cola = new LinkedList<Jugador> ();
-		this.cola.add(jugador1);
-		this.cola.add(jugador2);
+		guardarAleatoriamente(jugador1, jugador2);
+		//this.cola.add(jugador1);
+		//this.cola.add(jugador2);
 		inicializarTurno();
 	}
 	
-	private void guardarAleatoriamente(){
-		
+	private void guardarAleatoriamente(Jugador jugador1, Jugador jugador2){
+		ArrayList<Jugador> lista= new ArrayList<Jugador> ();
+		lista.add(jugador1);
+		lista.add(jugador2);
+		int posicion = (new Random()).nextInt(lista.size());
+		this.cola.add(lista.remove(posicion));
+		this.cola.add(lista.get(0));
 	}
 	
 	public Jugador obtenerJugador(){

@@ -10,6 +10,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -30,9 +32,16 @@ public class Aplicacion  extends Application{
 		GridPane casilleros = new GridPane();
 		casilleros.setAlignment(Pos.CENTER);
 		GridPane general = new GridPane();
-		general.setHgap(30);
+		general.setHgap(10);
 		general.add(casilleros, 1, 1);
 		Scene scene = new Scene(general, 300, 250);
+		
+		Label lbl = new Label("Turno de "+turno.obtenerJugador().obtenerNombre());
+		general.add(lbl, 1, 0);
+		
+		Button boton = new Button("Pasar Turno");
+		boton.setOnAction(new BotonPasarTurnoHandler(turno, lbl));
+		general.add(boton, 2, 0);
 		
 		for (int i = 1; i <= 9; i++){
 			for(int j=1; j<= 9;j++){
@@ -41,7 +50,7 @@ public class Aplicacion  extends Application{
 				toggle.setMinSize(70, 70);
 				toggle.setMaxSize(70,70);
 				casilleros.add(toggle, j, i);
-				EventHandler<ActionEvent> event = new botonCasilla(tablero, celda, general);
+				EventHandler<ActionEvent> event = new BotonCasilleroHandler(turno, celda, casilleros);
 				toggle.setOnAction(event);
 				toggle.actualizarImagen();
 			}
