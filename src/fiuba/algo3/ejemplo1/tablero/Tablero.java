@@ -42,6 +42,10 @@ public class Tablero {
 		}
 	}
 	
+	public Boolean existePosicion(int fila, int columna){
+		return this.filas.containsKey(fila) && this.filas.containsKey(columna);
+	}
+	
 	private void comprobarAdyacencia(Celda celdaInicial, Celda celdaFinal){
 		if (!celdaInicial.esAdyacente(celdaFinal)){
 			throw new MovimientoInvalido();
@@ -51,7 +55,7 @@ public class Tablero {
 	private void comprobarNuevaPosicion(int fila, int columna){
 		// como es un tablero cuadrado, verifico que ambos numeros sean clave del tablero 
 		if(!this.filas.containsKey(fila) || !this.filas.containsKey(columna)){
-			throw new PosicionFueraDelTablero();
+			throw new PosicionFueraDelTablero("Posicion fuera del tablero");
 		}
 		if(!this.filas.get(fila).obtenerCelda(columna).estaVacia()){
 			throw new CeldaOcupada();

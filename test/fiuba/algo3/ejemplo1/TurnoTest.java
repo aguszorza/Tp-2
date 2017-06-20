@@ -2,6 +2,7 @@ package fiuba.algo3.ejemplo1;
 
 import static org.junit.Assert.*;
 
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -134,5 +135,5 @@ public class TurnoTest {
 		celdaFinal = tablero.obtenerCelda(1, 7);
 		turno.mover(goku, celdaFinal);
 		Assert.assertEquals("No paso: ", goku, tablero.obtenerCelda(1, 7).obtenerPersonaje());
-	}	
+	}
 }

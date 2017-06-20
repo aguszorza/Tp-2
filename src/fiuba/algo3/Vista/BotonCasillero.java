@@ -20,9 +20,14 @@ public class BotonCasillero extends ToggleButton{
 			this.setGraphic(null);
 			return;
 		}*/
-		ImageView imv = new ImageView();
-		Image image = new Image(this.celda.obtenerImagen());
-		imv.setImage(image);
-		this.setGraphic(imv);
+		if(!this.celda.estaVacia()){
+			ImageView imv = new ImageView();
+			Image image = new Image(this.celda.obtenerImagen());
+			imv.setImage(image);
+			this.setGraphic(imv);
+		}
+		else{
+			this.setGraphic(null);
+		}
 	}
 }

@@ -5,6 +5,7 @@ import java.util.Hashtable;
 
 import fiuba.algo3.ejemplo1.Excepciones.AtaqueAliadoInvalido;
 import fiuba.algo3.ejemplo1.Excepciones.PersonajeInexistente;
+import fiuba.algo3.ejemplo1.Excepciones.PosicionFueraDelTablero;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
 import fiuba.algo3.ejemplo1.tablero.Celda;
 import fiuba.algo3.ejemplo1.tablero.Tablero;
@@ -47,7 +48,7 @@ public class Jugador {
 	
 	public void verificarAtaque(Personaje atacante, Personaje atacado){
 		if(!existePersonaje(atacante)){
-			throw new PersonajeInexistente();
+			throw new PersonajeInexistente("El personaje seleccionado no es del jugador");
 		}
 		if(existePersonaje(atacado)){
 			throw new AtaqueAliadoInvalido();
@@ -63,12 +64,18 @@ public class Jugador {
 	}
 	
 	public void mover(Personaje personaje, Celda celdaFinal){
+		int fila = celdaFinal.obtenerFila();
+		int columna = celdaFinal.obtenerColumna();
 		if(!this.existePersonaje(personaje)){
-			throw new PersonajeInexistente();
+			throw new PersonajeInexistente("El personaje seleccionado no es del jugador");
 		}
+		if(!this.tablero.existePosicion(fila, columna)){
+			throw new PosicionFueraDelTablero("Movimiento no valido");
+		}
+		Celda celdaFin = this.tablero.obtenerCelda(fila, columna);
 		Celda celdaAct = this.obtenerCelda(personaje);
-		this.tablero.moverPersonaje(personaje, celdaAct, celdaFinal);
-		this.personajes.put(personaje, celdaFinal);
+		this.tablero.moverPersonaje(personaje, celdaAct, celdaFin);
+		this.personajes.put(personaje, celdaFin);
 	}
 	
 	public void atacar(Personaje personaje, Personaje enemigo){

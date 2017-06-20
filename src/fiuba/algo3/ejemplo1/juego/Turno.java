@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
+import fiuba.algo3.ejemplo1.Excepciones.PersonajeInexistente;
 import fiuba.algo3.ejemplo1.Excepciones.PersonajeNoMovilizable;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
 import fiuba.algo3.ejemplo1.tablero.Celda;
@@ -59,14 +60,17 @@ public class Turno {
 	}
 	
 	public void mover(Personaje personaje, Celda celdaFinal){
+		if (!this.cola.element().existePersonaje(personaje)){
+			throw new PersonajeInexistente("El personaje seleccionado no es del jugador");
+		}
 		if(this.personajeEnMovimiento != null && personaje != this.personajeEnMovimiento){
-			throw new PersonajeNoMovilizable();
+			throw new PersonajeNoMovilizable("El personaje seleccionado no es movilizable para este turno");
 		}
 		if (this.personajeEnMovimiento == null){
 			this.personajeEnMovimiento = personaje;
 		}
 		if (this.movimientos >= this.personajeEnMovimiento.obtenerVelocidad()){
-			throw new PersonajeNoMovilizable();
+			throw new PersonajeNoMovilizable("El personaje no puede moverse mas posiciones");
 		}
 		this.cola.element().mover(personaje, celdaFinal);
 		this.movimientos ++;

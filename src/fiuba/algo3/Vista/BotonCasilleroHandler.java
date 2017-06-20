@@ -43,7 +43,7 @@ public class BotonCasilleroHandler implements EventHandler<ActionEvent>{
 				//toggleinicio.setGraphic(null);
 			}
 			catch (PosicionFueraDelTablero e){
-				System.out.println("No se puede mover");
+				System.out.println(e.getMessage());
 			}
 			grid.getChildren().remove(botonDer);
 			this.actualizarVista();
