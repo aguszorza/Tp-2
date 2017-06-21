@@ -60,7 +60,7 @@ public class Aplicacion  extends Application{
 		
 		GridPane casilleros = new GridPane();
 		casilleros.setAlignment(Pos.CENTER);
-		general.setHgap(30);
+		general.setHgap(5);
 		general.add(casilleros, 1, 1);
 		
 		Label lbl = new Label("Turno de "+turno.obtenerJugador().obtenerNombre());
