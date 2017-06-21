@@ -60,13 +60,21 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 		this.grid = grid;
 		this.labelTurno = labelTurno;
 		this.botonDerecha = new Button("Derecha");
+		this.botonDerecha.setOpacity(0.8);
 		this.botonIzquierda = new Button("Izquierda");
+		this.botonIzquierda.setOpacity(0.8);
 		this.botonAbajo = new Button("Abajo");
+		this.botonAbajo.setOpacity(0.8);
 		this.botonArriba = new Button("Arriba");
+		this.botonArriba.setOpacity(0.8);
 		this.botonCancelar = new Button("Cancelar");
+		this.botonCancelar.setOpacity(0.8);
 		this.botonAtacar = new Button ("Atacar");
+		this.botonAtacar.setOpacity(0.8);
 		this.botonHabilidad = new Button ("Habilidad Especial");
+		this.botonHabilidad.setOpacity(0.8);
 		this.botonTransformar = new Button ("Transformar");
+		this.botonTransformar.setOpacity(0.8);
 	}
 	
 	@Override
@@ -132,6 +140,7 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 			while(enemigos.hasMoreElements()){
 				Personaje enemigo = enemigos.nextElement();
 				ToggleButton personaje = new ToggleButton();
+				personaje.setOpacity(0.9);
 				personaje.setOnAction(value2->{
 					try{
 						this.turno.lanzarHablidad(this.celda.obtenerPersonaje(), enemigo);
@@ -180,6 +189,7 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 		while(enemigos.hasMoreElements()){
 			Personaje enemigo = enemigos.nextElement();
 			ToggleButton personaje = new ToggleButton();
+			personaje.setOpacity(0.8);
 			personaje.setOnAction(value2->{
 				try{
 					this.turno.atacar(this.celda.obtenerPersonaje(), enemigo);

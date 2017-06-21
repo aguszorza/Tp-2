@@ -69,6 +69,7 @@ public class Aplicacion  extends Application{
 		general.add(lbl, 1, 0);
 		
 		Button boton = new Button("Pasar Turno");
+		boton.setOpacity(0.8);
 		boton.setOnAction(new BotonPasarTurnoHandler(casilleros, turno, lbl));
 		general.add(boton, 2, 0);
 		
@@ -76,6 +77,7 @@ public class Aplicacion  extends Application{
 			for(int j=1; j<= 9;j++){
 				Celda celda = tablero.obtenerCelda(i, j);
 				BotonCasillero toggle = new BotonCasillero(celda);
+				toggle.setOpacity(0.9);
 				toggle.setMinSize(70, 70);
 				toggle.setMaxSize(70,70);
 				casilleros.add(toggle, j, i);
