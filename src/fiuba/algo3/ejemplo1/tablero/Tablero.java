@@ -58,7 +58,7 @@ public class Tablero {
 			throw new PosicionFueraDelTablero("Posicion fuera del tablero");
 		}
 		if(!this.filas.get(fila).obtenerCelda(columna).estaVacia()){
-			throw new CeldaOcupada();
+			throw new CeldaOcupada("La celda está ocupada");
 		}
 	}
 	

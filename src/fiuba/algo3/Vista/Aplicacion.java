@@ -34,13 +34,18 @@ public class Aplicacion  extends Application{
 		Jugador enemigos = juego.obtenerEnemigos();
 		Tablero tablero = juego.obtenerTablero(); 
 		Turno turno = new Turno(guerreros, enemigos);
+		GridPane general = new GridPane();
+		
+		Scene scene = new Scene(general, 300, 250);
+		
+		MenuPrincipal menu = new MenuPrincipal(stage, scene);
+		Scene menuPrincipal = new Scene(menu, 640, 480);
+		stage.setScene(menuPrincipal);
 		
 		GridPane casilleros = new GridPane();
 		casilleros.setAlignment(Pos.CENTER);
-		GridPane general = new GridPane();
 		general.setHgap(30);
 		general.add(casilleros, 1, 1);
-		Scene scene = new Scene(general, 300, 250);
 		
 		Label lbl = new Label("Turno de "+turno.obtenerJugador().obtenerNombre());
 		general.add(lbl, 1, 0);
@@ -56,14 +61,14 @@ public class Aplicacion  extends Application{
 				toggle.setMinSize(70, 70);
 				toggle.setMaxSize(70,70);
 				casilleros.add(toggle, j, i);
-				EventHandler<ActionEvent> event = new botonCasilla(turno, celda, general);
+				EventHandler<ActionEvent> event = new botonCasilla(turno, celda, general, lbl);
 				toggle.setOnAction(event);
 				toggle.actualizarImagen();
 			}
 		}
 		stage.setFullScreen(true);
 		Aplicacion.reproducirMusica();
-		stage.setScene(scene);
+		//stage.setScene(scene);
 		stage.show();
 	}
 	

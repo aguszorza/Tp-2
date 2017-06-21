@@ -87,6 +87,9 @@ public class Jugador {
 		Celda celdaEnemigo = this.enemigos.get(enemigo);
 		this.tablero.verificarAtaque(personaje.obtenerDistanciaDeAtaque(), celdaPersonaje, celdaEnemigo);
 		personaje.atacar(enemigo);
+		if(enemigo.obtenerVida() <= 0){
+			celdaEnemigo.removerPersonaje();
+		}
 	}
 	
 	public void lanzarHablidadEspecial(Personaje atacante, Personaje atacado){
