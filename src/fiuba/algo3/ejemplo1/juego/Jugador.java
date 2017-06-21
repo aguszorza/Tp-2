@@ -101,6 +101,19 @@ public class Jugador {
 		atacante.lanzarHabilidadEspecial(atacado);
 	}
 	
+	public void transformar(Personaje personaje){
+		if(!this.existePersonaje(personaje)){
+			throw new PersonajeInexistente("El personaje seleccionado no es del jugador");
+		}
+		personaje.transformar();
+	}
+	
+	public void pasarTurno(){
+		Enumeration <Personaje> personajes = this.obtenerPersonajesAliados();
+		while(personajes.hasMoreElements()){
+			personajes.nextElement().pasarTurno();
+		}
+	}
 	
 	public Boolean sigueVivo(){
 		return personajes.size() != 0;

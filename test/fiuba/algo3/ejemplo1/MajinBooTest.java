@@ -286,7 +286,7 @@ public class MajinBooTest {
 		goku.obtenerDistanciaDeAtaque();
 		Assert.fail("No levanto excepcion");
 	}
-	
+		
 
 	@Test (expected = PersonajeInutilizado.class)
 	public void testObtenerDanioDeAtaqueLevantaExcepcionSiElPersonajeFueConvertidoEnChocolate(){
@@ -308,7 +308,7 @@ public class MajinBooTest {
 			majin.aumentarKi();
 		}
 		majin.lanzarHabilidadEspecial(goku);
-		goku.recuperarModoDePelea();
+		//goku.recuperarModoDePelea();
 		goku.atacar(majin);
 		Assert.fail("No levanto excepcion");
 	}
@@ -324,7 +324,7 @@ public class MajinBooTest {
 		goku.pasarTurno();
 		goku.pasarTurno();
 		goku.pasarTurno();
-		goku.recuperarModoDePelea();
+		//goku.recuperarModoDePelea();
 		int vida = majin.obtenerVida();
 		goku.atacar(majin);
 		vida = vida - majin.obtenerVida();
@@ -342,7 +342,7 @@ public class MajinBooTest {
 		goku.pasarTurno();
 		goku.pasarTurno();
 		goku.pasarTurno();
-		goku.recuperarModoDePelea();
+		//goku.recuperarModoDePelea();
 		int ki = goku.ki();
 		goku.aumentarKi();
 		ki = goku.ki() - ki;

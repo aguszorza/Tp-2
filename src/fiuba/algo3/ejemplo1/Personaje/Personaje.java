@@ -122,6 +122,7 @@ public class Personaje {
 		return null;};
 		actualizarConsumibles(funcion);
 		this.modoDePelea.pasarTurno();
+		this.recuperarModoDePelea();
 	}
 	
 	public void atacar(Personaje enemigo){

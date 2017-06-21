@@ -20,7 +20,7 @@ public class BotonCasillero extends ToggleButton{
 			this.setGraphic(null);
 			return;
 		}*/
-		if(!this.celda.estaVacia()){
+		if(!this.celda.estaVacia() || this.celda.hayConsumible()){
 			ImageView imv = new ImageView();
 			Image image = new Image(this.celda.obtenerImagen());
 			imv.setImage(image);

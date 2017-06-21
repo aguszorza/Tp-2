@@ -72,7 +72,7 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 	@Override
 	public void handle(ActionEvent actionEvent) {
 		limpiarBotones();
-		if (!this.celda.estaVacia()){
+		if (!this.celda.estaVacia() && this.turno.existePersonaje(this.celda.obtenerPersonaje())){
 			this.grid.add(botonDerecha, 3, 1);
 			this.grid.add(botonIzquierda, 4, 1);
 			this.grid.add(botonAbajo, 5, 1);
@@ -109,15 +109,19 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 	private void setearBotonTransformar(){
 		this.botonTransformar.setOnAction(value->{
 			try{
-				this.celda.obtenerPersonaje().transformar();
+				this.turno.transformar(this.celda.obtenerPersonaje());
 				this.reproducirSonido(SONIDO_TRANSFORMACION);
-				this.limpiarBotones();
-				this.actualizarVista();
 			}
 			catch (KiInsuficiente e){
 				System.out.println(e.getMessage());
 				this.reproducirSonido(SONIDO_ERROR);
 			}
+			catch(Exception e){
+				System.out.println(e.getMessage());
+				this.reproducirSonido(SONIDO_ERROR);
+			}
+			this.limpiarBotones();
+			this.actualizarVista();
 		});
 	}
 	
@@ -132,10 +136,8 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 					try{
 						this.turno.lanzarHablidad(this.celda.obtenerPersonaje(), enemigo);
 						this.reproducirSonido(SONIDO_HABILIDAD);
-						this.limpiarBotones();
-						this.actualizarVista();
 					}
-					catch(AtaqueNoValido e){
+					/*catch(AtaqueNoValido e){
 						System.out.println(e.getMessage());
 						this.reproducirSonido(SONIDO_ERROR);
 					}
@@ -150,7 +152,12 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 					catch(KiInsuficiente e){
 						System.out.println(e.getMessage());
 						this.reproducirSonido(SONIDO_ERROR);
+					}*/
+					catch(Exception e){
+						System.out.println(e.getMessage());
+						this.reproducirSonido(SONIDO_ERROR);
 					}
+					this.limpiarBotones();
 					this.actualizarVista();
 				});
 				personaje.setMinSize(70, 70);
@@ -177,10 +184,8 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 				try{
 					this.turno.atacar(this.celda.obtenerPersonaje(), enemigo);
 					this.reproducirSonido(SONIDO_GOLPE);
-					this.limpiarBotones();
-					this.actualizarVista();
 				}
-				catch(AtaqueNoValido e){
+				/*catch(AtaqueNoValido e){
 					System.out.println(e.getMessage());
 					this.reproducirSonido(SONIDO_ERROR);
 				}
@@ -191,7 +196,12 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 				catch(AtaqueAliadoInvalido e){
 					System.out.println(e.getMessage());
 					this.reproducirSonido(SONIDO_ERROR);
+				}*/
+				catch(Exception e){
+					System.out.println(e.getMessage());
+					this.reproducirSonido(SONIDO_ERROR);
 				}
+				this.limpiarBotones();
 				this.actualizarVista();
 			});
 			personaje.setMinSize(70, 70);
@@ -207,9 +217,9 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 		});
 	}
 	
-	private void actualizarLabel(){
+	/*private void actualizarLabel(){
 		this.labelTurno.setText("Turno de " + this.turno.obtenerJugador().obtenerNombre());
-	}
+	}*/
 	
 	private void setearBotonCancelar(){
 		this.botonCancelar.setOnAction(value->{
@@ -259,11 +269,12 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 	
 	
 	public void actualizarVista(){
-		this.actualizarLabel();
+		Aplicacion.actualizarVista((GridPane)this.grid.getChildren().get(0),this.turno,this.labelTurno);
+		/*this.actualizarLabel();
 		Iterator <Node> iter = ((GridPane)this.grid.getChildren().get(0)).getChildren().iterator();
 		while(iter.hasNext()){
 			BotonCasillero boton = (BotonCasillero) iter.next();
 			boton.actualizarImagen();
-		}
+		}*/
 	}
 }

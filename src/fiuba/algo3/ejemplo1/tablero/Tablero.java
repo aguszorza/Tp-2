@@ -1,6 +1,7 @@
 package fiuba.algo3.ejemplo1.tablero;
 
 import java.util.Hashtable;
+import java.util.Random;
 
 import fiuba.algo3.ejemplo1.Consumibles.Consumible;
 import fiuba.algo3.ejemplo1.Excepciones.AtaqueFueraDeRango;
@@ -85,6 +86,18 @@ public class Tablero {
 		int fila = celda.obtenerFila();
 		int columna = celda.obtenerColumna(); 
 		this.filas.get(fila).obtenerCelda(columna).agregarConsumible(consumible);
+	}
+	
+	public void agregarConsumibleAleatoriamente(Consumible consumible){
+		for(int i = 0; i < 20; i++){
+			int fila = (new Random()).nextInt(tamanio) + 1;
+			int columna = (new Random()).nextInt(tamanio) + 1;
+			Celda celda = this.obtenerCelda(fila, columna);
+			if(celda.estaVacia() && !celda.hayConsumible()){
+				this.agregarConsumible(celda, consumible);
+				break;
+			}
+		}
 	}
 	
 	public void moverPersonaje(Personaje personaje, Celda celdaAct, Celda celdaFin){

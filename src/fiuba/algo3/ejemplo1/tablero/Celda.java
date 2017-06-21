@@ -25,7 +25,7 @@ public class Celda {
 		return "file:";
 	}
 	
-	private Boolean hayConsumible(){
+	public Boolean hayConsumible(){
 		return this.consumible != null;
 	}
 	
