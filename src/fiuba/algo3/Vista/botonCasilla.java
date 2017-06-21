@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
 
+import fiuba.algo3.ejemplo1.Excepciones.AtaqueAliadoInvalido;
+import fiuba.algo3.ejemplo1.Excepciones.AtaqueFueraDeRango;
+import fiuba.algo3.ejemplo1.Excepciones.AtaqueNoValido;
 import fiuba.algo3.ejemplo1.Excepciones.CeldaOcupada;
+import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Excepciones.PersonajeInexistente;
 import fiuba.algo3.ejemplo1.Excepciones.PersonajeNoMovilizable;
 import fiuba.algo3.ejemplo1.Excepciones.PosicionFueraDelTablero;
@@ -27,6 +31,12 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public class botonCasilla implements EventHandler<ActionEvent>{
+	
+	String SONIDO_ERROR = "src/fiuba/algo3/Musica/error.mp3";
+	String SONIDO_MOVIMIENTO = "src/fiuba/algo3/Musica/movimiento.mp3";
+	String SONIDO_GOLPE = "src/fiuba/algo3/Musica/punch.mp3";
+	String SONIDO_HABILIDAD = "src/fiuba/algo3/Musica/candyattack.mp3";
+	String SONIDO_TRANSFORMACION = "src/fiuba/algo3/Musica/aura.mp3"; 
 	private Turno turno;
 	private Celda celda;
 	private GridPane grid;
@@ -37,6 +47,8 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 	private Button botonAbajo;
 	private Button botonCancelar;
 	private Button botonAtacar;
+	private Button botonHabilidad;
+	private Button botonTransformar;
 	
 	private ArrayList <ToggleButton> botonesEnemigos;
 	
@@ -53,10 +65,13 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 		this.botonArriba = new Button("Arriba");
 		this.botonCancelar = new Button("Cancelar");
 		this.botonAtacar = new Button ("Atacar");
+		this.botonHabilidad = new Button ("Habilidad Especial");
+		this.botonTransformar = new Button ("Transformar");
 	}
 	
 	@Override
 	public void handle(ActionEvent actionEvent) {
+		limpiarBotones();
 		if (!this.celda.estaVacia()){
 			this.grid.add(botonDerecha, 3, 1);
 			this.grid.add(botonIzquierda, 4, 1);
@@ -64,12 +79,16 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 			this.grid.add(botonArriba, 2, 1);
 			this.grid.add(botonCancelar, 6, 1);
 			this.grid.add(botonAtacar, 3, 2);
+			this.grid.add(botonHabilidad, 3, 3);
+			this.grid.add(botonTransformar, 3, 4);
 			this.setearAccionBoton(botonDerecha,1,0);
 			this.setearAccionBoton(botonIzquierda,-1,0);
 			this.setearAccionBoton(botonArriba,0,-1);
 			this.setearAccionBoton(botonAbajo,0,1);
 			this.setearBotonCancelar();
-			setearBotonAtacar();
+			this.setearBotonAtacar();
+			this.setearBotonHabilidad();
+			this.setearBotonTransformar();
 		}
 	}
 	//Button botonDerecha, Button botonIzquierda, Button botonArriba, Button botonAbajo
@@ -80,9 +99,71 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 		grid.getChildren().remove(botonAbajo);
 		grid.getChildren().remove(botonCancelar);
 		grid.getChildren().remove(botonAtacar);
+		grid.getChildren().remove(botonHabilidad);
+		grid.getChildren().remove(botonTransformar);
 		for(int i = 0; i < botonesEnemigos.size(); i++){
 			grid.getChildren().remove(botonesEnemigos.get(i));
 		}
+	}
+	
+	private void setearBotonTransformar(){
+		this.botonTransformar.setOnAction(value->{
+			try{
+				this.celda.obtenerPersonaje().transformar();
+				this.reproducirSonido(SONIDO_TRANSFORMACION);
+				this.limpiarBotones();
+				this.actualizarVista();
+			}
+			catch (KiInsuficiente e){
+				System.out.println(e.getMessage());
+				this.reproducirSonido(SONIDO_ERROR);
+			}
+		});
+	}
+	
+	private void setearBotonHabilidad(){
+		this.botonHabilidad.setOnAction(value->{
+			Enumeration <Personaje> enemigos = turno.obtenerJugador().obtenerPersonajesEnemigos();
+			int columna = 4;
+			while(enemigos.hasMoreElements()){
+				Personaje enemigo = enemigos.nextElement();
+				ToggleButton personaje = new ToggleButton();
+				personaje.setOnAction(value2->{
+					try{
+						this.turno.lanzarHablidad(this.celda.obtenerPersonaje(), enemigo);
+						this.reproducirSonido(SONIDO_HABILIDAD);
+						this.limpiarBotones();
+						this.actualizarVista();
+					}
+					catch(AtaqueNoValido e){
+						System.out.println(e.getMessage());
+						this.reproducirSonido(SONIDO_ERROR);
+					}
+					catch(AtaqueFueraDeRango e){
+						System.out.println(e.getMessage());
+						this.reproducirSonido(SONIDO_ERROR);
+					}
+					catch(AtaqueAliadoInvalido e){
+						System.out.println(e.getMessage());
+						this.reproducirSonido(SONIDO_ERROR);
+					}
+					catch(KiInsuficiente e){
+						System.out.println(e.getMessage());
+						this.reproducirSonido(SONIDO_ERROR);
+					}
+					this.actualizarVista();
+				});
+				personaje.setMinSize(70, 70);
+				personaje.setMaxSize(70, 70);
+				this.botonesEnemigos.add(personaje);
+				ImageView imv = new ImageView();
+				Image image = new Image(enemigo.obtenerImagen());
+				imv.setImage(image);
+				personaje.setGraphic(imv);
+				this.grid.add(personaje, columna, 2);
+				columna++;
+			}
+		});
 	}
 	
 	private void setearBotonAtacar(){
@@ -93,8 +174,24 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 			Personaje enemigo = enemigos.nextElement();
 			ToggleButton personaje = new ToggleButton();
 			personaje.setOnAction(value2->{
-				this.turno.atacar(this.celda.obtenerPersonaje(), enemigo);
-				this.limpiarBotones();
+				try{
+					this.turno.atacar(this.celda.obtenerPersonaje(), enemigo);
+					this.reproducirSonido(SONIDO_GOLPE);
+					this.limpiarBotones();
+					this.actualizarVista();
+				}
+				catch(AtaqueNoValido e){
+					System.out.println(e.getMessage());
+					this.reproducirSonido(SONIDO_ERROR);
+				}
+				catch(AtaqueFueraDeRango e){
+					System.out.println(e.getMessage());
+					this.reproducirSonido(SONIDO_ERROR);
+				}
+				catch(AtaqueAliadoInvalido e){
+					System.out.println(e.getMessage());
+					this.reproducirSonido(SONIDO_ERROR);
+				}
 				this.actualizarVista();
 			});
 			personaje.setMinSize(70, 70);
@@ -128,9 +225,10 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 			try{
 				Celda celdaFinal = new Celda(fila  + y , columna + x);
 				this.turno.mover(this.celda.obtenerPersonaje(), celdaFinal);
+				this.reproducirSonido(SONIDO_MOVIMIENTO);
 				//this.tablero.moverPersonaje(this.celda.obtenerPersonaje(), this.celda, celdaFinal);
 			}
-			catch (PosicionFueraDelTablero e){
+			/*catch (PosicionFueraDelTablero e){
 				System.out.println(e.getMessage());
 			}
 			catch (PersonajeNoMovilizable e){
@@ -141,14 +239,22 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 			}
 			catch (CeldaOcupada e){
 				System.out.println(e.getMessage());
-				String path = new File("src/fiuba/algo3/Musica/error.mp3").getAbsolutePath();
-				Media musicFile = new Media(new File(path).toURI().toString());
-				MediaPlayer mediaPlayer = new MediaPlayer(musicFile);
-				mediaPlayer.setAutoPlay(true);
+				this.reproducirSonido(SONIDO_ERROR);
+			}*/
+			catch(Exception e){
+				System.out.println(e.getMessage());
+				this.reproducirSonido(SONIDO_ERROR);
 			}
 			this.limpiarBotones();
 			this.actualizarVista();
 		});
+	}
+	
+	public void reproducirSonido(String ruta){
+		String path = new File(ruta).getAbsolutePath();
+		Media musicFile = new Media(new File(path).toURI().toString());
+		MediaPlayer mediaPlayer = new MediaPlayer(musicFile);
+		mediaPlayer.setAutoPlay(true);
 	}
 	
 	

@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
+import fiuba.algo3.ejemplo1.Excepciones.AtaqueNoValido;
 import fiuba.algo3.ejemplo1.Excepciones.PersonajeInexistente;
 import fiuba.algo3.ejemplo1.Excepciones.PersonajeNoMovilizable;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
@@ -79,7 +80,7 @@ public class Turno {
 	
 	public void atacar(Personaje personaje, Personaje enemigo){
 		if(this.ataque){
-			//excepcion
+			throw new AtaqueNoValido("Ya has realizado un ataque en este turno");
 		}
 		this.cola.element().atacar(personaje, enemigo);
 		this.ataque = true;
@@ -88,7 +89,7 @@ public class Turno {
 	
 	public void lanzarHablidad(Personaje personaje, Personaje enemigo){
 		if(this.ataque){
-			//excepcion
+			throw new AtaqueNoValido("Ya has realizado un ataque en este turno");
 		}
 		this.cola.element().lanzarHablidadEspecial(personaje, enemigo);
 		this.ataque = true;
