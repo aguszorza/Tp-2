@@ -32,6 +32,7 @@ import javafx.scene.media.MediaPlayer;
 
 public class botonCasilla implements EventHandler<ActionEvent>{
 	
+	double TRANSPARENCIA = 0.8;
 	String SONIDO_ERROR = "src/fiuba/algo3/Musica/error.mp3";
 	String SONIDO_MOVIMIENTO = "src/fiuba/algo3/Musica/movimiento.mp3";
 	String SONIDO_GOLPE = "src/fiuba/algo3/Musica/punch.mp3";
@@ -60,21 +61,21 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 		this.grid = grid;
 		this.labelTurno = labelTurno;
 		this.botonDerecha = new Button("Derecha");
-		this.botonDerecha.setOpacity(0.8);
+		this.botonDerecha.setOpacity(TRANSPARENCIA);
 		this.botonIzquierda = new Button("Izquierda");
-		this.botonIzquierda.setOpacity(0.8);
+		this.botonIzquierda.setOpacity(TRANSPARENCIA);
 		this.botonAbajo = new Button("Abajo");
-		this.botonAbajo.setOpacity(0.8);
+		this.botonAbajo.setOpacity(TRANSPARENCIA);
 		this.botonArriba = new Button("Arriba");
-		this.botonArriba.setOpacity(0.8);
+		this.botonArriba.setOpacity(TRANSPARENCIA);
 		this.botonCancelar = new Button("Cancelar");
-		this.botonCancelar.setOpacity(0.8);
+		this.botonCancelar.setOpacity(TRANSPARENCIA);
 		this.botonAtacar = new Button ("Atacar");
-		this.botonAtacar.setOpacity(0.8);
+		this.botonAtacar.setOpacity(TRANSPARENCIA);
 		this.botonHabilidad = new Button ("Habilidad Especial");
-		this.botonHabilidad.setOpacity(0.8);
+		this.botonHabilidad.setOpacity(TRANSPARENCIA);
 		this.botonTransformar = new Button ("Transformar");
-		this.botonTransformar.setOpacity(0.8);
+		this.botonTransformar.setOpacity(TRANSPARENCIA);
 	}
 	
 	@Override
@@ -140,7 +141,7 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 			while(enemigos.hasMoreElements()){
 				Personaje enemigo = enemigos.nextElement();
 				ToggleButton personaje = new ToggleButton();
-				personaje.setOpacity(0.9);
+				personaje.setOpacity(TRANSPARENCIA);
 				personaje.setOnAction(value2->{
 					try{
 						this.turno.lanzarHablidad(this.celda.obtenerPersonaje(), enemigo);
@@ -189,7 +190,7 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 		while(enemigos.hasMoreElements()){
 			Personaje enemigo = enemigos.nextElement();
 			ToggleButton personaje = new ToggleButton();
-			personaje.setOpacity(0.8);
+			personaje.setOpacity(TRANSPARENCIA);
 			personaje.setOnAction(value2->{
 				try{
 					this.turno.atacar(this.celda.obtenerPersonaje(), enemigo);
@@ -279,7 +280,9 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 	
 	
 	public void actualizarVista(){
-		Aplicacion.actualizarVista((GridPane)this.grid.getChildren().get(0),this.turno,this.labelTurno);
+		DatosPersonajes datos = (DatosPersonajes)this.grid.getChildren().get(0);
+		GridPane grid = (GridPane)this.grid.getChildren().get(1);
+		Aplicacion.actualizarVista(datos, grid,this.turno,this.labelTurno);
 		/*this.actualizarLabel();
 		Iterator <Node> iter = ((GridPane)this.grid.getChildren().get(0)).getChildren().iterator();
 		while(iter.hasNext()){

@@ -9,10 +9,15 @@ import javafx.scene.image.ImageView;
 
 public class BotonCasillero extends ToggleButton{
 
+	//double TRANSPARENCIA = 0.9;
+	
 	private Celda celda;
 	
 	public BotonCasillero(Celda celda){
 		this.celda = celda;	
+		//this.setOpacity(TRANSPARENCIA);
+		this.setMinSize(70, 70);
+		this.setMaxSize(70,70);
 	}
 	
 	public void actualizarImagen(){

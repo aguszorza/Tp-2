@@ -33,7 +33,10 @@ import javafx.stage.Stage;
 
 public class Aplicacion  extends Application{
 
+	String CANCION_MENU_PRINCIPAL = "src/fiuba/algo3/Musica/Opening.mp3";
 	static MediaPlayer mediaPlayer;
+	double TRANSPARENCIA = 0.9;
+	DatosPersonajes datos;
 	
 	public static void main(String[] args) {
         launch(args);
@@ -58,10 +61,15 @@ public class Aplicacion  extends Application{
 		Scene menuPrincipal = new Scene(menu, 640, 480);
 		stage.setScene(menuPrincipal);
 		
+		this.datos = new DatosPersonajes(guerreros.obtenerPersonajesAliados(), enemigos.obtenerPersonajesAliados());
+		general.add(datos, 0, 1);
+		
 		GridPane casilleros = new GridPane();
 		casilleros.setAlignment(Pos.CENTER);
 		general.setHgap(5);
 		general.add(casilleros, 1, 1);
+		
+		casilleros.setOpacity(TRANSPARENCIA);
 		
 		Label lbl = new Label("Turno de "+turno.obtenerJugador().obtenerNombre());
 		lbl.setTextFill(Color.BEIGE);
@@ -69,17 +77,14 @@ public class Aplicacion  extends Application{
 		general.add(lbl, 1, 0);
 		
 		Button boton = new Button("Pasar Turno");
-		boton.setOpacity(0.8);
-		boton.setOnAction(new BotonPasarTurnoHandler(casilleros, turno, lbl));
+		boton.setOpacity(TRANSPARENCIA);
+		boton.setOnAction(new BotonPasarTurnoHandler(this.datos, casilleros, turno, lbl));
 		general.add(boton, 2, 0);
 		
 		for (int i = 1; i <= 9; i++){
 			for(int j=1; j<= 9;j++){
 				Celda celda = tablero.obtenerCelda(i, j);
 				BotonCasillero toggle = new BotonCasillero(celda);
-				toggle.setOpacity(0.9);
-				toggle.setMinSize(70, 70);
-				toggle.setMaxSize(70,70);
 				casilleros.add(toggle, j, i);
 				EventHandler<ActionEvent> event = new botonCasilla(turno, celda, general, lbl);
 				toggle.setOnAction(event);
@@ -87,7 +92,7 @@ public class Aplicacion  extends Application{
 			}
 		}
 		stage.setFullScreen(true);
-		Aplicacion.reproducirMusica();
+		Aplicacion.reproducirMusica(CANCION_MENU_PRINCIPAL);
 		//stage.setScene(scene);
 		stage.show();
 	}
@@ -96,7 +101,8 @@ public class Aplicacion  extends Application{
 		label.setText("Turno de " + turno.obtenerJugador().obtenerNombre());
 	}
 	
-	public static void actualizarVista(GridPane grid, Turno turno, Label label){
+	public static void actualizarVista(DatosPersonajes datos, GridPane grid, Turno turno, Label label){
+		datos.actualizar();
 		actualizarLabel(turno, label);
 		Iterator <Node> iter = grid.getChildren().iterator();
 		while(iter.hasNext()){
@@ -105,8 +111,17 @@ public class Aplicacion  extends Application{
 		}
 	}
 	
-	public static void reproducirMusica(){
-		String path = new File("src/fiuba/algo3/Musica/Pelea.mp3").getAbsolutePath();
+	public static void reproducirMusica(String cancion){
+		String path = new File(cancion).getAbsolutePath();
+		Media musicFile = new Media(new File(path).toURI().toString());
+		mediaPlayer = new MediaPlayer(musicFile);
+		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+		mediaPlayer.setAutoPlay(true);
+	}
+	
+	public static void cambiarCancion(String cancion){
+		mediaPlayer.stop();
+		String path = new File(cancion).getAbsolutePath();
 		Media musicFile = new Media(new File(path).toURI().toString());
 		mediaPlayer = new MediaPlayer(musicFile);
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
