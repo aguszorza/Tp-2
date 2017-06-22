@@ -9,6 +9,7 @@ import fiuba.algo3.ejemplo1.Consumibles.NubeVoladora;
 import fiuba.algo3.ejemplo1.Consumibles.SemillaErmitanio;
 import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Excepciones.PersonajeInutilizado;
+import fiuba.algo3.ejemplo1.Personaje.Equipo;
 import fiuba.algo3.ejemplo1.Personaje.Gohan;
 import fiuba.algo3.ejemplo1.Personaje.Goku;
 import fiuba.algo3.ejemplo1.Personaje.MajinBoo;
@@ -353,6 +354,9 @@ public class MajinBooTest {
 	public void testConsumirEsferaDelDragonAumentaElDanioDeAtaque(){
 		MajinBoo majin = new MajinBoo();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(majin);
+		majin.agregarAliados(equipo);
 		majin.consumir(esfera);
 		float danio = (float)37.5;
 		Assert.assertEquals("No paso: no aumento el danio de ataque", danio, majin.obtenerPoderDePelea());
@@ -362,6 +366,9 @@ public class MajinBooTest {
 	public void testPasarDeTurnoNoReduceElEfectoDeLaEsferaDelDragon(){
 		MajinBoo majin = new MajinBoo();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(majin);
+		majin.agregarAliados(equipo);
 		majin.consumir(esfera);
 		majin.pasarTurno();
 		majin.pasarTurno();
@@ -373,6 +380,9 @@ public class MajinBooTest {
 	public void testAtacarNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
 		MajinBoo majin = new MajinBoo();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(majin);
+		majin.agregarAliados(equipo);
 		majin.consumir(esfera);
 		Gohan gohan = new Gohan();
 		majin.atacar(gohan);
@@ -384,6 +394,9 @@ public class MajinBooTest {
 	public void testAtacarReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
 		MajinBoo majin = new MajinBoo();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(majin);
+		majin.agregarAliados(equipo);
 		majin.consumir(esfera);
 		Gohan gohan = new Gohan();
 		majin.atacar(gohan);
@@ -396,6 +409,9 @@ public class MajinBooTest {
 	public void testLanzarHabilidadNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
 		MajinBoo majin = new MajinBoo();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(majin);
+		majin.agregarAliados(equipo);
 		majin.consumir(esfera);
 		for(int i = 0; i < 10; i++)
 			majin.aumentarKi();
@@ -409,6 +425,9 @@ public class MajinBooTest {
 	public void testLanzarHabilidadReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
 		MajinBoo majin = new MajinBoo();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(majin);
+		majin.agregarAliados(equipo);
 		majin.consumir(esfera);
 		Gohan gohan = new Gohan();
 		for(int i = 0; i < 12; i++)
@@ -423,6 +442,9 @@ public class MajinBooTest {
 	public void testConsumirSemillaErmitanioAumentaLaVidaEnCien(){
 		MajinBoo majin = new MajinBoo();
 		majin.reducirVida(200);
+		Equipo equipo = new Equipo(); 
+		equipo.add(majin);
+		majin.agregarAliados(equipo);
 		int vida = majin.obtenerVida();
 		SemillaErmitanio semilla = new SemillaErmitanio();
 		majin.consumir(semilla);
@@ -434,6 +456,9 @@ public class MajinBooTest {
 	public void testConsumirNubeVoladoraAumentaLaVelocidadAlDoble(){
 		MajinBoo majin = new MajinBoo();
 		int velocidad = majin.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(majin);
+		majin.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		majin.consumir(nube);
 		velocidad = majin.obtenerVelocidad()/velocidad;
@@ -444,6 +469,9 @@ public class MajinBooTest {
 	public void testPasarUnTurnoNoEliminaElEfectoDeLaNubeVoladora(){
 		MajinBoo majin = new MajinBoo();
 		int velocidad = majin.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(majin);
+		majin.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		majin.consumir(nube);
 		majin.pasarTurno();
@@ -455,6 +483,9 @@ public class MajinBooTest {
 	public void testPasarDosTurnoEliminaElEfectoDeLaNubeVoladora(){
 		MajinBoo majin = new MajinBoo();
 		int velocidad = majin.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(majin);
+		majin.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		majin.consumir(nube);
 		majin.pasarTurno();
@@ -467,6 +498,9 @@ public class MajinBooTest {
 	public void testAtacarNoReduceElEfectoDeLaNubeVoladora(){
 		MajinBoo majin = new MajinBoo();
 		int velocidad = majin.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(majin);
+		majin.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		majin.consumir(nube);
 		Gohan gohan = new Gohan();

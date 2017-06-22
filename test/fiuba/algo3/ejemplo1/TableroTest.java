@@ -7,6 +7,7 @@ import fiuba.algo3.ejemplo1.Excepciones.CeldaOcupada;
 import fiuba.algo3.ejemplo1.Excepciones.CeldaVacia;
 import fiuba.algo3.ejemplo1.Excepciones.MovimientoInvalido;
 import fiuba.algo3.ejemplo1.Excepciones.PosicionFueraDelTablero;
+import fiuba.algo3.ejemplo1.Personaje.Equipo;
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
 import fiuba.algo3.ejemplo1.Personaje.Goku;
 import fiuba.algo3.ejemplo1.tablero.Celda;
@@ -61,11 +62,17 @@ public class TableroTest {
 	public void testMoverPersonajeACeldaConConsumibleLoConsume() {
 		Tablero tablero = new Tablero(10);
 		Goku personaje = new Goku();
+		Equipo equipo = new Equipo(); 
+		equipo.add(personaje);
+		personaje.agregarAliados(equipo);
 		EsferaDragon esfera = new EsferaDragon();
 		Celda celda = tablero.obtenerCelda(3, 6);
+		Celda celdaPersonaje = tablero.obtenerCelda(3, 7);
+		celdaPersonaje.agregarPersonaje(personaje);
 		tablero.agregarConsumible(celda, esfera);
-		tablero.agregarPersonaje(celda,personaje);
-		Assert.assertEquals("No agrego el consumible", (float)25, personaje.obtenerPoderDePelea());
+		tablero.moverPersonaje(personaje, celdaPersonaje, celda);
+		//tablero.agregarPersonaje(celda,personaje);
+		Assert.assertEquals("No agrego el consumible", (float)25, personaje.obtenerPoderDePelea());		
 	}
 	
 	@Test

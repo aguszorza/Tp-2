@@ -10,6 +10,7 @@ import fiuba.algo3.ejemplo1.Consumibles.SemillaErmitanio;
 import fiuba.algo3.ejemplo1.Excepciones.AbsorcionesInsuficientes;
 import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Personaje.Cell;
+import fiuba.algo3.ejemplo1.Personaje.Equipo;
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
 import fiuba.algo3.ejemplo1.Personaje.Gohan;
 import fiuba.algo3.ejemplo1.Personaje.MajinBoo;
@@ -295,6 +296,9 @@ public class CellTest {
 	@Test
 	public void testConsumirEsferaDelDragonAumentaElDanioDeAtaque(){
 		Cell cell = new Cell();
+		Equipo equipo = new Equipo(); 
+		equipo.add(cell);
+		cell.agregarAliados(equipo);
 		EsferaDragon esfera = new EsferaDragon();
 		cell.consumir(esfera);
 		float danio = 25;
@@ -305,6 +309,9 @@ public class CellTest {
 	public void testPasarDeTurnoNoReduceElEfectoDeLaEsferaDelDragon(){
 		Cell cell = new Cell();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(cell);
+		cell.agregarAliados(equipo);
 		cell.consumir(esfera);
 		cell.pasarTurno();
 		cell.pasarTurno();
@@ -316,6 +323,9 @@ public class CellTest {
 	public void testAtacarNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
 		Cell cell = new Cell();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(cell);
+		cell.agregarAliados(equipo);
 		cell.consumir(esfera);
 		Gohan gohan = new Gohan();
 		cell.atacar(gohan);
@@ -327,6 +337,9 @@ public class CellTest {
 	public void testAtacarReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
 		Cell cell = new Cell();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(cell);
+		cell.agregarAliados(equipo);
 		cell.consumir(esfera);
 		Gohan gohan = new Gohan();
 		cell.atacar(gohan);
@@ -339,6 +352,9 @@ public class CellTest {
 	public void testLanzarHabilidadNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
 		Cell cell = new Cell();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(cell);
+		cell.agregarAliados(equipo);
 		cell.consumir(esfera);
 		for(int i = 0; i < 10; i++)
 			cell.aumentarKi();
@@ -352,6 +368,9 @@ public class CellTest {
 	public void testLanzarHabilidadReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
 		Cell cell = new Cell();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(cell);
+		cell.agregarAliados(equipo);
 		cell.consumir(esfera);
 		Gohan gohan = new Gohan();
 		for(int i = 0; i < 10; i++)
@@ -367,6 +386,9 @@ public class CellTest {
 		Cell cell = new Cell();
 		cell.reducirVida(200);
 		int vida = cell.obtenerVida();
+		Equipo equipo = new Equipo(); 
+		equipo.add(cell);
+		cell.agregarAliados(equipo);
 		SemillaErmitanio semilla = new SemillaErmitanio();
 		cell.consumir(semilla);
 		vida = cell.obtenerVida() - vida;
@@ -377,6 +399,9 @@ public class CellTest {
 	public void testConsumirNubeVoladoraAumentaLaVelocidadAlDoble(){
 		Cell cell = new Cell();
 		int velocidad = cell.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(cell);
+		cell.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		cell.consumir(nube);
 		velocidad = cell.obtenerVelocidad()/velocidad;
@@ -387,6 +412,9 @@ public class CellTest {
 	public void testPasarUnTurnoNoEliminaElEfectoDeLaNubeVoladora(){
 		Cell cell = new Cell();
 		int velocidad = cell.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(cell);
+		cell.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		cell.consumir(nube);
 		cell.pasarTurno();
@@ -398,6 +426,9 @@ public class CellTest {
 	public void testPasarDosTurnoEliminaElEfectoDeLaNubeVoladora(){
 		Cell cell = new Cell();
 		int velocidad = cell.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(cell);
+		cell.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		cell.consumir(nube);
 		cell.pasarTurno();
@@ -410,6 +441,9 @@ public class CellTest {
 	public void testAtacarNoReduceElEfectoDeLaNubeVoladora(){
 		Cell cell = new Cell();
 		int velocidad = cell.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(cell);
+		cell.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		cell.consumir(nube);
 		Gohan gohan = new Gohan();

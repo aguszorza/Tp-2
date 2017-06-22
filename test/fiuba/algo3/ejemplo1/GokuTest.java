@@ -8,6 +8,7 @@ import fiuba.algo3.ejemplo1.Consumibles.EsferaDragon;
 import fiuba.algo3.ejemplo1.Consumibles.NubeVoladora;
 import fiuba.algo3.ejemplo1.Consumibles.SemillaErmitanio;
 import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
+import fiuba.algo3.ejemplo1.Personaje.Equipo;
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
 import fiuba.algo3.ejemplo1.Personaje.Goku;
 import fiuba.algo3.ejemplo1.Personaje.MajinBoo;
@@ -270,6 +271,9 @@ public class GokuTest {
 	public void testConsumirEsferaDelDragonAumentaElDanioDeAtaque(){
 		Goku goku = new Goku();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(goku);
+		goku.agregarAliados(equipo);
 		goku.consumir(esfera);
 		float danio = 25;
 		Assert.assertEquals("No paso: no aumento el danio de ataque", danio, goku.obtenerPoderDePelea());
@@ -279,6 +283,9 @@ public class GokuTest {
 	public void testPasarDeTurnoNoReduceElEfectoDeLaEsferaDelDragon(){
 		Goku goku = new Goku();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(goku);
+		goku.agregarAliados(equipo);
 		goku.consumir(esfera);
 		goku.pasarTurno();
 		goku.pasarTurno();
@@ -290,6 +297,9 @@ public class GokuTest {
 	public void testAtacarNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
 		Goku goku = new Goku();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(goku);
+		goku.agregarAliados(equipo);
 		goku.consumir(esfera);
 		Freezer freezer = new Freezer();
 		goku.atacar(freezer);
@@ -301,6 +311,9 @@ public class GokuTest {
 	public void testAtacarReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
 		Goku goku = new Goku();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(goku);
+		goku.agregarAliados(equipo);
 		goku.consumir(esfera);
 		Freezer freezer = new Freezer();
 		goku.atacar(freezer);
@@ -313,6 +326,9 @@ public class GokuTest {
 	public void testLanzarHabilidadNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
 		Goku goku = new Goku();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(goku);
+		goku.agregarAliados(equipo);
 		goku.consumir(esfera);
 		for(int i = 0; i < 10; i++)
 			goku.aumentarKi();
@@ -326,6 +342,9 @@ public class GokuTest {
 	public void testLanzarHabilidadReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
 		Goku goku = new Goku();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(goku);
+		goku.agregarAliados(equipo);
 		goku.consumir(esfera);
 		Freezer freezer = new Freezer();
 		for(int i = 0; i < 10; i++)
@@ -341,6 +360,9 @@ public class GokuTest {
 		Goku goku = new Goku();
 		goku.reducirVida(200);
 		int vida = goku.obtenerVida();
+		Equipo equipo = new Equipo(); 
+		equipo.add(goku);
+		goku.agregarAliados(equipo);
 		SemillaErmitanio semilla = new SemillaErmitanio();
 		goku.consumir(semilla);
 		vida = goku.obtenerVida() - vida;
@@ -351,6 +373,9 @@ public class GokuTest {
 	public void testConsumirNubeVoladoraAumentaLaVelocidadAlDoble(){
 		Goku goku = new Goku();
 		int velocidad = goku.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(goku);
+		goku.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		goku.consumir(nube);
 		velocidad = goku.obtenerVelocidad()/velocidad;
@@ -361,6 +386,9 @@ public class GokuTest {
 	public void testPasarUnTurnoNoEliminaElEfectoDeLaNubeVoladora(){
 		Goku goku = new Goku();
 		int velocidad = goku.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(goku);
+		goku.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		goku.consumir(nube);
 		goku.pasarTurno();
@@ -372,6 +400,9 @@ public class GokuTest {
 	public void testPasarDosTurnoEliminaElEfectoDeLaNubeVoladora(){
 		Goku goku = new Goku();
 		int velocidad = goku.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(goku);
+		goku.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		goku.consumir(nube);
 		goku.pasarTurno();
@@ -384,6 +415,9 @@ public class GokuTest {
 	public void testAtacarNoReduceElEfectoDeLaNubeVoladora(){
 		Goku goku = new Goku();
 		int velocidad = goku.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(goku);
+		goku.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		goku.consumir(nube);
 		Freezer freezer = new Freezer();

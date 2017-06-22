@@ -8,6 +8,7 @@ import fiuba.algo3.ejemplo1.Consumibles.EsferaDragon;
 import fiuba.algo3.ejemplo1.Consumibles.NubeVoladora;
 import fiuba.algo3.ejemplo1.Consumibles.SemillaErmitanio;
 import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
+import fiuba.algo3.ejemplo1.Personaje.Equipo;
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
 import fiuba.algo3.ejemplo1.Personaje.Gohan;
 import fiuba.algo3.ejemplo1.Personaje.Goku;
@@ -265,6 +266,9 @@ public class FreezerTest {
 	public void testConsumirEsferaDelDragonAumentaElDanioDeAtaque(){
 		Freezer freezer = new Freezer();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(freezer);
+		freezer.agregarAliados(equipo);
 		freezer.consumir(esfera);
 		float danio = 25;
 		Assert.assertEquals("No paso: no aumento el danio de ataque", danio, freezer.obtenerPoderDePelea());
@@ -274,6 +278,9 @@ public class FreezerTest {
 	public void testPasarDeTurnoNoReduceElEfectoDeLaEsferaDelDragon(){
 		Freezer freezer = new Freezer();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(freezer);
+		freezer.agregarAliados(equipo);
 		freezer.consumir(esfera);
 		freezer.pasarTurno();
 		freezer.pasarTurno();
@@ -285,6 +292,9 @@ public class FreezerTest {
 	public void testAtacarNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
 		Freezer freezer = new Freezer();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(freezer);
+		freezer.agregarAliados(equipo);
 		freezer.consumir(esfera);
 		Gohan gohan = new Gohan();
 		freezer.atacar(gohan);
@@ -296,6 +306,9 @@ public class FreezerTest {
 	public void testAtacarReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
 		Freezer freezer = new Freezer();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(freezer);
+		freezer.agregarAliados(equipo);
 		freezer.consumir(esfera);
 		Gohan gohan = new Gohan();
 		freezer.atacar(gohan);
@@ -308,6 +321,9 @@ public class FreezerTest {
 	public void testLanzarHabilidadNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
 		Freezer freezer = new Freezer();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(freezer);
+		freezer.agregarAliados(equipo);
 		freezer.consumir(esfera);
 		for(int i = 0; i < 10; i++)
 			freezer.aumentarKi();
@@ -321,6 +337,9 @@ public class FreezerTest {
 	public void testLanzarHabilidadReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
 		Freezer freezer = new Freezer();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(freezer);
+		freezer.agregarAliados(equipo);
 		freezer.consumir(esfera);
 		Gohan gohan = new Gohan();
 		for(int i = 0; i < 10; i++)
@@ -336,6 +355,9 @@ public class FreezerTest {
 		Freezer freezer = new Freezer();
 		freezer.reducirVida(200);
 		int vida = freezer.obtenerVida();
+		Equipo equipo = new Equipo(); 
+		equipo.add(freezer);
+		freezer.agregarAliados(equipo);
 		SemillaErmitanio semilla = new SemillaErmitanio();
 		freezer.consumir(semilla);
 		vida = freezer.obtenerVida() - vida;
@@ -346,6 +368,9 @@ public class FreezerTest {
 	public void testConsumirNubeVoladoraAumentaLaVelocidadAlDoble(){
 		Freezer freezer = new Freezer();
 		int velocidad = freezer.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(freezer);
+		freezer.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		freezer.consumir(nube);
 		velocidad = freezer.obtenerVelocidad()/velocidad;
@@ -356,6 +381,9 @@ public class FreezerTest {
 	public void testPasarUnTurnoNoEliminaElEfectoDeLaNubeVoladora(){
 		Freezer freezer = new Freezer();
 		int velocidad = freezer.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(freezer);
+		freezer.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		freezer.consumir(nube);
 		freezer.pasarTurno();
@@ -367,6 +395,9 @@ public class FreezerTest {
 	public void testPasarDosTurnoEliminaElEfectoDeLaNubeVoladora(){
 		Freezer freezer = new Freezer();
 		int velocidad = freezer.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(freezer);
+		freezer.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		freezer.consumir(nube);
 		freezer.pasarTurno();
@@ -379,6 +410,9 @@ public class FreezerTest {
 	public void testAtacarNoReduceElEfectoDeLaNubeVoladora(){
 		Freezer freezer = new Freezer();
 		int velocidad = freezer.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(freezer);
+		freezer.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		freezer.consumir(nube);
 		Gohan gohan = new Gohan();

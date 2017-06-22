@@ -280,6 +280,9 @@ public class PiccoloTest {
 	public void testConsumirEsferaDelDragonAumentaElDanioDeAtaque(){
 		Piccolo piccolo = new Piccolo();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(piccolo);
+		piccolo.agregarAliados(equipo);
 		piccolo.consumir(esfera);
 		float danio = 25;
 		Assert.assertEquals("No paso: no aumento el danio de ataque", danio, piccolo.obtenerPoderDePelea());
@@ -289,6 +292,9 @@ public class PiccoloTest {
 	public void testPasarDeTurnoNoReduceElEfectoDeLaEsferaDelDragon(){
 		Piccolo piccolo = new Piccolo();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(piccolo);
+		piccolo.agregarAliados(equipo);
 		piccolo.consumir(esfera);
 		piccolo.pasarTurno();
 		piccolo.pasarTurno();
@@ -300,6 +306,9 @@ public class PiccoloTest {
 	public void testAtacarNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
 		Piccolo piccolo = new Piccolo();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(piccolo);
+		piccolo.agregarAliados(equipo);
 		piccolo.consumir(esfera);
 		Freezer freezer = new Freezer();
 		piccolo.atacar(freezer);
@@ -311,6 +320,9 @@ public class PiccoloTest {
 	public void testAtacarReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
 		Piccolo piccolo = new Piccolo();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(piccolo);
+		piccolo.agregarAliados(equipo);
 		piccolo.consumir(esfera);
 		Freezer freezer = new Freezer();
 		piccolo.atacar(freezer);
@@ -323,6 +335,9 @@ public class PiccoloTest {
 	public void testLanzarHabilidadNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
 		Piccolo piccolo = new Piccolo();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(piccolo);
+		piccolo.agregarAliados(equipo);
 		piccolo.consumir(esfera);
 		for(int i = 0; i < 10; i++)
 			piccolo.aumentarKi();
@@ -336,6 +351,9 @@ public class PiccoloTest {
 	public void testLanzarHabilidadReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
 		Piccolo piccolo = new Piccolo();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(piccolo);
+		piccolo.agregarAliados(equipo);
 		piccolo.consumir(esfera);
 		Freezer freezer = new Freezer();
 		for(int i = 0; i < 10; i++)
@@ -350,6 +368,9 @@ public class PiccoloTest {
 	public void testConsumirSemillaErmitanioAumentaLaVidaEnCien(){
 		Piccolo piccolo = new Piccolo();
 		piccolo.reducirVida(200);
+		Equipo equipo = new Equipo(); 
+		equipo.add(piccolo);
+		piccolo.agregarAliados(equipo);
 		int vida = piccolo.obtenerVida();
 		SemillaErmitanio semilla = new SemillaErmitanio();
 		piccolo.consumir(semilla);
@@ -361,6 +382,9 @@ public class PiccoloTest {
 	public void testConsumirNubeVoladoraAumentaLaVelocidadAlDoble(){
 		Piccolo piccolo = new Piccolo();
 		int velocidad = piccolo.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(piccolo);
+		piccolo.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		piccolo.consumir(nube);
 		velocidad = piccolo.obtenerVelocidad()/velocidad;
@@ -371,6 +395,9 @@ public class PiccoloTest {
 	public void testPasarUnTurnoNoEliminaElEfectoDeLaNubeVoladora(){
 		Piccolo piccolo = new Piccolo();
 		int velocidad = piccolo.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(piccolo);
+		piccolo.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		piccolo.consumir(nube);
 		piccolo.pasarTurno();
@@ -382,6 +409,9 @@ public class PiccoloTest {
 	public void testPasarDosTurnoEliminaElEfectoDeLaNubeVoladora(){
 		Piccolo piccolo = new Piccolo();
 		int velocidad = piccolo.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(piccolo);
+		piccolo.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		piccolo.consumir(nube);
 		piccolo.pasarTurno();
@@ -394,6 +424,9 @@ public class PiccoloTest {
 	public void testAtacarNoReduceElEfectoDeLaNubeVoladora(){
 		Piccolo piccolo = new Piccolo();
 		int velocidad = piccolo.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(piccolo);
+		piccolo.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		piccolo.consumir(nube);
 		Freezer freezer = new Freezer();

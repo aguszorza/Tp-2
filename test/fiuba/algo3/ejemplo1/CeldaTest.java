@@ -3,6 +3,7 @@ package fiuba.algo3.ejemplo1;
 import org.junit.Test;
 
 import fiuba.algo3.ejemplo1.Consumibles.EsferaDragon;
+import fiuba.algo3.ejemplo1.Personaje.Equipo;
 import fiuba.algo3.ejemplo1.Personaje.Goku;
 import fiuba.algo3.ejemplo1.tablero.Celda;
 import junit.framework.Assert;
@@ -90,6 +91,9 @@ public class CeldaTest {
 	public void testAgregarPersonajeConsumeElConsumibleSiHayUno(){
 		Celda celda = new Celda(2,3);
 		Goku personaje = new Goku();
+		Equipo equipo = new Equipo(); 
+		equipo.add(personaje);
+		personaje.agregarAliados(equipo);
 		EsferaDragon esfera = new EsferaDragon();
 		celda.agregarConsumible(esfera);
 		celda.agregarPersonaje(personaje);
@@ -100,6 +104,9 @@ public class CeldaTest {
 	public void testAgregarPersonajeEnUnaCeldaConConsumibleEliminaElConsumible(){
 		Celda celda = new Celda(2,3);
 		Goku personaje = new Goku();
+		Equipo equipo = new Equipo(); 
+		equipo.add(personaje);
+		personaje.agregarAliados(equipo);
 		EsferaDragon esfera = new EsferaDragon();
 		celda.agregarConsumible(esfera);
 		celda.agregarPersonaje(personaje);

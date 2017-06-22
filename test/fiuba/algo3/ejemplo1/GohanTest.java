@@ -357,6 +357,9 @@ public class GohanTest {
 	public void testConsumirEsferaDelDragonAumentaElDanioDeAtaque(){
 		Gohan gohan = new Gohan();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(gohan);
+		gohan.agregarAliados(equipo);
 		gohan.consumir(esfera);
 		float danio = (float) 18.75;
 		Assert.assertEquals("No paso: no aumento el danio de ataque", danio, gohan.obtenerPoderDePelea());
@@ -366,6 +369,9 @@ public class GohanTest {
 	public void testPasarDeTurnoNoReduceElEfectoDeLaEsferaDelDragon(){
 		Gohan gohan = new Gohan();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(gohan);
+		gohan.agregarAliados(equipo);
 		gohan.consumir(esfera);
 		gohan.pasarTurno();
 		gohan.pasarTurno();
@@ -377,6 +383,9 @@ public class GohanTest {
 	public void testAtacarNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
 		Gohan gohan = new Gohan();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(gohan);
+		gohan.agregarAliados(equipo);
 		gohan.consumir(esfera);
 		Freezer freezer = new Freezer();
 		gohan.atacar(freezer);
@@ -388,6 +397,9 @@ public class GohanTest {
 	public void testAtacarReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
 		Gohan gohan = new Gohan();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(gohan);
+		gohan.agregarAliados(equipo);
 		gohan.consumir(esfera);
 		Freezer freezer = new Freezer();
 		gohan.atacar(freezer);
@@ -400,6 +412,9 @@ public class GohanTest {
 	public void testLanzarHabilidadNoReduceElEfectoDeLaEsferaDelDragonTrasUnUso(){
 		Gohan gohan = new Gohan();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(gohan);
+		gohan.agregarAliados(equipo);
 		gohan.consumir(esfera);
 		for(int i = 0; i < 10; i++)
 			gohan.aumentarKi();
@@ -413,6 +428,9 @@ public class GohanTest {
 	public void testLanzarHabilidadReduceElEfectoDeLaEsferaDelDragonTrasDosUsos(){
 		Gohan gohan = new Gohan();
 		EsferaDragon esfera = new EsferaDragon();
+		Equipo equipo = new Equipo(); 
+		equipo.add(gohan);
+		gohan.agregarAliados(equipo);
 		gohan.consumir(esfera);
 		Freezer freezer = new Freezer();
 		for(int i = 0; i < 10; i++)
@@ -428,6 +446,9 @@ public class GohanTest {
 		Gohan gohan = new Gohan();
 		gohan.reducirVida(200);
 		int vida = gohan.obtenerVida();
+		Equipo equipo = new Equipo(); 
+		equipo.add(gohan);
+		gohan.agregarAliados(equipo);
 		SemillaErmitanio semilla = new SemillaErmitanio();
 		gohan.consumir(semilla);
 		vida = gohan.obtenerVida() - vida;
@@ -438,6 +459,9 @@ public class GohanTest {
 	public void testConsumirNubeVoladoraAumentaLaVelocidadAlDoble(){
 		Gohan gohan = new Gohan();
 		int velocidad = gohan.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(gohan);
+		gohan.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		gohan.consumir(nube);
 		velocidad = gohan.obtenerVelocidad()/velocidad;
@@ -448,6 +472,9 @@ public class GohanTest {
 	public void testPasarUnTurnoNoEliminaElEfectoDeLaNubeVoladora(){
 		Gohan gohan = new Gohan();
 		int velocidad = gohan.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(gohan);
+		gohan.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		gohan.consumir(nube);
 		gohan.pasarTurno();
@@ -459,6 +486,9 @@ public class GohanTest {
 	public void testPasarDosTurnoEliminaElEfectoDeLaNubeVoladora(){
 		Gohan gohan = new Gohan();
 		int velocidad = gohan.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(gohan);
+		gohan.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		gohan.consumir(nube);
 		gohan.pasarTurno();
@@ -471,6 +501,9 @@ public class GohanTest {
 	public void testAtacarNoReduceElEfectoDeLaNubeVoladora(){
 		Gohan gohan = new Gohan();
 		int velocidad = gohan.obtenerVelocidad();
+		Equipo equipo = new Equipo(); 
+		equipo.add(gohan);
+		gohan.agregarAliados(equipo);
 		NubeVoladora nube = new NubeVoladora();
 		gohan.consumir(nube);
 		Freezer freezer = new Freezer();
