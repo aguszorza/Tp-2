@@ -10,6 +10,7 @@ import fiuba.algo3.ejemplo1.Excepciones.AtaqueFueraDeRango;
 import fiuba.algo3.ejemplo1.Excepciones.AtaqueNoValido;
 import fiuba.algo3.ejemplo1.Excepciones.CeldaOcupada;
 import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
+import fiuba.algo3.ejemplo1.Excepciones.PartidaGanada;
 import fiuba.algo3.ejemplo1.Excepciones.PersonajeInexistente;
 import fiuba.algo3.ejemplo1.Excepciones.PersonajeNoMovilizable;
 import fiuba.algo3.ejemplo1.Excepciones.PosicionFueraDelTablero;
@@ -163,6 +164,10 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 						System.out.println(e.getMessage());
 						this.reproducirSonido(SONIDO_ERROR);
 					}*/
+					catch(PartidaGanada e){
+						//Aplicacion.ganoAlguien(e.getMessage());
+						System.out.println(e.getMessage());
+					}
 					catch(Exception e){
 						System.out.println(e.getMessage());
 						this.reproducirSonido(SONIDO_ERROR);
@@ -208,6 +213,10 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 					System.out.println(e.getMessage());
 					this.reproducirSonido(SONIDO_ERROR);
 				}*/
+				catch(PartidaGanada e){
+					//Aplicacion.ganoAlguien(e.getMessage());
+					System.out.println(e.getMessage());
+				}
 				catch(Exception e){
 					System.out.println(e.getMessage());
 					this.reproducirSonido(SONIDO_ERROR);

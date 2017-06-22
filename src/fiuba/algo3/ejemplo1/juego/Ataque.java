@@ -2,7 +2,7 @@ package fiuba.algo3.ejemplo1.juego;
 
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
 
-public class Ataque extends Accion{
+public class Ataque{
 	
 	private int danio;
 	private int distanciaDeAtaque;

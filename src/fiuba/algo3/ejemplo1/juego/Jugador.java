@@ -4,6 +4,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 import fiuba.algo3.ejemplo1.Excepciones.AtaqueAliadoInvalido;
+import fiuba.algo3.ejemplo1.Excepciones.PartidaGanada;
 import fiuba.algo3.ejemplo1.Excepciones.PersonajeInexistente;
 import fiuba.algo3.ejemplo1.Excepciones.PosicionFueraDelTablero;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
@@ -16,7 +17,6 @@ public class Jugador {
 	private Hashtable <Personaje, Celda> personajes;
 	private Hashtable <Personaje, Celda> enemigos;
 	private Tablero tablero;
-	private ControladorJugador controlador;
 	private String nombre;
 	
 	public Jugador(Hashtable <Personaje, Celda> personajes,  Hashtable <Personaje, Celda> enemigos, Tablero tablero, String nombre){
@@ -38,8 +38,8 @@ public class Jugador {
 		return this.enemigos.keys();
 	}
 	
-	public Celda obtenerCelda(Personaje personaje){
-		return this.personajes.get(personaje);
+	public Celda obtenerCelda( Hashtable <Personaje, Celda> celdas, Personaje personaje){
+		return celdas.get(personaje);
 	}
 	
 	public Boolean existePersonaje(Personaje personaje){
@@ -53,7 +53,7 @@ public class Jugador {
 		if(existePersonaje(atacado)){
 			throw new AtaqueAliadoInvalido();
 		}
-		this.tablero.verificarAtaque(atacante.obtenerDistanciaDeAtaque(), obtenerCelda(atacante), obtenerCelda(atacado)); 
+		this.tablero.verificarAtaque(atacante.obtenerDistanciaDeAtaque(), obtenerCelda(this.personajes, atacante), obtenerCelda(this.enemigos, atacado)); 
 	}
 	//ver de unir las dos. Ya sea usando una funcion o bien uniendo ataque con habilidad
 	
@@ -73,13 +73,13 @@ public class Jugador {
 			throw new PosicionFueraDelTablero("Movimiento no valido");
 		}
 		Celda celdaFin = this.tablero.obtenerCelda(fila, columna);
-		Celda celdaAct = this.obtenerCelda(personaje);
+		Celda celdaAct = this.obtenerCelda(this.personajes, personaje);
 		this.tablero.moverPersonaje(personaje, celdaAct, celdaFin);
 		this.personajes.put(personaje, celdaFin);
 	}
 	
 	public void atacar(Personaje personaje, Personaje enemigo){
-		if (enemigo == null)
+		//if (enemigo == null)
 			//excepcion
 		this.verificarAtaque(personaje, enemigo);
 		//Personaje enemigo = celdaEnemigo.obtenerPersonaje();
@@ -89,16 +89,23 @@ public class Jugador {
 		personaje.atacar(enemigo);
 		if(enemigo.obtenerVida() <= 0){
 			celdaEnemigo.removerPersonaje();
+			this.enemigos.remove(enemigo);
+			this.gano();
 		}
 	}
 	
 	public void lanzarHablidadEspecial(Personaje atacante, Personaje atacado){
-		if (atacado == null)
+		//if (atacado == null)
 		verificarAtaque(atacante,atacado);
 		Celda celdaPersonaje = this.personajes.get(atacante);
 		Celda celdaEnemigo = this.enemigos.get(atacado);
 		this.tablero.verificarAtaque(atacante.obtenerDistanciaDeAtaque(), celdaPersonaje, celdaEnemigo);
 		atacante.lanzarHabilidadEspecial(atacado);
+		if(atacado.obtenerVida() <= 0){
+			celdaEnemigo.removerPersonaje();
+			this.enemigos.remove(atacado);
+			this.gano();
+		}
 	}
 	
 	public void transformar(Personaje personaje){
@@ -115,41 +122,16 @@ public class Jugador {
 		}
 	}
 	
-	public Boolean sigueVivo(){
-		return personajes.size() != 0;
+	public void gano(){
+		if(enemigos.size() == 0){
+			String mensaje = "El ganador es: " + this.nombre;
+			throw new PartidaGanada(mensaje);
+		}
 	}
 	
 	//delegar a controlador?
-
-	
-	
-	private Personaje seleccionarPersonajeAliado(){
-		return this.controlador.seleccionarPersonajeAliado();
-	}
-	
-	private Personaje seleccionarPersonajeEnemigo(){
-		return this.controlador.seleccionarPersonajeEnemigo();
-	}
-	
-	private void accionar(Personaje personaje, Accion accion){
-		accion.realizar(personaje);
-	}
-	
-	private Accion seleccionarAccion(){
-		return this.controlador.seleccionarAccion();
-	}
 	
 	public Tablero obtenerTablero(){
 		return this.tablero;
-	}
-	
-	public void jugar(){
-		int acciones = 0;
-		while(acciones < 2){
-			Personaje personajeSeleccionado = this.seleccionarPersonajeAliado();
-			Accion accion = this.seleccionarAccion();
-			this.accionar(personajeSeleccionado, accion);
-			acciones++;
-		}
 	}
 }
