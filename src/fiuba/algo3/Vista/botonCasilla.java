@@ -147,6 +147,8 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 					try{
 						this.turno.lanzarHablidad(this.celda.obtenerPersonaje(), enemigo);
 						this.reproducirSonido(SONIDO_HABILIDAD);
+						this.limpiarBotones();
+						this.actualizarVista();
 					}
 					/*catch(AtaqueNoValido e){
 						System.out.println(e.getMessage());
@@ -171,9 +173,9 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 					catch(Exception e){
 						System.out.println(e.getMessage());
 						this.reproducirSonido(SONIDO_ERROR);
+						this.limpiarBotones();
+						this.actualizarVista();
 					}
-					this.limpiarBotones();
-					this.actualizarVista();
 				});
 				personaje.setMinSize(70, 70);
 				personaje.setMaxSize(70, 70);
@@ -200,6 +202,8 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 				try{
 					this.turno.atacar(this.celda.obtenerPersonaje(), enemigo);
 					this.reproducirSonido(SONIDO_GOLPE);
+					this.limpiarBotones();
+					this.actualizarVista();
 				}
 				/*catch(AtaqueNoValido e){
 					System.out.println(e.getMessage());
@@ -220,9 +224,9 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 				catch(Exception e){
 					System.out.println(e.getMessage());
 					this.reproducirSonido(SONIDO_ERROR);
+					this.limpiarBotones();
+					this.actualizarVista();
 				}
-				this.limpiarBotones();
-				this.actualizarVista();
 			});
 			personaje.setMinSize(70, 70);
 			personaje.setMaxSize(70, 70);
@@ -257,6 +261,8 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 				this.turno.mover(this.celda.obtenerPersonaje(), celdaFinal);
 				this.reproducirSonido(SONIDO_MOVIMIENTO);
 				//this.tablero.moverPersonaje(this.celda.obtenerPersonaje(), this.celda, celdaFinal);
+				this.limpiarBotones();
+				this.actualizarVista();
 			}
 			/*catch (PosicionFueraDelTablero e){
 				System.out.println(e.getMessage());
@@ -278,9 +284,9 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 			catch(Exception e){
 				System.out.println(e.getMessage());
 				this.reproducirSonido(SONIDO_ERROR);
+				this.limpiarBotones();
+				this.actualizarVista();
 			}
-			this.limpiarBotones();
-			this.actualizarVista();
 		});
 	}
 	
