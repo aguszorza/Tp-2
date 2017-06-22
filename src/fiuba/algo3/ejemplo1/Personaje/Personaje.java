@@ -153,6 +153,7 @@ public class Personaje {
 		this.consumiblesActivos.put(consumible.obtenerNombre(), consumible);
 		consumible.afectar(this);
 		consumible.afectar(modoDePelea);
+		this.aliados.consumir(consumible);
 	}
 
 	public void actualizarConsumibles(Function <Consumible, Void> funcion) {
@@ -181,5 +182,9 @@ public class Personaje {
 		for(int i = 0; i <= consumiblesCaducados.size(); i++) {
 			this.consumiblesActivos.remove(consumiblesCaducados.get(i));
 		}*/
+	}
+	
+	public int cantidadEsferas(){
+		return this.aliados.cantidadEsferas();
 	}
 }

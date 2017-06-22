@@ -1,6 +1,7 @@
 package fiuba.algo3.ejemplo1.Consumibles;
 
 import fiuba.algo3.ejemplo1.ModosDePelea.Modo;
+import fiuba.algo3.ejemplo1.Personaje.Equipo;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
 
 public abstract class Consumible {
@@ -18,6 +19,7 @@ public abstract class Consumible {
 
     public abstract void afectar(Personaje personaje);
     public abstract void afectar(Modo modo);
+    public abstract int afectar(Equipo equipo);
 
     public abstract void desafectar(Personaje personaje);
     public abstract void desafectar(Modo modo);

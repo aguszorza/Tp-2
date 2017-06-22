@@ -1,6 +1,7 @@
 package fiuba.algo3.ejemplo1.Consumibles;
 
 import fiuba.algo3.ejemplo1.ModosDePelea.Modo;
+import fiuba.algo3.ejemplo1.Personaje.Equipo;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
 
 
@@ -35,5 +36,9 @@ public class NubeVoladora extends Consumible {
     }
     
     public void atacar(){
+    }
+    
+    public int afectar(Equipo equipo){
+    	return 0;
     }
 }

@@ -9,6 +9,9 @@ import java.util.Queue;
 
 import org.junit.Test;
 
+import fiuba.algo3.ejemplo1.Consumibles.EsferaDragon;
+import fiuba.algo3.ejemplo1.Consumibles.NubeVoladora;
+import fiuba.algo3.ejemplo1.Consumibles.SemillaErmitanio;
 import fiuba.algo3.ejemplo1.Excepciones.PersonajeInexistente;
 import fiuba.algo3.ejemplo1.Excepciones.PersonajeNoMovilizable;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
@@ -135,5 +138,59 @@ public class TurnoTest {
 		celdaFinal = tablero.obtenerCelda(1, 7);
 		turno.mover(goku, celdaFinal);
 		Assert.assertEquals("No paso: ", goku, tablero.obtenerCelda(1, 7).obtenerPersonaje());
+	}
+	
+	
+	@Test 
+	public void testConsumirEsferaAumentaEnUnoLaCantidadDeEsferasDelEquipo(){
+		Juego juego = new Juego();
+		Jugador guerreros = juego.obtenerGuerrerosZ();
+		Jugador enemigos = juego.obtenerEnemigos();
+		Personaje personaje = guerreros.obtenerPersonajesAliados().nextElement();
+		EsferaDragon esfera = new EsferaDragon();
+		int cantidad = personaje.cantidadEsferas();
+		personaje.consumir(esfera);
+		cantidad = personaje.cantidadEsferas() - cantidad;
+		Assert.assertEquals("No paso: ", 1, cantidad);
+	}
+	
+	@Test 
+	public void testConsumirNubeNoAumentaLaCantidadDeEsferasDelEquipo(){
+		Juego juego = new Juego();
+		Jugador guerreros = juego.obtenerGuerrerosZ();
+		Jugador enemigos = juego.obtenerEnemigos();
+		Personaje personaje = guerreros.obtenerPersonajesAliados().nextElement();
+		NubeVoladora esfera = new NubeVoladora();
+		int cantidad = personaje.cantidadEsferas();
+		personaje.consumir(esfera);
+		cantidad = personaje.cantidadEsferas() - cantidad;
+		Assert.assertEquals("No paso: ", 0, cantidad);
+	}
+	
+	@Test 
+	public void testConsumirSemillaNoAumentaLaCantidadDeEsferasDelEquipo(){
+		Juego juego = new Juego();
+		Jugador guerreros = juego.obtenerGuerrerosZ();
+		Jugador enemigos = juego.obtenerEnemigos();
+		Personaje personaje = guerreros.obtenerPersonajesAliados().nextElement();
+		SemillaErmitanio esfera = new SemillaErmitanio();
+		int cantidad = personaje.cantidadEsferas();
+		personaje.consumir(esfera);
+		cantidad = personaje.cantidadEsferas() - cantidad;
+		Assert.assertEquals("No paso: ", 0, cantidad);
+	}
+	
+	@Test 
+	public void testPasarTurnoNoAumentaLaCantidadDeEsferas(){
+		Juego juego = new Juego();
+		Jugador guerreros = juego.obtenerGuerrerosZ();
+		Jugador enemigos = juego.obtenerEnemigos();
+		Personaje personaje = guerreros.obtenerPersonajesAliados().nextElement();
+		EsferaDragon esfera = new EsferaDragon();
+		int cantidad = personaje.cantidadEsferas();
+		personaje.consumir(esfera);
+		personaje.pasarTurno();
+		cantidad = personaje.cantidadEsferas() - cantidad;
+		Assert.assertEquals("No paso: ", 1, cantidad);
 	}
 }

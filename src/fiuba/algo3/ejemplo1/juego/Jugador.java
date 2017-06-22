@@ -76,6 +76,7 @@ public class Jugador {
 		Celda celdaAct = this.obtenerCelda(this.personajes, personaje);
 		this.tablero.moverPersonaje(personaje, celdaAct, celdaFin);
 		this.personajes.put(personaje, celdaFin);
+		this.gano(personaje);
 	}
 	
 	public void atacar(Personaje personaje, Personaje enemigo){
@@ -90,7 +91,7 @@ public class Jugador {
 		if(enemigo.obtenerVida() <= 0){
 			celdaEnemigo.removerPersonaje();
 			this.enemigos.remove(enemigo);
-			this.gano();
+			this.gano(personaje);
 		}
 	}
 	
@@ -104,7 +105,7 @@ public class Jugador {
 		if(atacado.obtenerVida() <= 0){
 			celdaEnemigo.removerPersonaje();
 			this.enemigos.remove(atacado);
-			this.gano();
+			this.gano(atacante);
 		}
 	}
 	
@@ -122,8 +123,8 @@ public class Jugador {
 		}
 	}
 	
-	public void gano(){
-		if(enemigos.size() == 0){
+	public void gano(Personaje personaje){
+		if(enemigos.size() == 0 || personaje.cantidadEsferas() == 7){
 			String mensaje = "El ganador es: " + this.nombre;
 			throw new PartidaGanada(mensaje);
 		}
