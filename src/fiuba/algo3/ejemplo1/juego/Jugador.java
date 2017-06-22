@@ -18,12 +18,21 @@ public class Jugador {
 	private Hashtable <Personaje, Celda> enemigos;
 	private Tablero tablero;
 	private String nombre;
+	private String imagenGanador;
 	
 	public Jugador(Hashtable <Personaje, Celda> personajes,  Hashtable <Personaje, Celda> enemigos, Tablero tablero, String nombre){
 		this.personajes = personajes;
 		this.enemigos = enemigos;
 		this.tablero = tablero;
 		this.nombre = nombre;
+	}
+	
+	public void guardarImagen(String nombre){
+		this.imagenGanador = nombre;
+	}
+	
+	public String obtenerImagen(){
+		return this.imagenGanador;
 	}
 	
 	public String obtenerNombre(){
@@ -125,7 +134,7 @@ public class Jugador {
 	
 	public void gano(Personaje personaje){
 		if(enemigos.size() == 0 || personaje.cantidadEsferas() == 7){
-			String mensaje = "El ganador es: " + this.nombre;
+			String mensaje = "Los ganadores son los: " + this.nombre;
 			throw new PartidaGanada(mensaje);
 		}
 	}

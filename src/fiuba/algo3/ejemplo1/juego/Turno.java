@@ -123,4 +123,8 @@ public class Turno {
 		this.ataque = true;
 		terminoTurno();
 	}
+	
+	public String obtenerImagen(){
+		return this.cola.element().obtenerImagen();
+	}
 }

@@ -17,6 +17,9 @@ import fiuba.algo3.ejemplo1.tablero.Tablero;
 
 public class Juego {
 	
+	String IMAGEN_GUERREROS = "file:src/fiuba/algo3/ImagenesMenu/finJuegoGuerreros.png";
+	String IMAGEN_ENEMIGOS = "file:src/fiuba/algo3/ImagenesMenu/finJuegoEnemigos.png";
+	
 	public static final int TAMANIO_TABLERO = 9;
 	private Jugador guerreroZ;
 	private Jugador enemigoTierra;
@@ -28,7 +31,9 @@ public class Juego {
 		Hashtable <Personaje, Celda> guerrerosZ = inicializarGuerrerosZ();
 		Hashtable <Personaje, Celda> enemigos = inicializarEnemigosDeLaTierra();
 		this.guerreroZ = new Jugador(guerrerosZ, enemigos, tablero, "Guerreros Z");
+		this.guerreroZ.guardarImagen(IMAGEN_GUERREROS);
 		this.enemigoTierra = new Jugador(enemigos, guerrerosZ, tablero, "Enemigos de la Tierra");
+		this.enemigoTierra.guardarImagen(IMAGEN_ENEMIGOS);
 	}
 	
 	private Hashtable <Personaje, Celda> inicializarGuerrerosZ(){

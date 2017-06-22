@@ -23,12 +23,20 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class Aplicacion  extends Application{
@@ -38,12 +46,15 @@ public class Aplicacion  extends Application{
 	double TRANSPARENCIA = 0.9;
 	DatosPersonajes datos;
 	
+	private static Stage stage;
+	
 	public static void main(String[] args) {
         launch(args);
     }
 	
 	@Override
     public void start(Stage stage) throws Exception {
+		this.stage = stage;
 		Juego juego = new Juego();
 		Jugador guerreros = juego.obtenerGuerrerosZ();
 		Jugador enemigos = juego.obtenerEnemigos();
@@ -126,5 +137,49 @@ public class Aplicacion  extends Application{
 		mediaPlayer = new MediaPlayer(musicFile);
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		mediaPlayer.setAutoPlay(true);
+	}
+	
+	///////
+	public static void ganoAlguien(String ganador, String imagen){
+        Stage popUp = new Stage();
+        popUp.initModality(Modality.WINDOW_MODAL);
+        //Botones y texto
+        //Label label = new Label();
+        //label.setText(ganador);
+        //label.setTextFill(Color.BLACK);
+		//label.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+       
+        Button botonCerrar = new Button();
+        botonCerrar.setText("Cerrar");
+        botonCerrar.setOnAction(e -> cerrarPrograma());
+        //Button botonSeguir = new Button();
+        //botonSeguir.setText("Seguir jugando");
+        //botonSeguir.setOnAction(e -> popUp.close());
+        //Contenedor
+        VBox layout = new VBox(10);
+        //layout.getChildren().addAll(label,botonCerrar,botonSeguir);
+        //layout.getChildren().addAll(label,botonCerrar);
+        layout.getChildren().addAll(botonCerrar);
+        layout.setAlignment(Pos.CENTER);
+        layout.setSpacing(5);
+        popUp.setFullScreen(true);
+        popUp.initOwner(stage);
+        HBox cont = new HBox(layout);
+        
+        Image Image = new Image(imagen);
+        BackgroundImage imagenDeFondo = new BackgroundImage(Image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        cont.setBackground(new Background(imagenDeFondo));
+        
+        cont.setSpacing(5);
+        
+        cont.setAlignment(Pos.CENTER);
+        
+        Scene scene = new Scene(cont);
+        popUp.setScene(scene);
+        popUp.showAndWait();
+	}
+	
+	private static void cerrarPrograma(){
+		stage.close();
 	}
 }

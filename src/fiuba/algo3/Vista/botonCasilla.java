@@ -165,7 +165,7 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 						this.reproducirSonido(SONIDO_ERROR);
 					}*/
 					catch(PartidaGanada e){
-						//Aplicacion.ganoAlguien(e.getMessage());
+						Aplicacion.ganoAlguien(e.getMessage(), this.turno.obtenerImagen());
 						System.out.println(e.getMessage());
 					}
 					catch(Exception e){
@@ -214,7 +214,7 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 					this.reproducirSonido(SONIDO_ERROR);
 				}*/
 				catch(PartidaGanada e){
-					//Aplicacion.ganoAlguien(e.getMessage());
+					Aplicacion.ganoAlguien(e.getMessage(), this.turno.obtenerImagen());
 					System.out.println(e.getMessage());
 				}
 				catch(Exception e){
@@ -271,6 +271,10 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 				System.out.println(e.getMessage());
 				this.reproducirSonido(SONIDO_ERROR);
 			}*/
+			catch(PartidaGanada e){
+				Aplicacion.ganoAlguien(e.getMessage(), this.turno.obtenerImagen());
+				System.out.println(e.getMessage());
+			}
 			catch(Exception e){
 				System.out.println(e.getMessage());
 				this.reproducirSonido(SONIDO_ERROR);
