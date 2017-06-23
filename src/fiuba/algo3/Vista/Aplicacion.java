@@ -97,7 +97,7 @@ public class Aplicacion  extends Application{
 				Celda celda = tablero.obtenerCelda(i, j);
 				BotonCasillero toggle = new BotonCasillero(celda);
 				casilleros.add(toggle, j, i);
-				EventHandler<ActionEvent> event = new botonCasilla(turno, celda, general, lbl);
+				EventHandler<ActionEvent> event = new botonCasilla(turno, celda, general, lbl,toggle);
 				toggle.setOnAction(event);
 				toggle.actualizarImagen();
 			}

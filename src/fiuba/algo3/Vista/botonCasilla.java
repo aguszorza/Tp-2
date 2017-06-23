@@ -51,11 +51,12 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 	private Button botonAtacar;
 	private Button botonHabilidad;
 	private Button botonTransformar;
+	private ToggleButton toggle;
 	
 	private ArrayList <ToggleButton> botonesEnemigos;
 	
 	
-	public botonCasilla(Turno turno, Celda celda, GridPane grid, Label labelTurno){
+	public botonCasilla(Turno turno, Celda celda, GridPane grid, Label labelTurno, ToggleButton toggle){
 		this.botonesEnemigos = new ArrayList <ToggleButton>();
 		this.turno = turno;
 		this.celda = celda;
@@ -77,6 +78,7 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 		this.botonHabilidad.setOpacity(TRANSPARENCIA);
 		this.botonTransformar = new Button ("Transformar");
 		this.botonTransformar.setOpacity(TRANSPARENCIA);
+		this.toggle = toggle;
 	}
 	
 	@Override
@@ -301,6 +303,7 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 	public void actualizarVista(){
 		DatosPersonajes datos = (DatosPersonajes)this.grid.getChildren().get(0);
 		GridPane grid = (GridPane)this.grid.getChildren().get(1);
+		this.toggle.setSelected(false);
 		Aplicacion.actualizarVista(datos, grid,this.turno,this.labelTurno);
 		/*this.actualizarLabel();
 		Iterator <Node> iter = ((GridPane)this.grid.getChildren().get(0)).getChildren().iterator();
