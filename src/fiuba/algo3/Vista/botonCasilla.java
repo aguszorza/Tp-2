@@ -123,11 +123,11 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 				this.reproducirSonido(SONIDO_TRANSFORMACION);
 			}
 			catch (KiInsuficiente e){
-				System.out.println(e.getMessage());
+				//System.out.println(e.getMessage());
 				this.reproducirSonido(SONIDO_ERROR);
 			}
 			catch(Exception e){
-				System.out.println(e.getMessage());
+				//System.out.println(e.getMessage());
 				this.reproducirSonido(SONIDO_ERROR);
 			}
 			this.limpiarBotones();
@@ -168,10 +168,10 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 					}*/
 					catch(PartidaGanada e){
 						Aplicacion.ganoAlguien(e.getMessage(), this.turno.obtenerImagen());
-						System.out.println(e.getMessage());
+						//System.out.println(e.getMessage());
 					}
 					catch(Exception e){
-						System.out.println(e.getMessage());
+						//System.out.println(e.getMessage());
 						this.reproducirSonido(SONIDO_ERROR);
 						this.limpiarBotones();
 						this.actualizarVista();
@@ -219,10 +219,10 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 				}*/
 				catch(PartidaGanada e){
 					Aplicacion.ganoAlguien(e.getMessage(), this.turno.obtenerImagen());
-					System.out.println(e.getMessage());
+					//System.out.println(e.getMessage());
 				}
 				catch(Exception e){
-					System.out.println(e.getMessage());
+					//System.out.println(e.getMessage());
 					this.reproducirSonido(SONIDO_ERROR);
 					this.limpiarBotones();
 					this.actualizarVista();
@@ -279,10 +279,10 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 			}*/
 			catch(PartidaGanada e){
 				Aplicacion.ganoAlguien(e.getMessage(), this.turno.obtenerImagen());
-				System.out.println(e.getMessage());
+				//System.out.println(e.getMessage());
 			}
 			catch(Exception e){
-				System.out.println(e.getMessage());
+				//System.out.println(e.getMessage());
 				this.reproducirSonido(SONIDO_ERROR);
 				this.limpiarBotones();
 				this.actualizarVista();
