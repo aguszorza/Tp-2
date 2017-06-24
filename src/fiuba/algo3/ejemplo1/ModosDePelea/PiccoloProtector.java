@@ -25,7 +25,7 @@ public class PiccoloProtector extends Modo {
 		Iterator <Personaje> it = aliados.iterator();
 		while(it.hasNext()){
 			Personaje aliado = it.next();
-			if (aliado.getNombre() == "Gohan" && aliado.obtenerPorcentajeDeVida() >= 30){
+			if (aliado.getNombre() == "Gohan" && aliado.obtenerPorcentajeDeVida() >= 20){
 				throw new RequisitosDeTransformacionInsuficientes();
 			}
 		}

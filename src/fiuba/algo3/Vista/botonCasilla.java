@@ -102,6 +102,9 @@ public class botonCasilla implements EventHandler<ActionEvent>{
 			this.setearBotonHabilidad();
 			this.setearBotonTransformar();
 		}
+		else{
+			this.toggle.setSelected(false);
+		}
 	}
 	//Button botonDerecha, Button botonIzquierda, Button botonArriba, Button botonAbajo
 	private void limpiarBotones() {
