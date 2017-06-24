@@ -43,6 +43,7 @@ public class DatosPersonajes extends GridPane{
 		for (int i = 0; i < this.personajes.size(); i ++){
 			Personaje personaje = this.personajes.get(i);
 			ToggleButton boton = new ToggleButton();
+			boton.setOnAction(value-> boton.setSelected(false));
 			Label label = new Label();
 			boton.setOpacity(TRANSPARENCIA);
 			boton.setMinSize(70, 70);
