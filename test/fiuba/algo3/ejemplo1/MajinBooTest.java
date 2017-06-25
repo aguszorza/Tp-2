@@ -7,7 +7,6 @@ import junit.framework.Assert;
 import fiuba.algo3.ejemplo1.Consumibles.EsferaDragon;
 import fiuba.algo3.ejemplo1.Consumibles.NubeVoladora;
 import fiuba.algo3.ejemplo1.Consumibles.SemillaErmitanio;
-import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Excepciones.PersonajeInutilizado;
 import fiuba.algo3.ejemplo1.Personaje.Equipo;
 import fiuba.algo3.ejemplo1.Personaje.Gohan;
@@ -94,11 +93,10 @@ public class MajinBooTest {
 		Assert.assertEquals("No paso: no devolvio 2", 2, majin.obtenerVelocidad());
 	}
 	
-	@Test(expected = KiInsuficiente.class)
-	public void testBooMaloLevantaExcepcionSiNoSeTieneElKiSuficinte(){
+	@Test
+	public void testBooMaloDevuelveFalseSiNoSeTieneElKiSuficinte(){
 		MajinBoo majin = new MajinBoo();
-		majin.transformar();
-		Assert.fail("No levanto excepcion");
+		Assert.assertFalse("No devolvio false", majin.transformar());
 	}
 	
 	@Test
@@ -147,16 +145,15 @@ public class MajinBooTest {
 		Assert.assertEquals("No paso: el ki se redujo", 20, ki);
 	}
 
-	@Test(expected = KiInsuficiente.class)
-	public void testBooOriginalLevantaExcepcionSiNoTieneElKiNecesario(){
+	@Test
+	public void testBooOriginalDevuelveFalseSiNoTieneElKiNecesario(){
 		MajinBoo majin = new MajinBoo();
 		majin.aumentarKi();
 		majin.aumentarKi();
 		majin.aumentarKi();
 		majin.aumentarKi();
 		majin.transformar();
-		majin.transformar();
-		Assert.fail("No levanto excepcion");
+		Assert.assertFalse("No devolvio false", majin.transformar());
 	}
 	
 	@Test
@@ -216,12 +213,12 @@ public class MajinBooTest {
 		Assert.assertEquals("No paso: no se redujo la vida", (int)(danio * 0.8), vida);
 	}
 	
-	@Test (expected = KiInsuficiente.class)
-	public void testLanzarHabilidadEspecialLanzaExcepcionSiNoSeTieneElKiSuficiente(){
+	@Test
+	public void testLanzarHabilidadEspecialDevuelveFalseSiNoSeTieneElKiSuficiente(){
 		MajinBoo majin = new MajinBoo();
 		Goku goku = new Goku();
-		majin.lanzarHabilidadEspecial(goku);
-		Assert.fail("No levanto excepcion");
+		System.out.println( majin.lanzarHabilidadEspecial(goku));
+		Assert.assertFalse("No devolvio false", majin.lanzarHabilidadEspecial(goku));
 	}
 	
 	@Test
@@ -239,20 +236,19 @@ public class MajinBooTest {
 		Assert.assertEquals("No paso: aumento el ki", 0, ki);
 	}
 	
-	@Test (expected = PersonajeInutilizado.class)
-	public void testAtacarLevantaExcepcionSiElPersonajeFueConvertidoEnChocolate(){
+	@Test
+	public void testAtacarDevuelveFalseSiElPersonajeFueConvertidoEnChocolate(){
 		MajinBoo majin = new MajinBoo();
 		Goku goku = new Goku();
 		for (int i = 0; i < 6; i++){
 			majin.aumentarKi();
 		}
 		majin.lanzarHabilidadEspecial(goku);
-		goku.atacar(majin);
-		Assert.fail("No levanto excepcion");
+		Assert.assertFalse("No devolvio false", goku.atacar(majin));
 	}
 	
-	@Test (expected = PersonajeInutilizado.class)
-	public void testLanzarHabilidadLevantaExcepcionSiElPersonajeFueConvertidoEnChocolate(){
+	@Test
+	public void testLanzarHabilidadDevuelveFalseSiElPersonajeFueConvertidoEnChocolate(){
 		MajinBoo majin = new MajinBoo();
 		Goku goku = new Goku();
 		for (int i = 0; i < 6; i++){
@@ -260,32 +256,29 @@ public class MajinBooTest {
 			goku.aumentarKi();
 		}
 		majin.lanzarHabilidadEspecial(goku);
-		goku.lanzarHabilidadEspecial(majin);
-		Assert.fail("No levanto excepcion");
+		Assert.assertFalse("No devolvio false", goku.lanzarHabilidadEspecial(majin));
 	}
 	
-	@Test (expected = PersonajeInutilizado.class)
-	public void testObtenerVelocidadLevantaExcepcionSiElPersonajeFueConvertidoEnChocolate(){
+	@Test
+	public void testObtenerVelocidadDevuelveCeroSiElPersonajeFueConvertidoEnChocolate(){
 		MajinBoo majin = new MajinBoo();
 		Goku goku = new Goku();
 		for (int i = 0; i < 6; i++){
 			majin.aumentarKi();
 		}
 		majin.lanzarHabilidadEspecial(goku);
-		goku.obtenerVelocidad();
-		Assert.fail("No levanto excepcion");
+		Assert.assertEquals("No devolvio cero", 0, goku.obtenerVelocidad());
 	}
 	
-	@Test (expected = PersonajeInutilizado.class)
-	public void testObtenerDistanciaDeAtaqueLevantaExcepcionSiElPersonajeFueConvertidoEnChocolate(){
+	@Test
+	public void testObtenerDistanciaDeAtaqueDevuelveCeroSiElPersonajeFueConvertidoEnChocolate(){
 		MajinBoo majin = new MajinBoo();
 		Goku goku = new Goku();
 		for (int i = 0; i < 6; i++){
 			majin.aumentarKi();
 		}
 		majin.lanzarHabilidadEspecial(goku);
-		goku.obtenerDistanciaDeAtaque();
-		Assert.fail("No levanto excepcion");
+		Assert.assertEquals("No devolvio cero", 0, goku.obtenerDistanciaDeAtaque());
 	}
 		
 
@@ -301,7 +294,7 @@ public class MajinBooTest {
 		Assert.fail("No levanto excepcion");
 	}
 	
-	@Test (expected = PersonajeInutilizado.class)
+	@Test
 	public void testRecuperarModoDePeleaNoCambiaElModoDePeleaSiNoPasaronTresTurnos(){
 		MajinBoo majin = new MajinBoo();
 		Goku goku = new Goku();
@@ -309,9 +302,7 @@ public class MajinBooTest {
 			majin.aumentarKi();
 		}
 		majin.lanzarHabilidadEspecial(goku);
-		//goku.recuperarModoDePelea();
-		goku.atacar(majin);
-		Assert.fail("No levanto excepcion");
+		Assert.assertFalse("No devolvio false", goku.atacar(majin));
 	}
 
 	@Test
@@ -325,7 +316,6 @@ public class MajinBooTest {
 		goku.pasarTurno();
 		goku.pasarTurno();
 		goku.pasarTurno();
-		//goku.recuperarModoDePelea();
 		int vida = majin.obtenerVida();
 		goku.atacar(majin);
 		vida = vida - majin.obtenerVida();
@@ -343,7 +333,6 @@ public class MajinBooTest {
 		goku.pasarTurno();
 		goku.pasarTurno();
 		goku.pasarTurno();
-		//goku.recuperarModoDePelea();
 		int ki = goku.ki();
 		goku.aumentarKi();
 		ki = goku.ki() - ki;

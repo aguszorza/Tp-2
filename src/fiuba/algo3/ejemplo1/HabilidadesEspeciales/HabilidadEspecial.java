@@ -1,6 +1,5 @@
 package fiuba.algo3.ejemplo1.HabilidadesEspeciales;
 
-import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
 
 public class HabilidadEspecial{
@@ -15,7 +14,7 @@ public class HabilidadEspecial{
 	
 	public float lanzarHabilidad(Personaje enemigo){
 		if (this.personaje.ki() < this.costoKi){
-			throw new KiInsuficiente();
+			return -1;
 		}
 		this.personaje.reducirKi(this.costoKi);
 		return this.personaje.obtenerDanioDeAtaque(enemigo);

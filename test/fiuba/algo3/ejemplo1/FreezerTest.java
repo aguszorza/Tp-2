@@ -7,13 +7,10 @@ import junit.framework.Assert;
 import fiuba.algo3.ejemplo1.Consumibles.EsferaDragon;
 import fiuba.algo3.ejemplo1.Consumibles.NubeVoladora;
 import fiuba.algo3.ejemplo1.Consumibles.SemillaErmitanio;
-import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Personaje.Equipo;
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
 import fiuba.algo3.ejemplo1.Personaje.Gohan;
-import fiuba.algo3.ejemplo1.Personaje.Goku;
 import fiuba.algo3.ejemplo1.Personaje.MajinBoo;
-import fiuba.algo3.ejemplo1.Personaje.Piccolo;
 
 public class FreezerTest {
 
@@ -95,11 +92,10 @@ public class FreezerTest {
 		Assert.assertEquals("No paso: no devolvio 4", 4, freezer.obtenerVelocidad());
 	}
 	
-	@Test(expected = KiInsuficiente.class)
-	public void testSegundaFormaLevantaExcepcionSiNoSeTieneElKiSuficinte(){
+	@Test
+	public void testSegundaFormaDevuelveFalseSiNoSeTieneElKiSuficinte(){
 		Freezer freezer = new Freezer();
-		freezer.transformar();
-		Assert.fail("No levanto excepcion");
+		Assert.assertFalse("No devolvio false", freezer.transformar());
 	}
 	
 	@Test
@@ -136,7 +132,7 @@ public class FreezerTest {
 	}
 	
 	@Test
-	public void testSuperSaiyajinReduceElKi(){
+	public void testSegundaFormaReduceElKi(){
 		Freezer freezer = new Freezer();
 		freezer.aumentarKi();
 		freezer.aumentarKi();
@@ -148,16 +144,15 @@ public class FreezerTest {
 		Assert.assertEquals("No paso: el ki se redujo", 20, ki);
 	}
 
-	@Test(expected = KiInsuficiente.class)
-	public void testDefinitivoLevantaExcepcionSiNoTieneElKiNecesario(){
+	@Test
+	public void testDefinitivoDevuelveFalseSiNoTieneElKiNecesario(){
 		Freezer freezer = new Freezer();
 		freezer.aumentarKi();
 		freezer.aumentarKi();
 		freezer.aumentarKi();
 		freezer.aumentarKi();
 		freezer.transformar();
-		freezer.transformar();
-		Assert.fail("No levanto excepcion");
+		Assert.assertFalse("No devolvio false",freezer.transformar());
 	}
 	
 	@Test
@@ -212,12 +207,11 @@ public class FreezerTest {
 		Assert.assertEquals("No paso: no se redujo la vida", (int)(danio * 0.8), vida);
 	}
 	
-	@Test(expected = KiInsuficiente.class)
-	public void testLanzarHabilidadEspecialLanzaExcepcionSiNoSeTieneElKiSuficiente(){
+	@Test
+	public void testLanzarHabilidadEspecialDevuelveFalseSiNoSeTieneElKiSuficiente(){
 		Freezer freezer = new Freezer();
 		Gohan gohan = new Gohan();
-		freezer.lanzarHabilidadEspecial(gohan);
-		Assert.fail("No levanto excepcion");
+		Assert.assertFalse("No levanto excepcion", freezer.lanzarHabilidadEspecial(gohan));
 	}
 	
 	@Test

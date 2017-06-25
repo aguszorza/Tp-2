@@ -12,8 +12,6 @@ import org.junit.Test;
 import fiuba.algo3.ejemplo1.Consumibles.EsferaDragon;
 import fiuba.algo3.ejemplo1.Consumibles.NubeVoladora;
 import fiuba.algo3.ejemplo1.Consumibles.SemillaErmitanio;
-import fiuba.algo3.ejemplo1.Excepciones.PersonajeInexistente;
-import fiuba.algo3.ejemplo1.Excepciones.PersonajeNoMovilizable;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
 import fiuba.algo3.ejemplo1.juego.Juego;
 import fiuba.algo3.ejemplo1.juego.Jugador;
@@ -38,21 +36,6 @@ public class TurnoTest {
 		turno.mover(goku, celdaFinal);
 		Assert.assertEquals("No paso: ", goku, tablero.obtenerCelda(1, 6).obtenerPersonaje());
 	}
-
-	@Test(expected = PersonajeInexistente.class)
-	public void testMoverPersonajeLevantaExcepcionSiElPersonajeNoEsSuyo() {
-		Juego juego = new Juego();
-		Jugador guerreros = juego.obtenerGuerrerosZ();
-		Jugador enemigos = juego.obtenerEnemigos();
-		Tablero tablero = juego.obtenerTablero(); 
-		Turno turno = new Turno(guerreros, enemigos);
-		if(turno.obtenerJugador() != guerreros)
-			turno.pasarTurno();
-		Personaje freezer = tablero.obtenerCelda(9, 5).obtenerPersonaje();
-		Celda celdaFinal = tablero.obtenerCelda(9, 6);
-		turno.mover(freezer, celdaFinal);
-		Assert.fail("No levanto excepcion");
-	}
 	
 	@Test
 	public void testPasarTurnoCambiaElTurnoDelJugador() {
@@ -70,23 +53,7 @@ public class TurnoTest {
 		Assert.assertEquals("No paso: ", freezer, tablero.obtenerCelda(9, 6).obtenerPersonaje());
 	}
 	
-	@Test (expected = PersonajeInexistente.class)
-	public void testMoverPersonajeLevantaExcepcionAlMoverUnPersonajeDelOtroJugadorCuandoSePasoTurno() {
-		Juego juego = new Juego();
-		Jugador guerreros = juego.obtenerGuerrerosZ();
-		Jugador enemigos = juego.obtenerEnemigos();
-		Tablero tablero = juego.obtenerTablero(); 
-		Turno turno = new Turno(guerreros, enemigos);
-		if(turno.obtenerJugador() != guerreros)
-			turno.pasarTurno();
-		Personaje goku = tablero.obtenerCelda(1, 5).obtenerPersonaje();
-		Celda celdaFinal = tablero.obtenerCelda(1, 6);
-		turno.pasarTurno();
-		turno.mover(goku, celdaFinal);
-		Assert.fail("No levanto excepcion");
-	}
-	
-	@Test (expected = PersonajeNoMovilizable.class)
+	@Test
 	public void testMoverPersonajeNoPermiteMoverDosPersonajesDistintos() {
 		Juego juego = new Juego();
 		Jugador guerreros = juego.obtenerGuerrerosZ();
@@ -101,10 +68,10 @@ public class TurnoTest {
 		Celda celdaFinal = tablero.obtenerCelda(1, 6);
 		turno.mover(goku, celdaFinal);
 		turno.mover(piccolo, celdaPiccolo);
-		Assert.fail("No levanto excepcion");
+		Assert.assertFalse("No devolvio falso",turno.mover(piccolo, celdaPiccolo));
 	}
 	
-	@Test (expected = PersonajeNoMovilizable.class)
+	@Test
 	public void testMoverPersonajeSePuedeUtilizarHastaQueElPersonajeNoTengaMasMovimientos() {
 		Juego juego = new Juego();
 		Jugador guerreros = juego.obtenerGuerrerosZ();
@@ -119,8 +86,7 @@ public class TurnoTest {
 		celdaFinal = tablero.obtenerCelda(1, 7);
 		turno.mover(goku, celdaFinal);
 		celdaFinal = tablero.obtenerCelda(1, 8);
-		turno.mover(goku, celdaFinal);
-		Assert.fail("No levanto excepcion");
+		Assert.assertFalse("No devolvio falso",turno.mover(goku, celdaFinal));
 	}
 	
 	@Test 

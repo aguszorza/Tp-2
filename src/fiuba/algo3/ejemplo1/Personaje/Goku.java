@@ -19,12 +19,4 @@ public class Goku extends Personaje {
 		}
 		return super.obtenerPoderDePelea();
 	}
-	
-	/*public void kaioKen(){
-		this.transformar(new FabricaDeModos().gokuKaioKen(this.modoDePelea));
-	}
-	
-	public void SuperSaiyajin(){
-		this.transformar(new FabricaDeModos().gokuSuperSaiyajin(this.modoDePelea));
-	}*/	
 }

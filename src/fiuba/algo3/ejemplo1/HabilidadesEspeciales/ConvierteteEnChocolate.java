@@ -10,7 +10,9 @@ public class ConvierteteEnChocolate extends HabilidadEspecial{
 	}
 	
 	public float lanzarHabilidad(Personaje enemigo){
-		super.lanzarHabilidad(enemigo);
+		if(super.lanzarHabilidad(enemigo) < 0){
+			return -1;
+		}
 		enemigo.transformarEnChocolate();
 		return 0;
 	}

@@ -17,17 +17,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -97,14 +91,13 @@ public class Aplicacion  extends Application{
 				Celda celda = tablero.obtenerCelda(i, j);
 				BotonCasillero toggle = new BotonCasillero(celda);
 				casilleros.add(toggle, j, i);
-				EventHandler<ActionEvent> event = new botonCasilla(turno, celda, general, lbl,toggle);
+				EventHandler<ActionEvent> event = new BotonCasilleroHandler(turno, celda, general, lbl,toggle);
 				toggle.setOnAction(event);
 				toggle.actualizarImagen();
 			}
 		}
 		stage.setFullScreen(true);
 		Aplicacion.reproducirMusica(CANCION_MENU_PRINCIPAL);
-		//stage.setScene(scene);
 		stage.show();
 	}
 	
@@ -139,44 +132,33 @@ public class Aplicacion  extends Application{
 		mediaPlayer.setAutoPlay(true);
 	}
 	
-	///////
-	public static void ganoAlguien(String ganador, String imagen){
-        Stage popUp = new Stage();
-        popUp.initModality(Modality.WINDOW_MODAL);
-        //Botones y texto
-        //Label label = new Label();
-        //label.setText(ganador);
-        //label.setTextFill(Color.BLACK);
-		//label.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
-       
-        Button botonCerrar = new Button();
-        botonCerrar.setText("Cerrar");
-        botonCerrar.setOnAction(e -> cerrarPrograma());
-        //Button botonSeguir = new Button();
-        //botonSeguir.setText("Seguir jugando");
-        //botonSeguir.setOnAction(e -> popUp.close());
-        //Contenedor
-        VBox layout = new VBox(10);
-        //layout.getChildren().addAll(label,botonCerrar,botonSeguir);
-        //layout.getChildren().addAll(label,botonCerrar);
-        layout.getChildren().addAll(botonCerrar);
-        layout.setAlignment(Pos.CENTER);
-        layout.setSpacing(5);
-        popUp.setFullScreen(true);
-        popUp.initOwner(stage);
-        HBox cont = new HBox(layout);
-        
-        Image Image = new Image(imagen);
-        BackgroundImage imagenDeFondo = new BackgroundImage(Image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-        cont.setBackground(new Background(imagenDeFondo));
-        
-        cont.setSpacing(5);
-        
-        cont.setAlignment(Pos.CENTER);
-        
-        Scene scene = new Scene(cont);
-        popUp.setScene(scene);
-        popUp.showAndWait();
+	public static void ganoAlguien( String imagen){
+		Stage popUp = new Stage();
+		popUp.initModality(Modality.WINDOW_MODAL);
+
+		Button botonCerrar = new Button();
+		botonCerrar.setText("Cerrar");
+		botonCerrar.setOnAction(e -> cerrarPrograma());
+		
+		VBox layout = new VBox(10);
+		layout.getChildren().addAll(botonCerrar);
+		layout.setAlignment(Pos.CENTER);
+		layout.setSpacing(5);
+		popUp.setFullScreen(true);
+		popUp.initOwner(stage);
+		HBox cont = new HBox(layout);
+
+		Image Image = new Image(imagen);
+		BackgroundImage imagenDeFondo = new BackgroundImage(Image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+		cont.setBackground(new Background(imagenDeFondo));
+
+		cont.setSpacing(5);
+
+		cont.setAlignment(Pos.CENTER);
+
+		Scene scene = new Scene(cont);
+		popUp.setScene(scene);
+		popUp.showAndWait();
 	}
 	
 	private static void cerrarPrograma(){

@@ -23,9 +23,6 @@ public class SemillaErmitanio extends Consumible {
     public void afectar(Modo modo) { }
 
     @Override
-    public void desafectar(Personaje personaje) { }
-
-    @Override
     public void desafectar(Modo modo) { }
     
     public void pasarTurno() {
@@ -37,5 +34,9 @@ public class SemillaErmitanio extends Consumible {
     
     public int afectar(Equipo equipo){
     	return 0;
+    }
+    
+    public Consumible obtenerCopia(){
+    	return new SemillaErmitanio();
     }
 }

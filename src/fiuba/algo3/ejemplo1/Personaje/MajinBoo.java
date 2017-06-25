@@ -9,12 +9,4 @@ public class MajinBoo extends Personaje {
 		super(300, "Majin Boo", new FabricaDeModos().majinBooNormal());
 		this.habilidad = new ConvierteteEnChocolate(this);
 	}
-	
-	/*public void BooMalo(){
-		this.transformar(new FabricaDeModos().majinBooMalo(this.modoDePelea));
-	}
-	
-	public void BooOriginal(){
-		this.transformar(new FabricaDeModos().majinBooOriginal(this.modoDePelea));
-	}*/	
 }

@@ -1,11 +1,8 @@
 package fiuba.algo3.ejemplo1.ModosDePelea;
 
-import fiuba.algo3.ejemplo1.Consumibles.Consumible;
-import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
 import fiuba.algo3.ejemplo1.juego.Ataque;
 
-import java.util.ArrayList;
 import java.util.function.Function;
 
 
@@ -14,12 +11,7 @@ public class Modo {
 	private Ataque ataque;
 	private float danioAdicional;
 	private int velocidadAdicional;
-	//private int poderDePeleaOriginal;
-	//private int distanciaDeAtaqueOriginal;
-	//private int velocidadOriginal;
 	private int costoDeKi;
-	//protected int poderDePelea;
-	//protected int distanciaDeAtaque;
 	protected int velocidad;
 	protected int cantidadDeTurnosRestantes;
 	protected Function <FabricaDeModos, Modo> nuevaTransformacion;
@@ -27,9 +19,6 @@ public class Modo {
 
 	public Modo(Ataque ataque, int velocidad, int costoDeKi,  Function <FabricaDeModos, Modo> funcion){
 		this.ataque = ataque;
-		//this.poderDePelea = this.poderDePeleaOriginal = poder;
-		//this.distanciaDeAtaque = this.distanciaDeAtaqueOriginal = distancia;
-		//this.velocidad = this.velocidadOriginal = velocidad;
 		this.velocidad = velocidad;
 		this.costoDeKi = costoDeKi;
 		this.danioAdicional = this.velocidadAdicional = 1;
@@ -54,15 +43,18 @@ public class Modo {
 		this.incrementarPoderPelea(modo.danioAdicional());
 	}
 	
-	public void validarTransformacion(Personaje personaje, int costoKi){
+	public Boolean validarTransformacion(Personaje personaje, int costoKi){
 		if(personaje.ki() < costoKi){
-			throw new KiInsuficiente();
+			return false;
 		}
+		return true;
 	}
 	
 	public Modo transformar(Personaje personaje){
 		Modo modoNuevo = this.nuevaTransformacion.apply(new FabricaDeModos());
-		modoNuevo.validarTransformacion(personaje, modoNuevo.obtenerCostoDeKi());
+		if (modoNuevo == null || !modoNuevo.validarTransformacion(personaje, modoNuevo.obtenerCostoDeKi())){
+			return null;
+		}		
 		modoNuevo.igualarAdicionales(this);
 		return modoNuevo;
 	}

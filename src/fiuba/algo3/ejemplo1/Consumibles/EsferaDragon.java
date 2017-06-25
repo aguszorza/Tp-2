@@ -15,17 +15,12 @@ public class EsferaDragon extends Consumible {
     }
 
     @Override
-    public void afectar(Personaje personaje) {
-        //if( this.esPrimerUso() ) { personaje.getEquipo().ganarEsferaDragon(); }
-    }
+    public void afectar(Personaje personaje) {}
 
     @Override
     public void afectar(Modo modo) {
         modo.incrementarPoderPelea((float)1.25);
     }
-
-    @Override
-    public void desafectar(Personaje personaje) { }
 
     @Override
     public void desafectar(Modo modo) {
@@ -41,5 +36,9 @@ public class EsferaDragon extends Consumible {
     
     public int afectar(Equipo equipo){
     	return 1;
+    }
+    
+    public Consumible obtenerCopia(){
+    	return new EsferaDragon();
     }
 }

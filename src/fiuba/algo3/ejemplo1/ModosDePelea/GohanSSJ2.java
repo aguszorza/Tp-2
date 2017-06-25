@@ -1,10 +1,8 @@
 package fiuba.algo3.ejemplo1.ModosDePelea;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.function.Function;
 
-import fiuba.algo3.ejemplo1.Excepciones.RequisitosDeTransformacionInsuficientes;
 import fiuba.algo3.ejemplo1.Personaje.Equipo;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
 import fiuba.algo3.ejemplo1.juego.Ataque;
@@ -19,8 +17,10 @@ public class GohanSSJ2 extends Modo {
 		this.guardarDireccion("file:src/fiuba/algo3/Imagenes/Gohan_SSJ2.png");
 	}
 	
-	public void validarTransformacion(Personaje personaje, int costoKi){
-		super.validarTransformacion(personaje, costoKi);
+	public Boolean validarTransformacion(Personaje personaje, int costoKi){
+		if(!super.validarTransformacion(personaje, costoKi)){
+			return false;
+		}
 		Equipo aliados = personaje.obtenerAliados();
 		Iterator <Personaje> it = aliados.iterator();
 		while(it.hasNext()){
@@ -29,8 +29,9 @@ public class GohanSSJ2 extends Modo {
 				continue;
 			}
 			if (aliado.obtenerPorcentajeDeVida() >= 30){
-				throw new RequisitosDeTransformacionInsuficientes();
+				return false;
 			}
 		}
+		return true;
 	}
 }

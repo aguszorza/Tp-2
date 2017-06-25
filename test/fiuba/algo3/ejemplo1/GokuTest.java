@@ -7,7 +7,6 @@ import org.junit.Test;
 import fiuba.algo3.ejemplo1.Consumibles.EsferaDragon;
 import fiuba.algo3.ejemplo1.Consumibles.NubeVoladora;
 import fiuba.algo3.ejemplo1.Consumibles.SemillaErmitanio;
-import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Personaje.Equipo;
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
 import fiuba.algo3.ejemplo1.Personaje.Goku;
@@ -94,11 +93,10 @@ public class GokuTest {
 		Assert.assertEquals("No paso: no devolvio 2", 2, goku.obtenerVelocidad());
 	}
 	
-	@Test(expected = KiInsuficiente.class)
-	public void testKaioKenLevantaExcepcionSiNoSeTieneElKiSuficinte(){
+	@Test
+	public void testKaioKenDevuelveFalseSiNoSeTieneElKiSuficinte(){
 		Goku goku = new Goku();
-		goku.transformar();
-		Assert.fail("No levanto excepcion");
+		Assert.assertFalse("No devolvio false", goku.transformar());
 	}
 	
 	@Test
@@ -145,16 +143,25 @@ public class GokuTest {
 		Assert.assertEquals("No paso: no devolvio 0", 0, goku.ki());
 	}
 	
-	@Test(expected = KiInsuficiente.class)
-	public void testSuperSaiyajinLevantaExcepcionSiNoSeTieneElKiSuficiente(){
+	@Test
+	public void testSuperSaiyajinDevuelveFalseSiNoSeTieneElKiSuficiente(){
 		Goku goku = new Goku();
 		goku.aumentarKi();
 		goku.aumentarKi();
 		goku.aumentarKi();
 		goku.aumentarKi();	
 		goku.transformar();
+		Assert.assertFalse("No devolvio false", goku.transformar());
+	}
+	
+	@Test
+	public void testSuperSaiyajinDevuelveTrueSiSeTieneElKiSuficiente(){
+		Goku goku = new Goku();
+		for(int i = 0; i < 14; i++){
+			goku.aumentarKi();
+		}
 		goku.transformar();
-		Assert.fail("No levanto excepcion");
+		Assert.assertTrue("No devolvio true", goku.transformar());
 	}
 	
 	@Test
@@ -235,12 +242,11 @@ public class GokuTest {
 		Assert.assertEquals("No paso: no se redujo la vida", (int)(danio * 0.8), vida);
 	}
 	
-	@Test(expected = KiInsuficiente.class)
-	public void testLanzarHabilidadEspecialLanzaExcepcionSiNoSeTieneElKiSuficiente(){
+	@Test
+	public void testLanzarHabilidadEspecialDevuelveFalseSiNoSeTieneElKiSuficiente(){
 		Goku goku = new Goku();
 		Freezer freezer = new Freezer();
-		goku.lanzarHabilidadEspecial(freezer);
-		Assert.fail("No levanto excepcion");
+		Assert.assertFalse("No devolvio false", goku.lanzarHabilidadEspecial(freezer));
 	}
 	
 	@Test

@@ -7,8 +7,6 @@ import org.junit.Test;
 import fiuba.algo3.ejemplo1.Consumibles.EsferaDragon;
 import fiuba.algo3.ejemplo1.Consumibles.NubeVoladora;
 import fiuba.algo3.ejemplo1.Consumibles.SemillaErmitanio;
-import fiuba.algo3.ejemplo1.Excepciones.AbsorcionesInsuficientes;
-import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
 import fiuba.algo3.ejemplo1.Personaje.Cell;
 import fiuba.algo3.ejemplo1.Personaje.Equipo;
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
@@ -96,11 +94,10 @@ public class CellTest {
 		Assert.assertEquals("No paso: no devolvio 2", 2, cell.obtenerVelocidad());
 	}
 	
-	@Test(expected = AbsorcionesInsuficientes.class)
-	public void testSemiPerfectoLevantaExcepcionSiNoSeTieneAbsorcionesSuficinte(){
+	@Test
+	public void testTransformarDevuelveFalseSiNoSeTieneAbsorcionesSuficinte(){
 		Cell cell = new Cell();
-		cell.transformar();
-		Assert.fail("No levanto excepcion");
+		Assert.assertFalse("No levanto excepcion", cell.transformar());
 	}
 	
 	@Test
@@ -152,8 +149,8 @@ public class CellTest {
 		Assert.assertEquals("No paso: el ki se redujo", 5, cell.ki());
 	}
 	
-	@Test(expected = AbsorcionesInsuficientes.class)
-	public void testPerfectoLevantaExcepcionSiNoSeTieneLasAbsorcionesSuficientes(){
+	@Test
+	public void testPerfectoDevuelveFalseSiNoSeTieneLasAbsorcionesSuficientes(){
 		Cell cell = new Cell();
 		Freezer freezer = new Freezer();
 		for(int i = 0; i < 4; i++){
@@ -161,8 +158,7 @@ public class CellTest {
 			cell.lanzarHabilidadEspecial(freezer);
 		}
 		cell.transformar();
-		cell.transformar();
-		Assert.fail("No levanto excepcion");
+		Assert.assertFalse("No levanto excepcion",cell.transformar());
 	}
 	
 	@Test
@@ -217,12 +213,11 @@ public class CellTest {
 		Assert.assertEquals("No paso: no se redujo la vida", (int)(danio * 0.8), vida);
 	}
 	
-	@Test(expected = KiInsuficiente.class)
-	public void testLanzarHabilidadEspecialLanzaExcepcionSiNoSeTieneElKiSuficiente(){
+	@Test
+	public void testLanzarHabilidadEspecialDevuelveFalseSiNoSeTieneElKiSuficiente(){
 		Cell cell = new Cell();
 		Freezer freezer = new Freezer();
-		cell.lanzarHabilidadEspecial(freezer);
-		Assert.fail("No levanto excepcion");
+		Assert.assertFalse("No levanto excepcion", cell.lanzarHabilidadEspecial(freezer));
 	}
 	
 	@Test

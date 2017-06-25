@@ -3,10 +3,6 @@ package fiuba.algo3.ejemplo1;
 import org.junit.Test;
 
 import fiuba.algo3.ejemplo1.Consumibles.EsferaDragon;
-import fiuba.algo3.ejemplo1.Excepciones.CeldaOcupada;
-import fiuba.algo3.ejemplo1.Excepciones.CeldaVacia;
-import fiuba.algo3.ejemplo1.Excepciones.MovimientoInvalido;
-import fiuba.algo3.ejemplo1.Excepciones.PosicionFueraDelTablero;
 import fiuba.algo3.ejemplo1.Personaje.Equipo;
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
 import fiuba.algo3.ejemplo1.Personaje.Goku;
@@ -15,30 +11,6 @@ import fiuba.algo3.ejemplo1.tablero.Tablero;
 import junit.framework.Assert;
 
 public class TableroTest {
-
-	/*@Test
-	public void testCrearTableroYObtenerCeldas() {
-		Tablero tablero = new Tablero(10);
-		int contador = 1;
-		Boolean estado = true;
-		for(int i = 1; i <= 10; i++){
-			for(int j = 1; j <= 10; j++){
-				Personaje personaje = new Personaje(100, Integer.toString(contador));
-				tablero.agregarPersonaje(i, j, personaje);
-				contador ++;
-			}
-		}
-		contador = 1;
-		Celda celda;
-		for(int i = 1; i <= 10; i++){
-			for(int j = 1; j <= 10; j++){
-				celda = tablero.obtenerCelda(i, j);
-				estado = (estado && (celda.obtenerPersonaje().getNombre().equals(Integer.toString(contador)))); 
-				contador ++;
-			}
-		}
-		Assert.assertTrue(estado);
-	}*/
 	
 	@Test
 	public void testAgregarPersonajeAgregaAlPersonajeEnLaCeldaCorrecta() {
@@ -86,20 +58,29 @@ public class TableroTest {
 		Assert.assertEquals("No movio el personaje", personaje, celdaFinal.obtenerPersonaje());
 	}
 
-	@Test (expected = PosicionFueraDelTablero.class)
-	public void testIntentarMoverAUnaPosicionFueraDelTableroLanzaExcepcion() {
+	@Test
+	public void testMoverPersonajeAOtraCeldaDevuelveTrue() {
 		Tablero tablero = new Tablero(10);
 		Goku personaje = new Goku();
-		Celda celdaInicial = tablero.obtenerCelda(10, 7);
-		tablero.agregarPersonaje(celdaInicial,personaje);
-		Celda celdaFinal = new Celda(11,7);
-		tablero.moverPersonaje(personaje, celdaInicial, celdaFinal);
-		Assert.fail("No levanto excepcion");
+		Celda celdaInicial = tablero.obtenerCelda(3, 6);
+		tablero.agregarPersonaje(celdaInicial, personaje);
+		Celda celdaFinal = tablero.obtenerCelda(4, 6);
+		Assert.assertTrue("No devolvio true", tablero.moverPersonaje(personaje, celdaInicial, celdaFinal));
+	}
+	
+	@Test 
+	public void testIntentarMoverAUnaPosicionFueraDelTableroDevuelveFalso() {
+		Tablero tablero = new Tablero(10);
+		Goku personaje = new Goku();
+		Celda celda = tablero.obtenerCelda(10, 7);
+		tablero.agregarPersonaje(celda,personaje);
+		Celda celda2 = new Celda(11,7);
+		Assert.assertFalse("No devolvio falso", tablero.moverPersonaje(personaje, celda, celda2));
 	}
 	
 	
-	@Test (expected = CeldaOcupada.class)
-	public void testIntentarMoverAUnaCeldaOcupadaLanzaExcepcion() {
+	@Test
+	public void testIntentarMoverAUnaCeldaOcupadaDevuelveFalso() {
 		Tablero tablero = new Tablero(10);
 		Goku personaje = new Goku(); 
 		Celda celda = tablero.obtenerCelda(10, 7);
@@ -107,19 +88,17 @@ public class TableroTest {
 		Freezer personaje2 = new Freezer();
 		Celda celda2 = tablero.obtenerCelda(10, 8);
 		tablero.agregarPersonaje(celda2,personaje2);
-		tablero.moverPersonaje(personaje, celda, celda2);
-		Assert.fail("No levanto excepcion");
+		Assert.assertFalse("No devolvio falso", tablero.moverPersonaje(personaje, celda, celda2));
 	}
 	
-	@Test (expected = MovimientoInvalido.class)
-	public void testIntentarMoverAUnaCeldaNoAdyacenteLanzaExcepcion() {
+	@Test 
+	public void testIntentarMoverAUnaCeldaNoAdyacenteDevuelveFalso() {
 		Tablero tablero = new Tablero(10);
 		Goku personaje = new Goku(); 
 		Celda celdaInicial = tablero.obtenerCelda(10, 7);
 		Celda celdaFinal = tablero.obtenerCelda(2, 1);
 		tablero.agregarPersonaje(celdaInicial,personaje);
 		tablero.moverPersonaje(personaje, celdaInicial, celdaFinal);
-		
-		Assert.fail("No levanto excepcion");
+		Assert.assertFalse("No devolvio falso", tablero.moverPersonaje(personaje, celdaInicial, celdaFinal));
 	}
 }

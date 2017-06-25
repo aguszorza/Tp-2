@@ -1,12 +1,11 @@
 package fiuba.algo3.ejemplo1.Personaje;
 
 import fiuba.algo3.ejemplo1.Consumibles.Consumible;
+import fiuba.algo3.ejemplo1.Excepciones.PersonajeInutilizado;
 import fiuba.algo3.ejemplo1.HabilidadesEspeciales.HabilidadEspecial;
 import fiuba.algo3.ejemplo1.ModosDePelea.Modo;
 import fiuba.algo3.ejemplo1.ModosDePelea.ModoChocolate;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.function.Function;
@@ -61,7 +60,7 @@ public class Personaje {
 			this.vidaActual = this.vidaActual + cantidad;
 		}
 	}
-	//ver que hacer cuando llega a cero
+
 	public void reducirVida(int cantidad){
 		this.vidaActual = this.vidaActual - cantidad;
 	}
@@ -94,23 +93,20 @@ public class Personaje {
 		return this.modoDePelea.obtenerVelocidad();
 	}
 	
-	public void transformar(){
+	public Boolean transformar(){
 		Modo modoNuevo = this.modoDePelea.transformar(this);
+		if (modoNuevo == null){
+			return false;
+		}
 		this.modoDePelea = modoNuevo;
 		this.ki = this.ki - modoNuevo.obtenerCostoDeKi();
+		return true;
 	}
-	
-	/*public void validarTransformacion(Modo modoNuevo){
-		System.out.println("Mal");
-		System.out.println(modoNuevo.getClass());
-	}*/
 	
 	public void transformarEnChocolate(){
 		this.modoDePelea = new ModoChocolate (this.modoDePelea, TURNOS_CHOCOLATE );
 	}
 
-	// recordar recuperar modo de pelea todos los turnos para los guerreros Z
-	// crear excepcion para cuando se pida obtener ataque y esas cosas
 	public void recuperarModoDePelea(){
 		this.modoDePelea = this.modoDePelea.recuperarModoDePelea();
 	}
@@ -125,28 +121,39 @@ public class Personaje {
 		this.recuperarModoDePelea();
 	}
 	
-	public void atacar(Personaje enemigo){
-		float danio = this.obtenerDanioDeAtaque(enemigo);
-		enemigo.reducirVida((int)danio);
-		Function <Consumible, Void> funcion;
-		funcion = (Consumible consumible) -> {
-		consumible.atacar();
-		return null;};
-		actualizarConsumibles(funcion);
-	}
-	
 	public float obtenerDanioDeAtaque(Personaje enemigo){
 		return this.modoDePelea.obtenerDanioDeAtaque(enemigo);
 	}
 	
-	public void lanzarHabilidadEspecial(Personaje enemigo){
-		float danio = this.habilidad.lanzarHabilidad(enemigo);
-		enemigo.reducirVida((int)danio);
-		Function <Consumible, Void> funcion;
-		funcion = (Consumible consumible) -> {
-		consumible.atacar();
-		return null;};
-		actualizarConsumibles(funcion);
+	private Boolean ataque(Personaje enemigo, Function <Personaje, Float> ataque){
+		try{
+			float danio = ataque.apply(this);
+			if(danio < 0){
+				return false;
+			}
+			enemigo.reducirVida((int)danio);
+			Function <Consumible, Void> funcion;
+			funcion = (Consumible consumible) -> {
+			consumible.atacar();
+			return null;};
+			actualizarConsumibles(funcion);
+			return true;
+		}
+		catch (PersonajeInutilizado e){
+			return false;
+		}
+	}
+	
+	public Boolean atacar(Personaje enemigo){
+		Function <Personaje, Float> funcion;
+		funcion = (Personaje personaje)-> personaje.obtenerDanioDeAtaque(enemigo);
+		return ataque(enemigo, funcion);
+	}
+	
+	public Boolean lanzarHabilidadEspecial(Personaje enemigo){
+		Function <Personaje, Float> funcion;
+		funcion = (Personaje personaje)-> personaje.habilidad.lanzarHabilidad(enemigo);
+		return ataque(enemigo, funcion);
 	}
 
 	public void consumir(Consumible consumible) {
@@ -158,30 +165,15 @@ public class Personaje {
 
 	public void actualizarConsumibles(Function <Consumible, Void> funcion) {
 		Iterator <Consumible> iterador = this.consumiblesActivos.values().iterator();
-		// Uso el Consumible y Guardo los caducados.
+		// Uso el Consumible y remuevo los caducados.
 		while(iterador.hasNext()){
 			Consumible consumible = iterador.next();
 			funcion.apply(consumible);
-			//consumible.pasarTurno();
 			if(consumible.caducoEfecto()){
-				consumible.desafectar(this);
 				consumible.desafectar(this.modoDePelea);
 				iterador.remove();
 			}
 		}
-		/*for(int i = 0; i <= this.consumiblesActivos.size(); i++) {
-			Consumible consumible = this.consumiblesActivos.get(i);
-			consumible.usarConsumible();
-			if( consumible.caducoEfecto() ) {
-				consumible.desafectar(this);
-				consumible.desafectar(this.modoDePelea);
-				consumiblesCaducados.add(consumible);
-			}
-		}
-		// Elimino de los Activos los caducados.
-		for(int i = 0; i <= consumiblesCaducados.size(); i++) {
-			this.consumiblesActivos.remove(consumiblesCaducados.get(i));
-		}*/
 	}
 	
 	public int cantidadEsferas(){

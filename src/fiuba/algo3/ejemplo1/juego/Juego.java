@@ -1,6 +1,5 @@
 package fiuba.algo3.ejemplo1.juego;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 
 import fiuba.algo3.ejemplo1.Personaje.Cell;
@@ -83,19 +82,6 @@ public class Juego {
 		personajes.put(cell, celdaCell);
 		return personajes;
 	}
-	
-	/*public void jugar(){
-		//ArrayList <Jugador> jugadores = new ArrayList <Jugador>();
-		//jugadores.add(this.guerreroZ);
-		//jugadores.add(this.enemigoTierra);
-		//implementar turnos random
-		Jugador primero = this.guerreroZ;
-		Jugador segundo = this.enemigoTierra;
-		while(this.guerreroZ.sigueVivo() && this.enemigoTierra.sigueVivo()){
-			primero.jugar();
-			segundo.jugar();
-		}
-	}*/
 	
 	public Tablero obtenerTablero(){
 		return this.tablero;

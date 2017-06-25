@@ -13,20 +13,6 @@ public class Cell extends Personaje{
 		this.habilidad = new Absorber(this);
 	}
 	
-	/*public void semiPerfecto(){
-		if (this.cantidadAbsorciones < 4){
-			throw new AbsorcionesInsuficientes();
-		}
-		this.transformar(new FabricaDeModos().cellSemiPerfecto());
-	}
-	
-	public void Perfecto(){
-		if (this.cantidadAbsorciones < 8){
-			throw new AbsorcionesInsuficientes();
-		}
-		this.transformar(new FabricaDeModos().cellPerfecto());
-	}*/
-	
 	public void aumentarAbsorciones(){
 		this.cantidadAbsorciones ++;
 	}

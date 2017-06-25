@@ -1,17 +1,16 @@
 package fiuba.algo3.ejemplo1.juego;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
+import java.util.function.Function;
 
 import fiuba.algo3.ejemplo1.Consumibles.Consumible;
 import fiuba.algo3.ejemplo1.Consumibles.EsferaDragon;
 import fiuba.algo3.ejemplo1.Consumibles.NubeVoladora;
 import fiuba.algo3.ejemplo1.Consumibles.SemillaErmitanio;
-import fiuba.algo3.ejemplo1.Excepciones.AtaqueNoValido;
-import fiuba.algo3.ejemplo1.Excepciones.PersonajeInexistente;
-import fiuba.algo3.ejemplo1.Excepciones.PersonajeNoMovilizable;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
 import fiuba.algo3.ejemplo1.tablero.Celda;
 
@@ -27,8 +26,6 @@ public class Turno {
 	public Turno(Jugador jugador1, Jugador jugador2){
 		this.cola = new LinkedList<Jugador> ();
 		guardarAleatoriamente(jugador1, jugador2);
-		//this.cola.add(jugador1);
-		//this.cola.add(jugador2);
 		SemillaErmitanio semilla = new SemillaErmitanio();
 		EsferaDragon esfera = new EsferaDragon();
 		NubeVoladora nube = new NubeVoladora();
@@ -50,7 +47,7 @@ public class Turno {
 	
 	private void agregarConsumible(){
 		int posicionAleatoria = (new Random()).nextInt(consumibles.size());
-		Consumible consumible = consumibles.get(posicionAleatoria);
+		Consumible consumible = consumibles.get(posicionAleatoria).obtenerCopia();
 		this.cola.element().obtenerTablero().agregarConsumibleAleatoriamente(consumible);
 	}
 	
@@ -84,44 +81,64 @@ public class Turno {
 		pasarTurno();
 	}
 	
-	public void mover(Personaje personaje, Celda celdaFinal){
-		if (!existePersonaje(personaje)){
-			throw new PersonajeInexistente("El personaje seleccionado no es del jugador");
+	public Jugador obtenerGanador(){
+		Iterator<Jugador> iter = this.cola.iterator();
+		while(iter.hasNext()){
+			Jugador jugador = iter.next();
+			if(jugador.gano()){
+				return jugador;
+			}
 		}
+		return null;
+	}
+	
+	public Boolean mover(Personaje personaje, Celda celdaFinal){
 		if(this.personajeEnMovimiento != null && personaje != this.personajeEnMovimiento){
-			throw new PersonajeNoMovilizable("El personaje seleccionado no es movilizable para este turno");
+			return false;
+		}
+		if(personaje.obtenerVelocidad() == 0){
+			return false;
 		}
 		if (this.personajeEnMovimiento == null){
 			this.personajeEnMovimiento = personaje;
 		}
 		if (this.movimientos >= this.personajeEnMovimiento.obtenerVelocidad()){
-			throw new PersonajeNoMovilizable("El personaje no puede moverse mas posiciones");
+			return false;
 		}
-		this.cola.element().mover(personaje, celdaFinal);
+		if(!this.cola.element().mover(personaje, celdaFinal)){
+			return false;
+		}
 		this.movimientos ++;
 		terminoTurno();
+		return true;
 	}
 	
-	public void transformar(Personaje personaje){
-		this.cola.element().transformar(personaje);
+	public Boolean transformar(Personaje personaje){
+		return this.cola.element().transformar(personaje);
 	}
 	
-	public void atacar(Personaje personaje, Personaje enemigo){
+	private Boolean ataque(Function <Jugador, Boolean> funcion){
 		if(this.ataque){
-			throw new AtaqueNoValido("Ya has realizado un ataque en este turno");
+			return false;
 		}
-		this.cola.element().atacar(personaje, enemigo);
+		if(!funcion.apply(this.cola.element())){
+			return false;
+		}
 		this.ataque = true;
 		terminoTurno();
+		return true;
 	}
 	
-	public void lanzarHablidad(Personaje personaje, Personaje enemigo){
-		if(this.ataque){
-			throw new AtaqueNoValido("Ya has realizado un ataque en este turno");
-		}
-		this.cola.element().lanzarHablidadEspecial(personaje, enemigo);
-		this.ataque = true;
-		terminoTurno();
+	public Boolean atacar(Personaje personaje, Personaje enemigo){
+		Function <Jugador, Boolean> funcion;
+		funcion = (Jugador jugador) -> jugador.atacar(personaje, enemigo);
+		return ataque(funcion);
+	}
+	
+	public Boolean lanzarHablidad(Personaje personaje, Personaje enemigo){
+		Function <Jugador, Boolean> funcion;
+		funcion = (Jugador jugador) -> jugador.lanzarHabilidadEspecial(personaje, enemigo);
+		return ataque(funcion);
 	}
 	
 	public String obtenerImagen(){

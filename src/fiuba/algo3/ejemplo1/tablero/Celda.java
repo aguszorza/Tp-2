@@ -13,7 +13,7 @@ public class Celda {
 	public Celda(int fila, int columna){
 		this.fila = fila;
 		this.columna = columna;
-		this.personaje = null; // se podria llegar a cambiar a que tenga un personaje vacio
+		this.personaje = null;
 		this.consumible = null;
 	}
 	

@@ -4,31 +4,12 @@ import java.util.Hashtable;
 import java.util.Random;
 
 import fiuba.algo3.ejemplo1.Consumibles.Consumible;
-import fiuba.algo3.ejemplo1.Excepciones.AtaqueFueraDeRango;
-import fiuba.algo3.ejemplo1.Excepciones.CeldaOcupada;
-import fiuba.algo3.ejemplo1.Excepciones.MovimientoInvalido;
-import fiuba.algo3.ejemplo1.Excepciones.PosicionFueraDelTablero;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
 
 public class Tablero {
 	
 	private Hashtable <Integer,ConjuntoCeldas> filas;
 	private int tamanio;
-	
-	/*public Tablero(int tamanio){
-		this.columnas = new Hashtable <Integer, ConjuntoCeldas>();
-		this.filas = new Hashtable <Integer, ConjuntoCeldas>();
-		crearColumnas(this.columnas, tamanio);
-		for (int i = 1; i <= tamanio; i ++){
-			ConjuntoCeldas fila = new ConjuntoCeldas();
-			for (int j = 1; j <= tamanio; j ++){
-				Celda celda = new Celda(fila, this.columnas.get(j));
-				fila.agregarCelda(celda, i);
-				this.columnas.get(j).agregarCelda(celda, j);
-			}
-			this.filas.put(i, fila);
-		}
-	}*/
 	
 	public Tablero(int tamanio){
 		this.tamanio = tamanio;
@@ -47,29 +28,30 @@ public class Tablero {
 		return this.filas.containsKey(fila) && this.filas.containsKey(columna);
 	}
 	
-	private void comprobarAdyacencia(Celda celdaInicial, Celda celdaFinal){
-		if (!celdaInicial.esAdyacente(celdaFinal)){
-			throw new MovimientoInvalido();
-		}
+	private Boolean comprobarAdyacencia(Celda celdaInicial, Celda celdaFinal){
+		return celdaInicial.esAdyacente(celdaFinal);
+			
 	}
 	
-	private void comprobarNuevaPosicion(int fila, int columna){
+	private Boolean comprobarNuevaPosicion(int fila, int columna){
 		// como es un tablero cuadrado, verifico que ambos numeros sean clave del tablero 
 		if(!this.filas.containsKey(fila) || !this.filas.containsKey(columna)){
-			throw new PosicionFueraDelTablero("Posicion fuera del tablero");
+			return false;
 		}
 		if(!this.filas.get(fila).obtenerCelda(columna).estaVacia()){
-			throw new CeldaOcupada("La celda está ocupada");
+			return false;
 		}
+		return true;
 	}
 	
-	public void verificarAtaque(int rango, Celda celdaAtacante, Celda celdaAtacado){
+	public Boolean verificarAtaque(int rango, Celda celdaAtacante, Celda celdaAtacado){
 		if (Math.abs(celdaAtacante.obtenerFila() - celdaAtacado.obtenerFila()) > rango){
-			throw new AtaqueFueraDeRango();
+			return false;
 		}
 		if (Math.abs(celdaAtacante.obtenerColumna() - celdaAtacado.obtenerColumna()) > rango){
-			throw new AtaqueFueraDeRango();
+			return false;
 		}
+		return true;
 	}
 
 	public Celda obtenerCelda(int fila, int columna){
@@ -100,13 +82,17 @@ public class Tablero {
 		}
 	}
 	
-	public void moverPersonaje(Personaje personaje, Celda celdaAct, Celda celdaFin){
+	public Boolean moverPersonaje(Personaje personaje, Celda celdaAct, Celda celdaFin){
 		int filaFinal = celdaFin.obtenerFila();
 		int colFinal = celdaFin.obtenerColumna();
-		comprobarNuevaPosicion (filaFinal, colFinal); // verifica que sea parte del tablero y que no haya un personaje
-		//Celda celdaFin = this.obtenerCelda(filaFinal, colFinal);
-		this.comprobarAdyacencia(celdaAct, celdaFin);
+		if(!comprobarNuevaPosicion (filaFinal, colFinal)){// verifica que sea parte del tablero y que no haya un personaje
+			return false;
+		}
+		if(!this.comprobarAdyacencia(celdaAct, celdaFin)){
+			return false;
+		}
 		celdaAct.removerPersonaje();
 		this.obtenerCelda(filaFinal, colFinal).agregarPersonaje(personaje);
+		return true;
 	}
 }

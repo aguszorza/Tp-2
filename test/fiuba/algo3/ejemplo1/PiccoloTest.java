@@ -2,18 +2,13 @@ package fiuba.algo3.ejemplo1;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-
 import org.junit.Test;
 import junit.framework.Assert;
 import fiuba.algo3.ejemplo1.Personaje.MajinBoo;
-import fiuba.algo3.ejemplo1.Personaje.Personaje;
 import fiuba.algo3.ejemplo1.Personaje.Piccolo;
 import fiuba.algo3.ejemplo1.Consumibles.EsferaDragon;
 import fiuba.algo3.ejemplo1.Consumibles.NubeVoladora;
 import fiuba.algo3.ejemplo1.Consumibles.SemillaErmitanio;
-import fiuba.algo3.ejemplo1.Excepciones.KiInsuficiente;
-import fiuba.algo3.ejemplo1.Excepciones.RequisitosDeTransformacionInsuficientes;
 import fiuba.algo3.ejemplo1.Personaje.Equipo;
 import fiuba.algo3.ejemplo1.Personaje.Freezer;
 import fiuba.algo3.ejemplo1.Personaje.Gohan;
@@ -98,11 +93,10 @@ public class PiccoloTest {
 		Assert.assertEquals("No paso: no devolvio 2", 2, piccolo.obtenerVelocidad());
 	}
 	
-	@Test(expected = KiInsuficiente.class)
-	public void testFortalecidoLevantaExcepcionSiNoSeTieneElKiSuficinte(){
+	@Test
+	public void testFortalecidoDevuelveFalseSiNoSeTieneElKiSuficinte(){
 		Piccolo piccolo = new Piccolo();
-		piccolo.transformar();
-		Assert.fail("No levanto excepcion");
+		Assert.assertFalse("No devolvio false", piccolo.transformar());
 	}
 	
 	@Test
@@ -151,8 +145,8 @@ public class PiccoloTest {
 		Assert.assertEquals("No paso: el ki se redujo", 20, ki);
 	}
 	
-	@Test(expected = RequisitosDeTransformacionInsuficientes.class)
-	public void testProtectorLevantaExcepcionSiGohanTieneMasDel20PorcientoDeVida(){
+	@Test
+	public void testProtectorDevuelveFalseSiGohanTieneMasDel20PorcientoDeVida(){
 		Piccolo piccolo = new Piccolo();
 		Gohan gohan = new Gohan();
 		Equipo aliado = new Equipo();
@@ -163,8 +157,7 @@ public class PiccoloTest {
 		piccolo.aumentarKi();
 		piccolo.aumentarKi();
 		piccolo.transformar();
-		piccolo.transformar();
-		Assert.fail("No levanto excepcion");
+		Assert.assertFalse("No devolvio false", piccolo.transformar());
 	}
 	
 	@Test
@@ -232,12 +225,11 @@ public class PiccoloTest {
 		Assert.assertEquals("No paso: no se redujo la vida", (int)(danio * 0.8), vida);
 	}
 	
-	@Test(expected = KiInsuficiente.class)
-	public void testLanzarHabilidadEspecialLanzaExcepcionSiNoSeTieneElKiSuficiente(){
+	@Test
+	public void testLanzarHabilidadEspecialDevuelveFalseSiNoSeTieneElKiSuficiente(){
 		Piccolo piccolo = new Piccolo();
 		Freezer freezer = new Freezer();
-		piccolo.lanzarHabilidadEspecial(freezer);
-		Assert.fail("No levanto excepcion");
+		Assert.assertFalse("No devolvio false", piccolo.lanzarHabilidadEspecial(freezer));
 	}
 	
 	@Test

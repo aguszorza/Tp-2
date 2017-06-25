@@ -2,11 +2,8 @@ package fiuba.algo3.ejemplo1.juego;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.function.Function;
 
-import fiuba.algo3.ejemplo1.Excepciones.AtaqueAliadoInvalido;
-import fiuba.algo3.ejemplo1.Excepciones.PartidaGanada;
-import fiuba.algo3.ejemplo1.Excepciones.PersonajeInexistente;
-import fiuba.algo3.ejemplo1.Excepciones.PosicionFueraDelTablero;
 import fiuba.algo3.ejemplo1.Personaje.Personaje;
 import fiuba.algo3.ejemplo1.tablero.Celda;
 import fiuba.algo3.ejemplo1.tablero.Tablero;
@@ -19,12 +16,14 @@ public class Jugador {
 	private Tablero tablero;
 	private String nombre;
 	private String imagenGanador;
+	private int cantidadEsferas;
 	
 	public Jugador(Hashtable <Personaje, Celda> personajes,  Hashtable <Personaje, Celda> enemigos, Tablero tablero, String nombre){
 		this.personajes = personajes;
 		this.enemigos = enemigos;
 		this.tablero = tablero;
 		this.nombre = nombre;
+		this.cantidadEsferas = 0;
 	}
 	
 	public void guardarImagen(String nombre){
@@ -55,16 +54,15 @@ public class Jugador {
 		return this.personajes.containsKey(personaje);
 	}
 	
-	public void verificarAtaque(Personaje atacante, Personaje atacado){
+	public Boolean verificarAtaque(Personaje atacante, Personaje atacado){
 		if(!existePersonaje(atacante)){
-			throw new PersonajeInexistente("El personaje seleccionado no es del jugador");
+			return false;
 		}
 		if(existePersonaje(atacado)){
-			throw new AtaqueAliadoInvalido();
+			return false;
 		}
-		this.tablero.verificarAtaque(atacante.obtenerDistanciaDeAtaque(), obtenerCelda(this.personajes, atacante), obtenerCelda(this.enemigos, atacado)); 
+		return this.tablero.verificarAtaque(atacante.obtenerDistanciaDeAtaque(), obtenerCelda(this.personajes, atacante), obtenerCelda(this.enemigos, atacado)); 
 	}
-	//ver de unir las dos. Ya sea usando una funcion o bien uniendo ataque con habilidad
 	
 	public void aumentarKi(){
 		Enumeration<Personaje> personajes = this.obtenerPersonajesAliados();
@@ -72,57 +70,54 @@ public class Jugador {
 			personajes.nextElement().aumentarKi();
 	}
 	
-	public void mover(Personaje personaje, Celda celdaFinal){
+	public Boolean mover(Personaje personaje, Celda celdaFinal){
 		int fila = celdaFinal.obtenerFila();
 		int columna = celdaFinal.obtenerColumna();
 		if(!this.existePersonaje(personaje)){
-			throw new PersonajeInexistente("El personaje seleccionado no es del jugador");
+			return false;
 		}
 		if(!this.tablero.existePosicion(fila, columna)){
-			throw new PosicionFueraDelTablero("Movimiento no valido");
+			return false;
 		}
 		Celda celdaFin = this.tablero.obtenerCelda(fila, columna);
 		Celda celdaAct = this.obtenerCelda(this.personajes, personaje);
-		this.tablero.moverPersonaje(personaje, celdaAct, celdaFin);
+		if(!this.tablero.moverPersonaje(personaje, celdaAct, celdaFin)){
+			return false;
+		}
 		this.personajes.put(personaje, celdaFin);
-		this.gano(personaje);
+		this.cantidadEsferas = personaje.cantidadEsferas();
+		return true;
 	}
 	
-	public void atacar(Personaje personaje, Personaje enemigo){
-		//if (enemigo == null)
-			//excepcion
-		this.verificarAtaque(personaje, enemigo);
-		//Personaje enemigo = celdaEnemigo.obtenerPersonaje();
-		Celda celdaPersonaje = this.personajes.get(personaje);
+	private Boolean ataque(Personaje personaje, Personaje enemigo, Function <Personaje, Boolean> funcion){
+		if(!this.verificarAtaque(personaje, enemigo)){
+			return false;
+		}
 		Celda celdaEnemigo = this.enemigos.get(enemigo);
-		this.tablero.verificarAtaque(personaje.obtenerDistanciaDeAtaque(), celdaPersonaje, celdaEnemigo);
-		personaje.atacar(enemigo);
+		if(!funcion.apply(personaje)){
+			return false;
+		}
 		if(enemigo.obtenerVida() <= 0){
 			celdaEnemigo.removerPersonaje();
 			this.enemigos.remove(enemigo);
-			this.gano(personaje);
 		}
+		return true;
 	}
 	
-	public void lanzarHablidadEspecial(Personaje atacante, Personaje atacado){
-		//if (atacado == null)
-		verificarAtaque(atacante,atacado);
-		Celda celdaPersonaje = this.personajes.get(atacante);
-		Celda celdaEnemigo = this.enemigos.get(atacado);
-		this.tablero.verificarAtaque(atacante.obtenerDistanciaDeAtaque(), celdaPersonaje, celdaEnemigo);
-		atacante.lanzarHabilidadEspecial(atacado);
-		if(atacado.obtenerVida() <= 0){
-			celdaEnemigo.removerPersonaje();
-			this.enemigos.remove(atacado);
-			this.gano(atacante);
-		}
+	public Boolean atacar(Personaje personaje, Personaje enemigo){
+		Function <Personaje, Boolean> funcion;
+		funcion = (Personaje persona) -> persona.atacar(enemigo);
+		return ataque(personaje, enemigo, funcion);
 	}
 	
-	public void transformar(Personaje personaje){
-		if(!this.existePersonaje(personaje)){
-			throw new PersonajeInexistente("El personaje seleccionado no es del jugador");
-		}
-		personaje.transformar();
+	public Boolean lanzarHabilidadEspecial(Personaje atacante, Personaje atacado){
+		Function <Personaje, Boolean> funcion;
+		funcion = (Personaje persona) -> persona.lanzarHabilidadEspecial(atacado);
+		return ataque(atacante, atacado, funcion);
+	}
+	
+	public Boolean transformar(Personaje personaje){
+		return personaje.transformar();
 	}
 	
 	public void pasarTurno(){
@@ -132,14 +127,12 @@ public class Jugador {
 		}
 	}
 	
-	public void gano(Personaje personaje){
-		if(enemigos.size() == 0 || personaje.cantidadEsferas() == 7){
-			String mensaje = "Los ganadores son los: " + this.nombre;
-			throw new PartidaGanada(mensaje);
+	public Boolean gano(){
+		if(this.enemigos.size() == 0 || this.cantidadEsferas == 7){
+			return true;
 		}
+		return false;
 	}
-	
-	//delegar a controlador?
 	
 	public Tablero obtenerTablero(){
 		return this.tablero;

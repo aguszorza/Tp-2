@@ -24,9 +24,6 @@ public class NubeVoladora extends Consumible {
     }
 
     @Override
-    public void desafectar(Personaje personaje) { }
-
-    @Override
     public void desafectar(Modo modo) {
         modo.actualizarVelocidadOriginal();
     }
@@ -40,5 +37,9 @@ public class NubeVoladora extends Consumible {
     
     public int afectar(Equipo equipo){
     	return 0;
+    }
+    
+    public Consumible obtenerCopia(){
+    	return new NubeVoladora();
     }
 }

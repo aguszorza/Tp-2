@@ -9,12 +9,4 @@ public class Freezer extends Personaje{
 		super(400, "Freezer", new FabricaDeModos().freezerNormal());
 		this.habilidad = new RayoMortal(this);
 	}
-	
-	/*public void segundaForma(){
-		this.transformar(new FabricaDeModos().freezerSegundaForma(this.modoDePelea));
-	}
-	
-	public void definitivo(){
-		this.transformar(new FabricaDeModos().freezerDefinitivo(this.modoDePelea));
-	}*/
 }

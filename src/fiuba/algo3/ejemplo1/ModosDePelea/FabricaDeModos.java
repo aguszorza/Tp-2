@@ -2,13 +2,12 @@ package fiuba.algo3.ejemplo1.ModosDePelea;
 
 import java.util.function.Function;
 
-import fiuba.algo3.ejemplo1.Excepciones.TransformacionInexistente;
 import fiuba.algo3.ejemplo1.juego.Ataque;
 
 public class FabricaDeModos {
 	
 	public Modo transformacionInvalida(){
-		throw new TransformacionInexistente();
+		return null;
 	}
 	
 	public Modo gokuNormal(){
@@ -61,7 +60,6 @@ public class FabricaDeModos {
 		return superSaiyajin;
 	}
 	
-	//falta verificar la vida de los aliados
 	public Modo gohanSuperSaiyajin2(){
 		Modo superSaiyajin2 = new GohanSSJ2 ();
 		return superSaiyajin2;
@@ -87,7 +85,6 @@ public class FabricaDeModos {
 		return piccolo;
 	}
 	
-	//falta verificar la vida de Gohan
 	public Modo piccoloProtector(){
 		Modo piccolo = new PiccoloProtector ();
 		return piccolo;
@@ -103,13 +100,11 @@ public class FabricaDeModos {
 		return cell;
 	}
 	
-	//falta verificar las absorciones
 	public Modo cellSemiPerfecto(){
 		CellSemiPerfecto cell = new CellSemiPerfecto();
 		return cell;
 	}
 	
-	//falta verificar las absorciones
 	public Modo cellPerfecto(){
 		CellPerfecto cell = new CellPerfecto ();
 		return cell;
@@ -174,10 +169,4 @@ public class FabricaDeModos {
 		majin.guardarDireccion("file:src/fiuba/algo3/Imagenes/majin_boo_original.png");
 		return majin;
 	}
-	
-	//agregar la imposibilidad de ganar ki
-	/*public Modo chocolate(){
-		Modo chocolate = new Modo(0, 0, 0, 0);
-		return chocolate;
-	}*/
 }
