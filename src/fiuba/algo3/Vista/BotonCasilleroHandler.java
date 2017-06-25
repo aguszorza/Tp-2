@@ -9,6 +9,7 @@ import fiuba.algo3.ejemplo1.juego.Turno;
 import fiuba.algo3.ejemplo1.tablero.Celda;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
@@ -20,7 +21,7 @@ import javafx.scene.media.MediaPlayer;
 
 public class BotonCasilleroHandler implements EventHandler<ActionEvent>{
 	
-	double TRANSPARENCIA = 0.8;
+	double TRANSPARENCIA = 0.9;
 	String SONIDO_ERROR = "src/fiuba/algo3/Musica/error.mp3";
 	String SONIDO_MOVIMIENTO = "src/fiuba/algo3/Musica/movimiento.mp3";
 	String SONIDO_GOLPE = "src/fiuba/algo3/Musica/punch.mp3";
@@ -39,6 +40,7 @@ public class BotonCasilleroHandler implements EventHandler<ActionEvent>{
 	private Button botonHabilidad;
 	private Button botonTransformar;
 	private ToggleButton toggle;
+	private GridPane botonera;
 	
 	private ArrayList <ToggleButton> botonesEnemigos;
 	
@@ -61,25 +63,44 @@ public class BotonCasilleroHandler implements EventHandler<ActionEvent>{
 		this.botonCancelar.setOpacity(TRANSPARENCIA);
 		this.botonAtacar = new Button ("Atacar");
 		this.botonAtacar.setOpacity(TRANSPARENCIA);
-		this.botonHabilidad = new Button ("Habilidad Especial");
+		this.botonHabilidad = new Button ("Habilidad\nEspecial");
 		this.botonHabilidad.setOpacity(TRANSPARENCIA);
 		this.botonTransformar = new Button ("Transformar");
 		this.botonTransformar.setOpacity(TRANSPARENCIA);
 		this.toggle = toggle;
+		this.botonera = new GridPane();
+		this.botonDerecha.setMinSize(100, 70);
+		this.botonDerecha.setMaxSize(100, 70);
+		this.botonIzquierda.setMinSize(100, 70);
+		this.botonIzquierda.setMaxSize(100, 70);
+		this.botonAbajo.setMinSize(100, 70);
+		this.botonAbajo.setMaxSize(100, 70);
+		this.botonArriba.setMinSize(100, 70);
+		this.botonArriba.setMaxSize(100, 70);
+		this.botonCancelar.setMinSize(100, 70);
+		this.botonCancelar.setMaxSize(100, 70);
+		this.botonAtacar.setMinSize(100, 70);
+		this.botonAtacar.setMaxSize(100, 70);
+		this.botonHabilidad.setMinSize(100, 70);
+		this.botonHabilidad.setMaxSize(100, 70);
+		this.botonTransformar.setMinSize(100, 70);
+		this.botonTransformar.setMaxSize(100, 70);
 	}
 	
 	@Override
 	public void handle(ActionEvent actionEvent) {
 		limpiarBotones();
 		if (!this.celda.estaVacia() && this.turno.existePersonaje(this.celda.obtenerPersonaje())){
-			this.grid.add(botonDerecha, 3, 1);
-			this.grid.add(botonIzquierda, 4, 1);
-			this.grid.add(botonAbajo, 5, 1);
-			this.grid.add(botonArriba, 2, 1);
-			this.grid.add(botonCancelar, 6, 1);
-			this.grid.add(botonAtacar, 3, 2);
-			this.grid.add(botonHabilidad, 3, 3);
-			this.grid.add(botonTransformar, 3, 4);
+			this.grid.add(this.botonera, 2, 1);
+			this.botonera.setAlignment(Pos.CENTER);
+			this.botonera.add(botonDerecha, 2, 3);
+			this.botonera.add(botonIzquierda, 3, 3);
+			this.botonera.add(botonAbajo, 4, 3);
+			this.botonera.add(botonArriba, 1, 3);
+			this.botonera.add(botonCancelar, 1, 2);
+			this.botonera.add(botonAtacar, 1, 4);
+			this.botonera.add(botonHabilidad, 1, 5);
+			this.botonera.add(botonTransformar, 1, 6);
 			this.setearAccionBoton(botonDerecha,1,0);
 			this.setearAccionBoton(botonIzquierda,-1,0);
 			this.setearAccionBoton(botonArriba,0,-1);
@@ -95,7 +116,19 @@ public class BotonCasilleroHandler implements EventHandler<ActionEvent>{
 	}
 
 	private void limpiarBotones() {
-		grid.getChildren().remove(botonDerecha);
+		grid.getChildren().remove(this.botonera);
+		this.botonera.getChildren().remove(botonDerecha);
+		this.botonera.getChildren().remove(botonIzquierda);
+		this.botonera.getChildren().remove(botonArriba);
+		this.botonera.getChildren().remove(botonAbajo);
+		this.botonera.getChildren().remove(botonCancelar);
+		this.botonera.getChildren().remove(botonAtacar);
+		this.botonera.getChildren().remove(botonHabilidad);
+		this.botonera.getChildren().remove(botonTransformar);
+		for(int i = 0; i < botonesEnemigos.size(); i++){
+			this.botonera.getChildren().remove(botonesEnemigos.get(i));
+		}
+		/*grid.getChildren().remove(botonDerecha);
 		grid.getChildren().remove(botonIzquierda);
 		grid.getChildren().remove(botonArriba);
 		grid.getChildren().remove(botonAbajo);
@@ -105,7 +138,7 @@ public class BotonCasilleroHandler implements EventHandler<ActionEvent>{
 		grid.getChildren().remove(botonTransformar);
 		for(int i = 0; i < botonesEnemigos.size(); i++){
 			grid.getChildren().remove(botonesEnemigos.get(i));
-		}
+		}*/
 	}
 	
 	private void setearBotonTransformar(){
@@ -124,7 +157,7 @@ public class BotonCasilleroHandler implements EventHandler<ActionEvent>{
 	private void setearBotonHabilidad(){
 		this.botonHabilidad.setOnAction(value->{
 			Enumeration <Personaje> enemigos = turno.obtenerJugador().obtenerPersonajesEnemigos();
-			int columna = 4;
+			int columna = 2;
 			while(enemigos.hasMoreElements()){
 				Personaje enemigo = enemigos.nextElement();
 				ToggleButton personaje = new ToggleButton();
@@ -147,7 +180,7 @@ public class BotonCasilleroHandler implements EventHandler<ActionEvent>{
 				Image image = new Image(enemigo.obtenerImagen());
 				imv.setImage(image);
 				personaje.setGraphic(imv);
-				this.grid.add(personaje, columna, 2);
+				this.botonera.add(personaje, columna, 4);
 				columna++;
 			}
 		});
@@ -156,7 +189,7 @@ public class BotonCasilleroHandler implements EventHandler<ActionEvent>{
 	private void setearBotonAtacar(){
 		this.botonAtacar.setOnAction(value->{
 		Enumeration <Personaje> enemigos = turno.obtenerJugador().obtenerPersonajesEnemigos();
-		int columna = 4;
+		int columna = 2;
 		while(enemigos.hasMoreElements()){
 			Personaje enemigo = enemigos.nextElement();
 			ToggleButton personaje = new ToggleButton();
@@ -179,7 +212,7 @@ public class BotonCasilleroHandler implements EventHandler<ActionEvent>{
 			Image image = new Image(enemigo.obtenerImagen());
 			imv.setImage(image);
 			personaje.setGraphic(imv);
-			this.grid.add(personaje, columna, 2);
+			this.botonera.add(personaje, columna, 4);
 			columna++;
 		}
 		});

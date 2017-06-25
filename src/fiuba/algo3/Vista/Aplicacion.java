@@ -48,19 +48,21 @@ public class Aplicacion  extends Application{
 	
 	@Override
     public void start(Stage stage) throws Exception {
+		ContenedorPrincipal contenedor = new ContenedorPrincipal(stage);
 		this.stage = stage;
+		stage.setTitle("DragonAlgoBall");
 		Juego juego = new Juego();
 		Jugador guerreros = juego.obtenerGuerrerosZ();
 		Jugador enemigos = juego.obtenerEnemigos();
 		Tablero tablero = juego.obtenerTablero(); 
 		Turno turno = new Turno(guerreros, enemigos);
 		GridPane general = new GridPane();
-		
+		contenedor.setCenter(general);
 		Image imagen = new Image("file:src/fiuba/algo3/ImagenesMenu/fondoPrincipal.jpg");
         BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         general.setBackground(new Background(imagenDeFondo));
 		
-		Scene scene = new Scene(general, 300, 250);
+		Scene scene = new Scene(contenedor, 300, 250);
 		
 		MenuPrincipal menu = new MenuPrincipal(stage, scene);
 		Scene menuPrincipal = new Scene(menu, 640, 480);
