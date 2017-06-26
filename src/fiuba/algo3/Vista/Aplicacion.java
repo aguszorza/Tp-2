@@ -68,6 +68,9 @@ public class Aplicacion  extends Application{
 		Scene menuPrincipal = new Scene(menu, 640, 480);
 		stage.setScene(menuPrincipal);
 		
+		AplicacionOnKeyPressEventHandler AplicacionOnKeyPressEventHandler = new AplicacionOnKeyPressEventHandler(stage, contenedor.getBarraDeMenu());
+        scene.setOnKeyPressed(AplicacionOnKeyPressEventHandler);
+		
 		this.datos = new DatosPersonajes(guerreros.obtenerPersonajesAliados(), enemigos.obtenerPersonajesAliados());
 		general.add(datos, 0, 1);
 		

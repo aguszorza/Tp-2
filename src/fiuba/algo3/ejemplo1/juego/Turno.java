@@ -99,14 +99,14 @@ public class Turno {
 		if(personaje.obtenerVelocidad() == 0){
 			return false;
 		}
-		if (this.personajeEnMovimiento == null){
-			this.personajeEnMovimiento = personaje;
-		}
-		if (this.movimientos >= this.personajeEnMovimiento.obtenerVelocidad()){
+		if (this.movimientos >= personaje.obtenerVelocidad()){
 			return false;
 		}
 		if(!this.cola.element().mover(personaje, celdaFinal)){
 			return false;
+		}
+		if (this.personajeEnMovimiento == null){
+			this.personajeEnMovimiento = personaje;
 		}
 		this.movimientos ++;
 		terminoTurno();

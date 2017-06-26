@@ -31,12 +31,12 @@ public class MenuPrincipal extends VBox {
 		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 		this.setBackground(new Background(imagenDeFondo));
 
-		Button botonEntrar = new Button();
-		botonEntrar.setText("Jugar");
-		botonEntrar.setOpacity(0.8);
+		Button botonJugar = new Button();
+		botonJugar.setText("Jugar");
+		botonJugar.setOpacity(0.8);
 
-		BotonJugarEventHandler botonEntrarHandler = new BotonJugarEventHandler(stage, partida);
-		botonEntrar.setOnAction(botonEntrarHandler);
-		this.getChildren().add(botonEntrar);
+		BotonJugarEventHandler botonJugarHandler = new BotonJugarEventHandler(stage, partida);
+		botonJugar.setOnAction(botonJugarHandler);
+		this.getChildren().add(botonJugar);
 	}
 }
