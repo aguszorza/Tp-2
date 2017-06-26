@@ -76,8 +76,16 @@ public class Modo {
 	}
 	
 	public float obtenerDanioDeAtaque(Personaje enemigo){
-		return this.ataque.calcularDanio(enemigo) * this.danioAdicional;
+		return this.calcularDanio(enemigo);
 	}
+	
+	public float calcularDanio(Personaje enemigo){
+		float danio = this.obtenerPoderDePelea();
+		if(enemigo.obtenerPoderDePelea() > danio)
+			danio = danio * (float)0.8;
+		return danio;
+	}
+	
 
 	public void incrementarPoderPelea(float danioAdicional) {
 		this.danioAdicional = danioAdicional;
